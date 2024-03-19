@@ -17,4 +17,4 @@ mix.js('resources/js/app.js', 'public/js')
         //
     ]);
 
-mix.browserSync('laravel-9.test');
+mix.browserSync('corretor.my');
