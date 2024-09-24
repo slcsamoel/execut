@@ -4,7 +4,7 @@ import Auth from '../../Layouts/Auth'
 
 export default function Register({ errors }) {
     const {data, setData, post} = useForm({
-        name: '', username: '', email: '', password:'',
+        nomeUsuario: '', razaoSocial: '', email: '', password:'',
     })
 
     const changeHandler = (e) => setData({...data, [e.target.id]: e.target.value})
@@ -62,12 +62,12 @@ export default function Register({ errors }) {
                             <div className="card-body">
                             <form role="form" onSubmit={submitHandler}>
                                 <div className="mb-3">
-                                    <input value={data.name} onChange={changeHandler} name='name' id='name' type="text" className="form-control" placeholder="Name" aria-label="Name" />
-                                    {errors && (<div className='text-danger mt-1'>{errors.name}</div>)}
+                                    <input value={data.nomeUsuario} onChange={changeHandler} name='nomeUsuario' id='nomeUsuario' type="text" className="form-control" placeholder="Nome" aria-label="Nome" />
+                                    {errors && (<div className='text-danger mt-1'>{errors.nomeUsuario}</div>)}
                                 </div>
                                 <div className="mb-3">
-                                    <input value={data.username} onChange={changeHandler} name='username' id='username' type="text" className="form-control" placeholder="Username" aria-label="Username" />
-                                    {errors && (<div className='text-danger mt-1'>{errors.username}</div>)}
+                                    <input value={data.razaoSocial} onChange={changeHandler} name='razaoSocial' id='razaoSocial' type="text" className="form-control" placeholder="Razão social / Nome completo" aria-label="Razão social / Nome completo" />
+                                    {errors && (<div className='text-danger mt-1'>{errors.razaoSocial}</div>)}
                                 </div>
                                 <div className="mb-3">
                                     <input value={data.email} onChange={changeHandler} type="email" name='email' id='email' className="form-control" placeholder="Email" aria-label="Email" />

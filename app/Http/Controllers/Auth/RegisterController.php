@@ -17,18 +17,18 @@ class RegisterController extends Controller
 
     public function store(Request $request) {
         $validated = $request->validate([
-            'name' => ['required'],
-            'username' => ['required'],
+            'nomeUsuario' => ['required'],
+            'razaoSocial' => ['required'],
             'email' => ['required','unique:users'],
             'password' => ['required'],
         ]);
 
         if($validated) {
             $newUser = User::create($validated);
-            
+
             Auth::login($newUser);
-    
-            return redirect('/dashboard')->with([
+
+            return redirect('/')->with([
                 'type' => 'success',
                 'message' => 'You are logged in.'
             ]);
