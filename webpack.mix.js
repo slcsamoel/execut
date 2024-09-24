@@ -17,4 +17,4 @@ mix.js('resources/js/app.js', 'public/js')
         //
     ]);
 
-mix.browserSync('corretor.my');
+mix.browserSync('execut.my');
