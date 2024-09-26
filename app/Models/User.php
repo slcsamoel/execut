@@ -19,6 +19,9 @@ class User extends Authenticatable
      *
      */
 
+    protected $table = 'usuario';
+
+
     protected $fillable = [
         'nomeUsuario',
         'razaoSocial',
@@ -50,5 +53,9 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function endereco(){
+        return $this->belongsTo(Endereco::class, 'idEndereco');
     }
 }

@@ -3,18 +3,29 @@ import React from 'react'
 
 export default function CreateUser({close}) {
 
-    const {data, setData, post, reset, errors} = useForm({ name: '', email: '', username: '', address: '', password: '', });
+    const {data, setData, post, reset, errors} = useForm({
+        nomeUsuario: '',
+        razaoSocial: '',
+        cpfCnpj: '',
+        telefone: '',
+        password: '',
+        email:'',
+        logradouro:'',
+        complemento:'',
+        cidade:'',
+        estado:'',
+    });
 
     const onChange = (e) => setData({ ...data, [e.target.id]: e.target.value });
 
     const onSubmit = (e) => {
         e.preventDefault();
         post(route('users.store'), {
-            data, 
+            data,
             onSuccess: () => {
                 reset(),
                 close()
-            }, 
+            },
         });
     }
 
@@ -23,14 +34,14 @@ export default function CreateUser({close}) {
             <form onSubmit={onSubmit}>
                 <div className="modal-body">
                         <div className="form-group">
-                            <label htmlFor="name" className="col-form-label">Name:</label>
-                            <input type="text" className="form-control" name='name' value={data.name} onChange={onChange} id="name"/>
-                            {errors && <div className='text-danger mt-1'>{errors.name}</div>}
+                            <label htmlFor="nomeUsuario" className="col-form-label">Nome:</label>
+                            <input type="text" className="form-control" name='nomeUsuario' value={data.nomeUsuario} onChange={onChange} id="nomeUsuario"/>
+                            {errors && <div className='text-danger mt-1'>{errors.nomeUsuario}</div>}
                         </div>
                         <div className="form-group">
-                            <label htmlFor="username" className="col-form-label">Username:</label>
-                            <input type="text" className="form-control" name='username' value={data.username} onChange={onChange} id="username"/>
-                            {errors && <div className='text-danger mt-1'>{errors.username}</div>}
+                            <label htmlFor="razaoSocial" className="col-form-label">Razão social/NomeCompleto</label>
+                            <input type="text" className="form-control" name='razaoSocial' value={data.razaoSocial} onChange={onChange} id="razaoSocial"/>
+                            {errors && <div className='text-danger mt-1'>{errors.razaoSocial}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="email" className="col-form-label">Email:</label>
@@ -38,19 +49,47 @@ export default function CreateUser({close}) {
                             {errors && <div className='text-danger mt-1'>{errors.email}</div>}
                         </div>
                         <div className="form-group">
-                            <label htmlFor="address" className="col-form-label">Address:</label>
-                            <input type="text" className="form-control" name='address' value={data.address} onChange={onChange} id="address"/>
-                            {errors && <div className='text-danger mt-1'>{errors.address}</div>}
+                            <label htmlFor="cpfCnpj" className="col-form-label">Cpf/Cnpj:</label>
+                            <input type="text" className="form-control" name='cpfCnpj' value={data.cpfCnpj} onChange={onChange} id="cpfCnpj"/>
+                            {errors && <div className='text-danger mt-1'>{errors.cpfCnpj}</div>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="telefone" className="col-form-label">Telefone:</label>
+                            <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={onChange} id="telefone"/>
+                            {errors && <div className='text-danger mt-1'>{errors.telefone}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="password" className="col-form-label">Password:</label>
                             <input type="password" className="form-control" name='password' value={data.password} onChange={onChange} id="password"/>
                             {errors && <div className='text-danger mt-1'>{errors.password}</div>}
                         </div>
+                        <hr className="horizontal dark" />
+                        <p className="text-uppercase text-sm">Informações de Endereço</p>
+                        <div className="form-group">
+                            <label htmlFor="logradouro" className="col-form-label">Logradouro:</label>
+                            <input type="text" className="form-control" name='logradouro' value={data.logradouro} onChange={onChange} id="logradouro"/>
+                            {errors && <div className='text-danger mt-1'>{errors.logradouro}</div>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="complemento" className="col-form-label">Complemento:</label>
+                            <input type="text" className="form-control" name='complemento' value={data.complemento} onChange={onChange} id="complemento"/>
+                            {errors && <div className='text-danger mt-1'>{errors.complemento}</div>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="cidade" className="col-form-label">Cidade:</label>
+                            <input type="text" className="form-control" name='cidade' value={data.cidade} onChange={onChange} id="cidade"/>
+                            {errors && <div className='text-danger mt-1'>{errors.cidade}</div>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="estado" className="col-form-label">Estado(UF):</label>
+                            <input type="text" className="form-control" name='estado' value={data.estado} onChange={onChange} id="estado"/>
+                            {errors && <div className='text-danger mt-1'>{errors.estado}</div>}
+                        </div>
+
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" className="btn bg-gradient-primary">Save</button>
+                    <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" className="btn bg-gradient-primary">Salvar</button>
                 </div>
             </form>
         </>

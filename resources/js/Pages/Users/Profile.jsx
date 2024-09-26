@@ -5,17 +5,19 @@ import Base from '../../Layouts/Base'
 export default function Profile(props) {
     const { auth } = usePage().props;
 
-    const {data, setData, put, reset, errors} = useForm({ name: auth.user.name, email: auth.user.email, username: auth.user.username, address: auth.user.address, });
+    const {data, setData, put, reset, errors} = useForm({ nomeUsuario: auth.user.nomeUsuario, email: auth.user.email, razaoSocial: auth.user.razaoSocial, telefone: auth.user.telefone, cpfCnpj:auth.user.cpfCnpj});
 
     const onChange = (e) => setData({ ...data, [e.target.id]: e.target.value });
+
+    console.log(auth.user);
 
     const onSubmit = (e) => {
         e.preventDefault();
         put(route('users.update', auth.user.id), {
-            data, 
+            data,
             onSuccess: () => {
-               
-            }, 
+
+            },
         });
     }
 
@@ -27,7 +29,7 @@ export default function Profile(props) {
                     <div className="row gx-4">
                         <div className="col-auto">
                         <div className="avatar avatar-xl position-relative">
-                            <img src="/img/team-2.jpg" alt="profile_image" className="w-100 border-radius-lg shadow-sm" />
+                             <h4>Perfil</h4>
                         </div>
                         </div>
                         <div className="col-auto my-auto">
@@ -41,7 +43,7 @@ export default function Profile(props) {
                         </div>
                         </div>
                         <div className="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                        
+
                         </div>
                     </div>
                     </div>
@@ -53,60 +55,78 @@ export default function Profile(props) {
                             <form onSubmit={onSubmit}>
                                 <div className="card-header pb-0">
                                     <div className="d-flex align-items-center">
-                                    <p className="mb-0">Edit Profile</p>
+                                    <p className="mb-0">Editar Perfil</p>
                                     <button type='submit' className="btn btn-primary btn-sm ms-auto">Save</button>
                                     </div>
                                 </div>
-                                <div className="card-body">                                
-                                    <p className="text-uppercase text-sm">User Information</p>
+                                <div className="card-body">
+                                    <p className="text-uppercase text-sm">Informações do usuario</p>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                            <label htmlFor="username" className="form-control-label">Username</label>
-                                            <input className="form-control" type="text" name='username' value={data.username} onChange={onChange} id="username" />
+                                            <label htmlFor="username" className="form-control-label">Nome</label>
+                                            <input className="form-control" type="text" name='nomeUsuario' value={data.nomeUsuario} onChange={onChange} id="nomeUsuario" />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                            <label htmlFor="email" className="form-control-label">Email address</label>
+                                            <label htmlFor="email" className="form-control-label">Email</label>
                                             <input className="form-control" type="email" name='email' value={data.email} onChange={onChange} id="email" />
                                             </div>
                                         </div>
                                         <div className="col-md-12">
                                             <div className="form-group">
-                                            <label htmlFor="name" className="form-control-label">Name</label>
-                                            <input className="form-control" type="text" name='name' value={data.name} onChange={onChange} id="name" />
+                                            <label htmlFor="name" className="form-control-label">Razao Social/Nome Completo</label>
+                                            <input className="form-control" type="text" name='razaoSocial' value={data.razaoSocial} onChange={onChange} id="razaoSocial" />
                                             </div>
                                         </div>
-                                        
-                                        </div>
-                                        <hr className="horizontal dark" />
-                                        <p className="text-uppercase text-sm">Contact Information</p>
-                                        <div className="row">
+
                                         <div className="col-md-12">
                                             <div className="form-group">
-                                            <label htmlFor="address" className="form-control-label">Address</label>
-                                            <input className="form-control" type="text" name='address' value={data.address} onChange={onChange} id="address" />
+                                            <label htmlFor="name" className="form-control-label">Cpf/Cnpj</label>
+                                            <input className="form-control" type="text" name='cpfCnpj' value={data.cpfCnpj} onChange={onChange} id="cpfCnpj" />
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div className="col-md-12">
+                                            <div className="form-group">
+                                            <label htmlFor="name" className="form-control-label">Telefone</label>
+                                            <input className="form-control" type="text" name='telefone' value={data.telefone} onChange={onChange} id="telefone" />
+                                            </div>
+                                        </div>
+
+                                        </div>
+                                        {/* <hr className="horizontal dark" />
+                                        <p className="text-uppercase text-sm">Informações de Endereço</p>
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <div className="form-group">
+                                                    <label htmlFor="address" className="form-control-label">Logradouro</label>
+                                                    <input className="form-control" type="text" name='address' value={data.address} onChange={onChange} id="address" />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="form-group">
+                                                    <label htmlFor="address" className="form-control-label">Complemento</label>
+                                                    <input className="form-control" type="text" name='address' value={data.address} onChange={onChange} id="address" />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="address" className="form-control-label">Cidade</label>
+                                                    <input className="form-control" type="text" name='address' value={data.address} onChange={onChange} id="address" />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="address" className="form-control-label">Estado(UF)</label>
+                                                    <input className="form-control" type="text" name='address' value={data.address} onChange={onChange} id="address" />
+                                                </div>
+                                            </div>
+                                        </div> */}
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card card-profile pb-7">
-                            <img src="/img/bg-profile.jpg" alt="Image placeholder" className="card-img-top" />
-                            <div className="row justify-content-center">
-                                <div className="col-4 col-lg-4 order-lg-2">
-                                <div className="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
-                                    <a href="javascript:;">
-                                    <img src="/img/team-2.jpg" className="rounded-circle img-fluid border border-2 border-white" />
-                                    </a>
-                                </div>
-                                </div>
-                            </div>
-                        
                         </div>
                     </div>
                     </div>
@@ -117,5 +137,5 @@ export default function Profile(props) {
     )
 }
 
-Profile.layout = (page) => <Base children={page} title={"Profile"}/>
+Profile.layout = (page) => <Base children={page} title={"Perfil"}/>
 

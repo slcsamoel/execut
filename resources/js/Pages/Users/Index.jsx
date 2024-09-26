@@ -9,8 +9,6 @@ import { Inertia } from '@inertiajs/inertia';
 
 export default function Index(props) {
 
-    console.log(props);
-
     const {data: users, links, meta} = props.users;
     const [state, setState] = useState([])
     const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
@@ -44,10 +42,10 @@ export default function Index(props) {
                 </Dialog>
 
                 <Dialog trigger={destroyTrigger} title={`Delete User: ${state.name}`}>
-                    <p>Are you sure to delete this user ?</p>
+                    <p>Deletar o Usuario ?</p>
                     <div className="modal-footer">
-                        <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" onClick={destroyUser} className="btn bg-gradient-danger">Delete</button>
+                        <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" onClick={destroyUser} className="btn bg-gradient-danger">Deletar</button>
                     </div>
                 </Dialog>
 
@@ -57,11 +55,11 @@ export default function Index(props) {
                             <div className="card-header pb-0">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <h6>Users table</h6>
+                                    <h6>Usuarios</h6>
                                 </div>
                                 <div className="col-md-6 d-flex justify-content-end">
                                     <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Create New User
+                                        Criar novo Usuario
                                     </button>
                                 </div>
                             </div>
@@ -72,10 +70,10 @@ export default function Index(props) {
                                     <thead>
                                         <tr>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-centter">#</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Name</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Username</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Nome</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Razão Social</th>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-left opacity-7 ps-2">Email</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-left opacity-7 ps-2">Address</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-left opacity-7 ps-2">Telefone</th>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
@@ -85,9 +83,6 @@ export default function Index(props) {
                                                 <td className='text-center'>{meta.from + index}</td>
                                                 <td className='text-left'>
                                                     <div className="d-flex px-2">
-                                                        <div>
-                                                            <img src="/img/team-2.jpg" className="avatar avatar-sm  me-3 " />
-                                                        </div>
                                                         <div className="my-auto">
                                                             <h6 className="mb-0 text-sm">{user.nomeUsuario}</h6>
                                                         </div>
@@ -137,4 +132,4 @@ export default function Index(props) {
     )
 }
 
-Index.layout = (page) => <Base key={page} children={page} title={"Manage Users"}/>
+Index.layout = (page) => <Base key={page} children={page} title={"Usuarios"}/>

@@ -23,33 +23,61 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li className="nav-item mt-3">
-                        <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Settings</h6>
+                        <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Configurações</h6>
                     </li>
                     <li className="nav-item">
                         <Link className={`${route().current('profile') && 'active'} nav-link`} href={route('profile')}>
                             <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i className="ni ni-single-02 text-dark text-sm opacity-10" />
                             </div>
-                            <span className="nav-link-text ms-1">Profile</span>
+                            <span className="nav-link-text ms-1">Perfil</span>
                         </Link>
                     </li>
                     <li className="nav-item mt-3">
-                        <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage</h6>
+                        <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Sistema</h6>
                     </li>
                     <li className="nav-item">
                         <Link className={`${route().current('users.*') && 'active'} nav-link`} href={route('users.index')}>
                             <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i className="fas fa-user-lock text-warning text-sm opacity-10" />
                             </div>
-                            <span className="nav-link-text ms-1">Users</span>
+                            <span className="nav-link-text ms-1">Usuarios</span>
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className={`nav-link`} href={route('users.index')}>
+                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i className="fas fa-user-tie text-warning text-sm opacity-10" />
+                            </div>
+                            <span className="nav-link-text ms-1">Clientes</span>
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link className={`nav-link`} href={route('users.index')}>
+                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i className="fas fa-user text-warning text-sm opacity-10" />
+                            </div>
+                            <span className="nav-link-text ms-1">Prestadores</span>
+                        </Link>
+                    </li>
+
+
+                    <li className="nav-item">
+                        <Link className={`nav-link`} href={route('users.index')}>
+                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i className="fas fa-hammer text-warning text-sm opacity-10"/>
+                            </div>
+                            <span className="nav-link-text ms-1">Obras</span>
+                        </Link>
+                    </li>
+
                     <li className="nav-item">
                         <Link className="nav-link " as='a' method='post' href={route('logout')}>
                             <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i className="fas fa-sign-out-alt text-danger text-sm opacity-10"></i>
                             </div>
-                            <span className="nav-link-text ms-1">Log out</span>
+                            <span className="nav-link-text ms-1">Sair</span>
                         </Link>
                     </li>
                 </ul>
