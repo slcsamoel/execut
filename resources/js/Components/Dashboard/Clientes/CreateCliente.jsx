@@ -1,26 +1,24 @@
 import { useForm } from '@inertiajs/inertia-react'
-import React, { useEffect } from 'react'
+import React from 'react'
 
-export default function EditUser({close, model}) {
+export default function CreateCliente({close}) {
 
-    const {data, setData, put, reset, errors} = useForm({
-        nomeUsuario: model.nomeUsuario,
-        razaoSocial: model.razaoSocial,
-        cpfCnpj: model.cpfCnpj,
-        email: model.email,
-        telefone: model.telefone,
-        password: model.password,
-        logradouro: model.endereco ? model.endereco.logradouro : '',
-        complemento: model.endereco ? model.endereco.complemento : '' ,
-        cidade: model.endereco ? model.endereco.cidade : '',
-        estado: model.endereco  ? model.endereco.estado : '',
+    const {data, setData, post, reset, errors} = useForm({
+        nomeCliente: '',
+        razaoSocial: '',
+        cpfCnpj: '',
+        telefone: '',
+        logradouro:'',
+        complemento:'',
+        cidade:'',
+        estado:'',
     });
 
     const onChange = (e) => setData({ ...data, [e.target.id]: e.target.value });
 
     const onSubmit = (e) => {
         e.preventDefault();
-        put(route('users.update', model.id), {
+        post(route('clientes.store'), {
             data,
             onSuccess: () => {
                 reset(),
@@ -29,39 +27,19 @@ export default function EditUser({close, model}) {
         });
     }
 
-    useEffect(() => {
-        setData({...data,
-            nomeUsuario: model.nomeUsuario,
-            razaoSocial: model.razaoSocial,
-            cpfCnpj: model.cpfCnpj,
-            email: model.email,
-            telefone: model.telefone,
-            password: model.password,
-            logradouro: model.endereco ? model.endereco.logradouro : '',
-            complemento: model.endereco ? model.endereco.complemento : '' ,
-            cidade: model.endereco ? model.endereco.cidade : '',
-            estado: model.endereco  ? model.endereco.estado : '',
-        });
-    }, [model]);
-
     return (
         <>
             <form onSubmit={onSubmit}>
-            <div className="modal-body">
+                <div className="modal-body">
                         <div className="form-group">
-                            <label htmlFor="nomeUsuario" className="col-form-label">Nome:</label>
-                            <input type="text" className="form-control" name='nomeUsuario' value={data.nomeUsuario} onChange={onChange} id="nomeUsuario"/>
-                            {errors && <div className='text-danger mt-1'>{errors.nomeUsuario}</div>}
+                            <label htmlFor="nomeCliente" className="col-form-label">Nome:</label>
+                            <input type="text" className="form-control" name='nomeCliente' value={data.nomeCliente} onChange={onChange} id="nomeCliente"/>
+                            {errors && <div className='text-danger mt-1'>{errors.nomeCliente}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="razaoSocial" className="col-form-label">Razão social/NomeCompleto</label>
                             <input type="text" className="form-control" name='razaoSocial' value={data.razaoSocial} onChange={onChange} id="razaoSocial"/>
                             {errors && <div className='text-danger mt-1'>{errors.razaoSocial}</div>}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email" className="col-form-label">Email:</label>
-                            <input type="email" className="form-control" name='email' value={data.email} onChange={onChange} id="email"/>
-                            {errors && <div className='text-danger mt-1'>{errors.email}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="cpfCnpj" className="col-form-label">Cpf/Cnpj:</label>
@@ -72,11 +50,6 @@ export default function EditUser({close, model}) {
                             <label htmlFor="telefone" className="col-form-label">Telefone:</label>
                             <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={onChange} id="telefone"/>
                             {errors && <div className='text-danger mt-1'>{errors.telefone}</div>}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password" className="col-form-label">Senha:</label>
-                            <input type="password" className="form-control" name='password' value={data.password} onChange={onChange} id="password"/>
-                            {errors && <div className='text-danger mt-1'>{errors.password}</div>}
                         </div>
                         <hr className="horizontal dark" />
                         <p className="text-uppercase text-sm">Informações de Endereço</p>
@@ -103,8 +76,8 @@ export default function EditUser({close, model}) {
 
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" className="btn bg-gradient-primary">Update</button>
+                    <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" className="btn bg-gradient-primary">Salvar</button>
                 </div>
             </form>
         </>

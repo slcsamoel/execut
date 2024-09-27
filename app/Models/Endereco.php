@@ -11,6 +11,9 @@ class Endereco extends Model
 
     protected $table = 'endereco';
 
+    // Desabilitar timestamps automáticos
+    public $timestamps = false;
+
 
     protected $fillable = [
         'logradouro',
@@ -23,6 +26,11 @@ class Endereco extends Model
     public function usuario()
     {
         return $this->hasMany(User::class , 'idEndereco' , 'id');
+    }
+
+    public function cliente()
+    {
+        return $this->hasMany(Cliente::class , 'idEndereco' , 'id');
     }
 
 

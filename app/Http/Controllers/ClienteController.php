@@ -2,34 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
-use App\Models\Endereco;
-use App\Models\User;
+use App\Http\Resources\ClienteResource;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
+use App\Models\Endereco;
 
-class UserController extends Controller
+class ClienteController extends Controller
 {
 
     public function index()
     {
-        $users = UserResource::collection(User::with('endereco')->latest()->paginate(10));
-        return inertia('Users/Index', [
-            'users' => $users,
+        $clientes = ClienteResource::collection(Cliente::with('endereco')->paginate(10));
+        return inertia('Clientes/Index', [
+            'clientes' => $clientes,
         ]);
     }
 
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
 
         $this->validate($request, [
-            'nomeUsuario' => 'required|max:255',
+            'nomeCliente' => 'required|max:255',
             'razaoSocial' => 'nullable|max:255',
             'cpfCnpj' => 'required|max:15',
             'telefone' => 'nullable|max:12',
-            'email' => 'required|max:150',
-            'password' => 'required|max:255',
             'logradouro'=> 'required|max:255',
             'complemento'=> 'required|max:255',
             'cidade'=> 'required|max:100',
@@ -46,19 +42,17 @@ class UserController extends Controller
         try {
             $endereco->save();
 
-            $usuario = new User();
-            $usuario->nomeUsuario = $request->nomeUsuario;
-            $usuario->razaoSocial = $request->razaoSocial;
-            $usuario->cpfCnpj = $request->cpfCnpj;
-            $usuario->telefone = $request->telefone;
-            $usuario->email = $request->email;
-            $usuario->password = bcrypt($request->password);
-            $usuario->idEndereco = $endereco->id;
-            $usuario->save();
+            $cliente = new Cliente();
+            $cliente->nomeCliente = $request->nomeCliente;
+            $cliente->razaoSocial = $request->razaoSocial;
+            $cliente->cpfCnpj = $request->cpfCnpj;
+            $cliente->telefone = $request->telefone;
+            $cliente->idEndereco = $endereco->id;
+            $cliente->save();
 
             return back()->with([
                 'type' => 'success',
-                'message' => 'Usuario criado com sucesso',
+                'message' => 'Cliente criado com sucesso',
             ]);
 
 
@@ -70,15 +64,14 @@ class UserController extends Controller
         }
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, Cliente $cliente)
     {
 
         $this->validate($request, [
-            'nomeUsuario' => 'required|max:255',
+            'nomeCliente' => 'required|max:255',
             'razaoSocial' => 'nullable|max:255',
             'cpfCnpj' => 'required|max:15',
             'telefone' => 'nullable|max:12',
-            'email' => 'required|max:150',
             'logradouro'=> 'required|max:255',
             'complemento'=> 'required|max:255',
             'cidade'=> 'required|max:100',
@@ -86,8 +79,8 @@ class UserController extends Controller
 
         ]);
 
-            if($user->idEndereco){
-                $endereco = Endereco::find($user->idEndereco);
+            if($cliente->idEndereco){
+                $endereco = Endereco::find($cliente->idEndereco);
             }else{
                 $endereco = new Endereco();
             }
@@ -100,17 +93,16 @@ class UserController extends Controller
         try {
 
             $endereco->save();
-            $user->nomeUsuario = $request->nomeUsuario;
-            $user->razaoSocial = $request->razaoSocial;
-            $user->cpfCnpj = $request->cpfCnpj;
-            $user->telefone = $request->telefone;
-            $user->email = $request->email;
-            $user->idEndereco = $endereco->id;
-            $user->update();
+            $cliente->nomeCliente = $request->nomeCliente;
+            $cliente->razaoSocial = $request->razaoSocial;
+            $cliente->cpfCnpj = $request->cpfCnpj;
+            $cliente->telefone = $request->telefone;
+            $cliente->idEndereco = $endereco->id;
+            $cliente->update();
 
             return back()->with([
                 'type' => 'success',
-                'message' => 'Usuario alterado com sucesso',
+                'message' => 'Cliente alterado com sucesso',
             ]);
         } catch (\Throwable $th) {
             return back()->with([
@@ -120,13 +112,14 @@ class UserController extends Controller
         }
     }
 
-    public function destroy(User $user)
+    public function destroy(Cliente $cliente)
     {
-        $user->delete();
+        $cliente->delete();
 
         return back()->with([
             'type' => 'success',
             'message' => 'User has been deleted',
         ]);
     }
+
 }

@@ -59,7 +59,7 @@ export default function CreateUser({close}) {
                             {errors && <div className='text-danger mt-1'>{errors.telefone}</div>}
                         </div>
                         <div className="form-group">
-                            <label htmlFor="password" className="col-form-label">Password:</label>
+                            <label htmlFor="password" className="col-form-label">Senha:</label>
                             <input type="password" className="form-control" name='password' value={data.password} onChange={onChange} id="password"/>
                             {errors && <div className='text-danger mt-1'>{errors.password}</div>}
                         </div>

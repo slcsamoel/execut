@@ -1,15 +1,13 @@
 import { useForm } from '@inertiajs/inertia-react'
 import React, { useEffect } from 'react'
 
-export default function EditUser({close, model}) {
+export default function EditCliente({close, model}) {
 
     const {data, setData, put, reset, errors} = useForm({
-        nomeUsuario: model.nomeUsuario,
+        nomeCliente: model.nomeCliente,
         razaoSocial: model.razaoSocial,
         cpfCnpj: model.cpfCnpj,
-        email: model.email,
         telefone: model.telefone,
-        password: model.password,
         logradouro: model.endereco ? model.endereco.logradouro : '',
         complemento: model.endereco ? model.endereco.complemento : '' ,
         cidade: model.endereco ? model.endereco.cidade : '',
@@ -20,7 +18,7 @@ export default function EditUser({close, model}) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        put(route('users.update', model.id), {
+        put(route('clientes.update', model.id), {
             data,
             onSuccess: () => {
                 reset(),
@@ -31,12 +29,10 @@ export default function EditUser({close, model}) {
 
     useEffect(() => {
         setData({...data,
-            nomeUsuario: model.nomeUsuario,
+            nomeCliente: model.nomeCliente,
             razaoSocial: model.razaoSocial,
             cpfCnpj: model.cpfCnpj,
-            email: model.email,
             telefone: model.telefone,
-            password: model.password,
             logradouro: model.endereco ? model.endereco.logradouro : '',
             complemento: model.endereco ? model.endereco.complemento : '' ,
             cidade: model.endereco ? model.endereco.cidade : '',
@@ -50,18 +46,13 @@ export default function EditUser({close, model}) {
             <div className="modal-body">
                         <div className="form-group">
                             <label htmlFor="nomeUsuario" className="col-form-label">Nome:</label>
-                            <input type="text" className="form-control" name='nomeUsuario' value={data.nomeUsuario} onChange={onChange} id="nomeUsuario"/>
-                            {errors && <div className='text-danger mt-1'>{errors.nomeUsuario}</div>}
+                            <input type="text" className="form-control" name='nomeCliente' value={data.nomeCliente} onChange={onChange} id="nomeCliente"/>
+                            {errors && <div className='text-danger mt-1'>{errors.nomeCliente}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="razaoSocial" className="col-form-label">Razão social/NomeCompleto</label>
                             <input type="text" className="form-control" name='razaoSocial' value={data.razaoSocial} onChange={onChange} id="razaoSocial"/>
                             {errors && <div className='text-danger mt-1'>{errors.razaoSocial}</div>}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email" className="col-form-label">Email:</label>
-                            <input type="email" className="form-control" name='email' value={data.email} onChange={onChange} id="email"/>
-                            {errors && <div className='text-danger mt-1'>{errors.email}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="cpfCnpj" className="col-form-label">Cpf/Cnpj:</label>
@@ -72,11 +63,6 @@ export default function EditUser({close, model}) {
                             <label htmlFor="telefone" className="col-form-label">Telefone:</label>
                             <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={onChange} id="telefone"/>
                             {errors && <div className='text-danger mt-1'>{errors.telefone}</div>}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password" className="col-form-label">Senha:</label>
-                            <input type="password" className="form-control" name='password' value={data.password} onChange={onChange} id="password"/>
-                            {errors && <div className='text-danger mt-1'>{errors.password}</div>}
                         </div>
                         <hr className="horizontal dark" />
                         <p className="text-uppercase text-sm">Informações de Endereço</p>
