@@ -62,6 +62,15 @@ export default function Sidebar() {
                         </Link>
                     </li>
 
+                    <li className="nav-item">
+                        <Link className={`${route().current('funcoes.*') && 'active'} nav-link`} href={route('funcoes.index')}>
+                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i className="fas fa-user text-warning text-sm opacity-10" />
+                            </div>
+                            <span className="nav-link-text ms-1">Funções de Prestadores</span>
+                        </Link>
+                    </li>
+
 
                     <li className="nav-item">
                         <Link className={`nav-link`} href={route('users.index')}>

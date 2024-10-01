@@ -8,4 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Prestador extends Model
 {
     use HasFactory;
+
+    protected $table = 'prestador';
+
+    public $timestamps = false;
+
+
+    protected $fillable = [
+        'nomePrestador',
+        'tipoPrestador',
+        'cpfCnpj',
+        'telefone',
+        'idFuncao',
+    ];
+
+    public function funcao()
+    {
+        return $this->belongsTo(FuncaoPrestador::class , 'idFuncao');
+    }
+
 }
