@@ -14,6 +14,7 @@ export default function Index(props) {
     const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
     const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
     const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog()
+
     const openUpdateDialog = (user) => {
         setState(user);
         UpdateDialogHandler()

@@ -31,6 +31,7 @@ class FuncaoPrestadorController extends Controller
 
 
         try {
+
             $funcao->save();
             return back()->with([
                 'type' => 'success',
@@ -45,21 +46,23 @@ class FuncaoPrestadorController extends Controller
         }
     }
 
-    public function update(Request $request , FuncaoPrestador $funcao)
+    public function update(Request $request , FuncaoPrestador $funco)
     {
         $this->validate($request, [
             'nomeFuncao' => 'required|max:255',
             'descricaoFuncao' => 'nullable|max:255',
         ]);
 
-        $funcao->nomeFuncao = $request->nomeFuncao;
-        $funcao->descricaoFuncao = $request->descricaoFuncao;
+        $funco->nomeFuncao = $request->nomeFuncao;
+        $funco->descricaoFuncao = $request->descricaoFuncao;
 
         try {
-            $funcao->save();
+
+            $funco->update();
+
             return back()->with([
                 'type' => 'success',
-                'message' => 'Função  alterado com sucesso',
+                'message' => 'Função  alterada com sucesso',
             ]);
 
         } catch (\Throwable $th) {
@@ -71,14 +74,21 @@ class FuncaoPrestadorController extends Controller
 
     }
 
-    public function destroy(FuncaoPrestador $funcao)
+    public function destroy(FuncaoPrestador $funco)
     {
-        $funcao->delete();
+        try {
+        $funco->delete();
 
         return back()->with([
             'type' => 'success',
-            'message' => 'User has been deleted',
+            'message' => 'Função Deletada',
         ]);
+        } catch (\Throwable $th) {
+            return back()->with([
+                'type' => 'error',
+                'message' => $th->getMessage(),
+            ]);
+        }
     }
 
 }
