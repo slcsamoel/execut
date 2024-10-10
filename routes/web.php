@@ -11,6 +11,7 @@ use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\FuncaoPrestadorController;
+use App\Http\Controllers\PrestadorController;
 
 // Route::get('/', HomeController::class)->name('home');
 
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('clientes', ClienteController::class);
     Route::apiResource('funcoes', FuncaoPrestadorController::class);
+    Route::apiResource('prestadores', PrestadorController::class);
 
     Route::get('profile', ProfileController::class)->name('profile');
 });

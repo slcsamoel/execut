@@ -80,6 +80,7 @@ class UserController extends Controller
             'telefone' => 'nullable|max:12',
             'email' => 'required|max:150',
             'logradouro'=> 'required|max:255',
+            'password' => 'required|max:255',
             'complemento'=> 'required|max:255',
             'cidade'=> 'required|max:100',
             'estado'=> 'required|max:2',
@@ -105,6 +106,7 @@ class UserController extends Controller
             $user->cpfCnpj = $request->cpfCnpj;
             $user->telefone = $request->telefone;
             $user->email = $request->email;
+            $user->password = bcrypt($request->password);
             $user->idEndereco = $endereco->id;
             $user->update();
 
