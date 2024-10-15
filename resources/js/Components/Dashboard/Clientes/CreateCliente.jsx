@@ -43,7 +43,7 @@ export default function CreateCliente({close}) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route('funcoes.store'), {
+        post(route('clientes.store'), {
             data,
             onSuccess: () => {
                 reset(),

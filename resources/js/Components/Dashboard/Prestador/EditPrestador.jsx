@@ -2,7 +2,7 @@ import { useForm } from '@inertiajs/inertia-react'
 import React, { useState , useEffect } from 'react';
 
 
-export default function EditPrestador({close , model ,funçoes}) {
+export default function EditPrestador({close , model ,funcoes}) {
 
     const {data, setData, put, reset, errors} = useForm({
         nomePrestador: model.nomePrestador,
@@ -72,7 +72,7 @@ export default function EditPrestador({close , model ,funçoes}) {
                                 id="idFuncao"
                             >
                                 <option value="">Selecione um estado</option>
-                                {funçoes.map((funcao) => (
+                                {funcoes.map((funcao) => (
                                     <option key={funcao.id} value={funcao.id}>
                                         {funcao.nomeFuncao}
                                     </option>
