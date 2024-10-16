@@ -20,6 +20,7 @@ class Prestador extends Model
         'cpfCnpj',
         'telefone',
         'idFuncao',
+        'valorDiaria'
     ];
 
     public function funcao()

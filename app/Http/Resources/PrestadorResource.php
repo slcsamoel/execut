@@ -21,6 +21,8 @@ class PrestadorResource extends JsonResource
             'cpfCnpj' => $this->cpfCnpj,
             'telefone' => $this->telefone,
             'funcao'  => $this->funcao,
+            'valorDiaria'=> $this->valorDiaria,
+            'idFuncao' => $this->idFuncao
         ];
     }
 }

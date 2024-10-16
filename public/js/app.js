@@ -8479,7 +8479,8 @@ function CreatePrestador(_ref) {
     tipoPrestador: '',
     cpfCnpj: '',
     telefone: '',
-    idFuncao: ''
+    idFuncao: '',
+    valorDiaria: ''
   }),
       data = _useForm.data,
       setData = _useForm.setData,
@@ -8599,6 +8600,23 @@ function CreatePrestador(_ref) {
             className: "text-danger mt-1",
             children: errors.idFuncao
           })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "form-group",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            htmlFor: "valorDiaria",
+            className: "col-form-label",
+            children: "Valor Diaria"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            className: "form-control",
+            name: "valorDiaria",
+            value: data.valorDiaria,
+            onChange: onChange,
+            id: "valorDiaria"
+          }), errors && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "text-danger mt-1",
+            children: errors.valorDiaria
+          })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "modal-footer",
@@ -8654,7 +8672,8 @@ function EditPrestador(_ref) {
     tipoPrestador: model.tipoPrestador,
     cpfCnpj: model.cpfCnpj,
     telefone: model.telefone,
-    idFuncao: model.idFuncao
+    idFuncao: model.idFuncao,
+    valorDiaria: model.valorDiaria
   }),
       data = _useForm.data,
       setData = _useForm.setData,
@@ -8682,7 +8701,8 @@ function EditPrestador(_ref) {
       tipoPrestador: model.tipoPrestador,
       cpfCnpj: model.cpfCnpj,
       telefone: model.telefone,
-      idFuncao: model.idFuncao
+      idFuncao: model.idFuncao,
+      valorDiaria: model.valorDiaria
     }));
   }, [model]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
@@ -8782,6 +8802,23 @@ function EditPrestador(_ref) {
           }), errors && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "text-danger mt-1",
             children: errors.idFuncao
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "form-group",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            htmlFor: "valorDiaria",
+            className: "col-form-label",
+            children: "Valor Diaria"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            className: "form-control",
+            name: "valorDiaria",
+            value: data.valorDiaria,
+            onChange: onChange,
+            id: "valorDiaria"
+          }), errors && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "text-danger mt-1",
+            children: errors.valorDiaria
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {

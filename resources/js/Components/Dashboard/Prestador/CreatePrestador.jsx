@@ -10,6 +10,7 @@ export default function CreatePrestador({close , funcoes}) {
         cpfCnpj: '',
         telefone: '',
         idFuncao: '',
+        valorDiaria: ''
     });
 
     const onChange = (e) => setData({ ...data, [e.target.id]: e.target.value });
@@ -61,7 +62,7 @@ export default function CreatePrestador({close , funcoes}) {
                                 onChange={onChange}
                                 id="idFuncao"
                             >
-                                <option value="">Selecione um estado</option>
+                                <option value="">Selecione uma função</option>
                                 {funcoes.map((funcao) => (
                                     <option key={funcao.id} value={funcao.id}>
                                         {funcao.nomeFuncao}
@@ -69,6 +70,12 @@ export default function CreatePrestador({close , funcoes}) {
                                 ))}
                             </select>
                             {errors && <div className='text-danger mt-1'>{errors.idFuncao}</div>}
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="valorDiaria" className="col-form-label">Valor Diaria</label>
+                            <input type="text" className="form-control" name='valorDiaria' value={data.valorDiaria} onChange={onChange} id="valorDiaria"/>
+                            {errors && <div className='text-danger mt-1'>{errors.valorDiaria}</div>}
                         </div>
 
 
