@@ -33,5 +33,10 @@ class Endereco extends Model
         return $this->hasMany(Cliente::class , 'idEndereco' , 'id');
     }
 
+    public function obra()
+    {
+        return $this->hasMany(Obra::class , 'idEndereco' , 'id');
+    }
+
 
 }
