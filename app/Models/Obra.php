@@ -24,7 +24,8 @@ class Obra extends Model
         'idPagamento',
         'idEndereco',
         'idTipoObra',
-        'nomeObra'
+        'nomeObra',
+        'valorOrcamento'
     ];
 
 
