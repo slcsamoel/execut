@@ -9,7 +9,7 @@ class Obra extends Model
 {
     use HasFactory;
 
-    protected $table = 'endereco';
+    protected $table = 'obra';
 
     // Desabilitar timestamps automáticos
     public $timestamps = false;

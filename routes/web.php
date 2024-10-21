@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::apiResource('clientes', ClienteController::class);
     Route::apiResource('funcoes', FuncaoPrestadorController::class);
     Route::apiResource('prestadores', PrestadorController::class);
-    Route::apiResource('obras', ObraController::class);
+    //Obras
+    Route::resource('obras', ObraController::class);
+    //Obras
 
     Route::get('profile', ProfileController::class)->name('profile');
 });
@@ -40,11 +42,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('login');
     Route::post('login', [LoginController::class, 'store']);
-
-    Route::get('register', [RegisterController::class, 'create'])->name('register');
-    Route::post('register', [RegisterController::class, 'store']);
-
-    Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
-    Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+    // Route::get('register', [RegisterController::class, 'create'])->name('register');
+    // Route::post('register', [RegisterController::class, 'store']);
+    // Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+    // Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 });
 
