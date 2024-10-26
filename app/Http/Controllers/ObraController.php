@@ -35,6 +35,8 @@ class ObraController extends Controller
         ]);
     }
 
-    public function show ()
+    public function show () {
+        
+    }
 
 }
