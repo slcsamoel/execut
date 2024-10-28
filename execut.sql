@@ -36,6 +36,16 @@ CREATE TABLE `cliente` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `cliente`
+--
+
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'João Silva','JS Serviços','12345678901234','11987654321',2),(2,'Teste novo update','teste novo','23132089000145','62991568478',13);
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `custo_prestador`
 --
 
@@ -56,6 +66,16 @@ CREATE TABLE `custo_prestador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `custo_prestador`
+--
+
+LOCK TABLES `custo_prestador` WRITE;
+/*!40000 ALTER TABLE `custo_prestador` DISABLE KEYS */;
+INSERT INTO `custo_prestador` VALUES (1,200,1,1);
+/*!40000 ALTER TABLE `custo_prestador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `endereco`
 --
 
@@ -71,6 +91,16 @@ CREATE TABLE `endereco` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `endereco`
+--
+
+LOCK TABLES `endereco` WRITE;
+/*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
+INSERT INTO `endereco` VALUES (1,'Rua dos Usuarios','Conjunto Usuario Apt A-101','Aparecida de Goiânia','GO'),(2,'Rua dos Clientes','Conjunto Cliente Apt B-101','Aparecida de Goiânia','GO'),(3,'Rua dos Fornecedores','Conjunto Fornecedor Apt C-101','Goiânia','GO'),(4,'Rua das Obras','Conjunto Construção Apt D-101','Goiânia','GO'),(5,'Avenida E, nº 1.470','sdfdfdfdafdsf','Aparecida de Goiânia','GO'),(6,'Rua dos Usuarios','Conjunto Usuario Apt A-101','Aparecida de Goiânia','GO'),(7,'Rua santa iris','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(8,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(9,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(10,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(11,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(12,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(13,'Avenida E, nº 1.470','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(14,'Rua santa iris','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(15,'Rua santa iris','Quadra 41 lote 10','APARECIDA DE GOIÂNIA','GO');
+/*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `failed_jobs`
@@ -91,6 +121,15 @@ CREATE TABLE `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `fornecedor`
@@ -114,6 +153,16 @@ CREATE TABLE `fornecedor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `fornecedor`
+--
+
+LOCK TABLES `fornecedor` WRITE;
+/*!40000 ALTER TABLE `fornecedor` DISABLE KEYS */;
+INSERT INTO `fornecedor` VALUES (1,'ConstruTudo Ltda','1133344556',1,3);
+/*!40000 ALTER TABLE `fornecedor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `funcao_prestador`
 --
 
@@ -127,6 +176,16 @@ CREATE TABLE `funcao_prestador` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `funcao_prestador`
+--
+
+LOCK TABLES `funcao_prestador` WRITE;
+/*!40000 ALTER TABLE `funcao_prestador` DISABLE KEYS */;
+INSERT INTO `funcao_prestador` VALUES (1,'Encanador','Profissional responsável por instalações hidráulicas'),(2,'Pedreiro','Responsavel pela Alvenaria'),(4,'Pintor','Responsavel pela Pintura'),(6,'Mestre de obras','Encarregado imediato pelo desenvolvimento da obra');
+/*!40000 ALTER TABLE `funcao_prestador` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `mao_de_obra`
@@ -150,6 +209,16 @@ CREATE TABLE `mao_de_obra` (
   CONSTRAINT `mao_de_obra_ibfk_3` FOREIGN KEY (`idFuncao`) REFERENCES `funcao_prestador` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mao_de_obra`
+--
+
+LOCK TABLES `mao_de_obra` WRITE;
+/*!40000 ALTER TABLE `mao_de_obra` DISABLE KEYS */;
+INSERT INTO `mao_de_obra` VALUES (1,'Próprio',1,1,1);
+/*!40000 ALTER TABLE `mao_de_obra` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `material_de_obra`
@@ -177,6 +246,16 @@ CREATE TABLE `material_de_obra` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `material_de_obra`
+--
+
+LOCK TABLES `material_de_obra` WRITE;
+/*!40000 ALTER TABLE `material_de_obra` DISABLE KEYS */;
+INSERT INTO `material_de_obra` VALUES (1,'Cimento','Saco de cimento 50kg',22.5,1,1,1);
+/*!40000 ALTER TABLE `material_de_obra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -190,6 +269,16 @@ CREATE TABLE `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_000001_create_personal_access_tokens_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `obra`
@@ -223,6 +312,16 @@ CREATE TABLE `obra` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `obra`
+--
+
+LOCK TABLES `obra` WRITE;
+/*!40000 ALTER TABLE `obra` DISABLE KEYS */;
+INSERT INTO `obra` VALUES (1,50000,'João Silva','2024-01-01 00:00:00','2024-12-31 00:00:00',1,1,4,'',0,0,NULL,NULL);
+/*!40000 ALTER TABLE `obra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `origem_recurso`
 --
 
@@ -236,6 +335,16 @@ CREATE TABLE `origem_recurso` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `origem_recurso`
+--
+
+LOCK TABLES `origem_recurso` WRITE;
+/*!40000 ALTER TABLE `origem_recurso` DISABLE KEYS */;
+INSERT INTO `origem_recurso` VALUES (1,'Recursos próprios',27850);
+/*!40000 ALTER TABLE `origem_recurso` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `pagamento`
@@ -253,6 +362,16 @@ CREATE TABLE `pagamento` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `pagamento`
+--
+
+LOCK TABLES `pagamento` WRITE;
+/*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
+INSERT INTO `pagamento` VALUES (1,'À vista','PIX');
+/*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `password_resets`
 --
 
@@ -266,6 +385,15 @@ CREATE TABLE `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `personal_access_tokens`
@@ -291,6 +419,15 @@ CREATE TABLE `personal_access_tokens` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `personal_access_tokens`
+--
+
+LOCK TABLES `personal_access_tokens` WRITE;
+/*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `prestador`
 --
 
@@ -310,6 +447,16 @@ CREATE TABLE `prestador` (
   CONSTRAINT `prestador_ibfk_1` FOREIGN KEY (`idFuncao`) REFERENCES `funcao_prestador` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prestador`
+--
+
+LOCK TABLES `prestador` WRITE;
+/*!40000 ALTER TABLE `prestador` DISABLE KEYS */;
+INSERT INTO `prestador` VALUES (1,'Maria Pereira','Autônomo','98765432100','234567890120',1,100),(2,'Samoel','Autônomo','023656646664','629664666464',1,80);
+/*!40000 ALTER TABLE `prestador` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `prestador_obra`
@@ -333,6 +480,16 @@ CREATE TABLE `prestador_obra` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `prestador_obra`
+--
+
+LOCK TABLES `prestador_obra` WRITE;
+/*!40000 ALTER TABLE `prestador_obra` DISABLE KEYS */;
+INSERT INTO `prestador_obra` VALUES (1,1,1,'2024-04-01','2024-07-01');
+/*!40000 ALTER TABLE `prestador_obra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tipo_de_fornecedor`
 --
 
@@ -346,6 +503,16 @@ CREATE TABLE `tipo_de_fornecedor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_de_fornecedor`
+--
+
+LOCK TABLES `tipo_de_fornecedor` WRITE;
+/*!40000 ALTER TABLE `tipo_de_fornecedor` DISABLE KEYS */;
+INSERT INTO `tipo_de_fornecedor` VALUES (1,'Material de construção','Fornecedor para construção civil');
+/*!40000 ALTER TABLE `tipo_de_fornecedor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tipo_de_obra`
@@ -363,6 +530,16 @@ CREATE TABLE `tipo_de_obra` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tipo_de_obra`
+--
+
+LOCK TABLES `tipo_de_obra` WRITE;
+/*!40000 ALTER TABLE `tipo_de_obra` DISABLE KEYS */;
+INSERT INTO `tipo_de_obra` VALUES (1,'Residencial','Obra destinada à construção de residências');
+/*!40000 ALTER TABLE `tipo_de_obra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tipo_mao_de_obra`
 --
 
@@ -376,6 +553,16 @@ CREATE TABLE `tipo_mao_de_obra` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_mao_de_obra`
+--
+
+LOCK TABLES `tipo_mao_de_obra` WRITE;
+/*!40000 ALTER TABLE `tipo_mao_de_obra` DISABLE KEYS */;
+INSERT INTO `tipo_mao_de_obra` VALUES (1,'Eletricista','instalações elétricas');
+/*!40000 ALTER TABLE `tipo_mao_de_obra` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `usuario`
@@ -403,6 +590,16 @@ CREATE TABLE `usuario` (
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (2,'SAMOEL COSTA','slccosta','23132089000145','62555555555',12,'samuellopescosta@gmail.com',NULL,'$2y$10$TAQTo.yY/daysp7LyfyituMm4aqJxe9o47jZlGGdcMcZVc7Ho2WYq',NULL,'2024-09-24 17:56:37','2024-09-27 13:53:49'),(3,'Teste','teste novo','123456789101112','62991568478',5,'teste@system.com',NULL,'$2y$10$Eq7e9kr/4/TlrHjZeoMuS.kzQfz0fRD09s4JRR1OdIlpmn3liyTL.',NULL,'2024-09-27 11:38:29','2024-09-27 11:38:29'),(4,'Antônio Almeida','Execut Construções e Reformas','123456789101112','6233363636',6,'adminstrador@system.com',NULL,'$2y$10$Qj8UMTn02XDsNuiu4/YkC.eaH7pc8EIT5.FKMbraCMHTXVVl78Qeq',NULL,'2024-09-27 11:46:04','2024-10-10 17:49:07'),(5,'Teste novo','teste teste','123456789101112','62991568478',15,'newTeste@system.com',NULL,'$2y$10$txBybdedRvsM9sEJ7lL81uVEVnRBqYViMB9iHuTkJy3kNwrtmKZau',NULL,'2024-10-01 14:12:53','2024-10-01 14:12:53');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -413,4 +610,4 @@ CREATE TABLE `usuario` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-21 17:20:27
+-- Dump completed on 2024-10-28 16:34:14

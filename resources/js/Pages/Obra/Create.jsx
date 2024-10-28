@@ -19,6 +19,7 @@ export default function Create(props) {
             nomeObra: null,
             idTipoObra: null,
             valorOrcamento: null,
+            dataInicio: null,
             previsaoEntrega: null,
             logradouro:'',
             complemento:'',
@@ -134,6 +135,13 @@ export default function Create(props) {
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Previsão de Entrega</label>
                                             <input className="form-control" type="date" name='previsaoEntrega' value={data.previsaoEntrega} onChange={onChange} id="previsaoEntrega" />
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-12">
+                                            <div className="form-group">
+                                            <label htmlFor="name" className="form-control-label">Data de Inicio</label>
+                                            <input className="form-control" type="date" name='dataInicio' value={data.dataInicio} onChange={onChange} id="dataInicio" />
                                             </div>
                                         </div>
 

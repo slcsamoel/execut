@@ -11272,6 +11272,7 @@ function Create(props) {
     nomeObra: null,
     idTipoObra: null,
     valorOrcamento: null,
+    dataInicio: null,
     previsaoEntrega: null,
     logradouro: '',
     complemento: '',
@@ -11453,6 +11454,23 @@ function Create(props) {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                           htmlFor: "name",
                           className: "form-control-label",
+                          children: "Data de Inicio"
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+                          className: "form-control",
+                          type: "date",
+                          name: "dataInicio",
+                          value: data.dataInicio,
+                          onChange: onChange,
+                          id: "dataInicio"
+                        })]
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                      className: "col-md-12",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                        className: "form-group",
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+                          htmlFor: "name",
+                          className: "form-control-label",
                           children: "Tipo de Obra"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
                           className: "form-control",
@@ -11503,7 +11521,7 @@ function Create(props) {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                           htmlFor: "name",
                           className: "form-control-label",
-                          children: "Clientes"
+                          children: "Cliente"
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
                           className: "form-control",
                           name: "idCliente",
