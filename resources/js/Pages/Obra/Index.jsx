@@ -113,9 +113,9 @@ export default function Index(props) {
                                                 </td>
                                                 <td className="align-middle text-center" width="10%">
                                                 <div>
-                                                    <button type="button" onClick={() => openUpdateDialog(obra)} className="btn btn-vimeo btn-icon-only mx-2">
+                                                    <Link type="button" href={route('obras.edit', obra.id)} className="btn btn-vimeo btn-icon-only mx-2">
                                                         <span className="btn-inner--icon"><i className="fas fa-pencil-alt"></i></span>
-                                                    </button>
+                                                    </Link>
                                                     {/* <button type="button" onClick={() => openDestroyDialog(obra)} className="btn btn-youtube btn-icon-only">
                                                         <span className="btn-inner--icon"><i className="fas fa-trash"></i></span>
                                                     </button> */}

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cliente;
+use App\Models\Obra;
+use App\Models\Prestador;
 
 class DashboardController extends Controller
 {
@@ -14,6 +17,15 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return inertia('Dashboard');
+
+        $clientes = Cliente::all()->count();
+        $prestadores = Prestador::all()->count();
+        $obras = Obra::all()->count();
+
+        return inertia('Dashboard' , [
+            'clientes' => $clientes,
+            'prestadores' => $prestadores,
+            'obras' => $obras
+        ]);
     }
 }

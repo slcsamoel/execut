@@ -95,13 +95,20 @@ class ObraController extends Controller
     }
 
 
-    public function show (Request $request , Obra $obra)
+    public function edit (Request $request , Obra $obra)
     {
         $tipoObras = TipoObra::all();
         $clientes =  Cliente::all();
         $pagamentos = Pagamento::all();
 
+        $obraEdit = Obra::with('endereco', 'cliente' , 'tipoObra')->where('id', $obra->id )->first();
 
+        return inertia('Obra/Edit', [
+            'tipoObras' => $tipoObras,
+            'clientes' => $clientes,
+            'pagamentos' => $pagamentos,
+            'obra' => $obraEdit,
+        ]);
 
     }
 

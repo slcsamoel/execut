@@ -1,7 +1,12 @@
 import React from 'react'
 import Base from '../Layouts/Base'
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+        const qntObras = props.obras;
+        const qntClientes = props.clientes;
+        const qntPrestador = props.prestadores;
+
+
     return (
         <>
             <div className="container-fluid py-4">
@@ -12,13 +17,12 @@ export default function Dashboard() {
                         <div className="row">
                             <div className="col-8">
                             <div className="numbers">
-                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
+                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Obras Realizadas</p>
                                 <h5 className="font-weight-bolder">
-                                $53,000
+                                  {qntObras}
                                 </h5>
                                 <p className="mb-0">
-                                <span className="text-success text-sm font-weight-bolder">+55%</span>
-                                since yesterday
+                                <span className="text-success text-sm font-weight-bolder">+</span>
                                 </p>
                             </div>
                             </div>
@@ -37,13 +41,12 @@ export default function Dashboard() {
                         <div className="row">
                             <div className="col-8">
                             <div className="numbers">
-                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Clientes </p>
                                 <h5 className="font-weight-bolder">
-                                2,300
+                                 {qntClientes}
                                 </h5>
                                 <p className="mb-0">
-                                <span className="text-success text-sm font-weight-bolder">+3%</span>
-                                since last week
+                                <span className="text-success text-sm font-weight-bolder">+</span>
                                 </p>
                             </div>
                             </div>
@@ -62,13 +65,12 @@ export default function Dashboard() {
                         <div className="row">
                             <div className="col-8">
                             <div className="numbers">
-                                <p className="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Prestadores</p>
                                 <h5 className="font-weight-bolder">
-                                +3,462
+                                {qntPrestador}
                                 </h5>
                                 <p className="mb-0">
-                                <span className="text-danger text-sm font-weight-bolder">-2%</span>
-                                since last quarter
+                                <span className="text-danger text-sm font-weight-bolder">+</span>
                                 </p>
                             </div>
                             </div>
@@ -81,7 +83,7 @@ export default function Dashboard() {
                         </div>
                     </div>
                     </div>
-                    <div className="col-xl-3 col-sm-6">
+                    {/* <div className="col-xl-3 col-sm-6">
                     <div className="card">
                         <div className="card-body p-3">
                         <div className="row">
@@ -104,7 +106,7 @@ export default function Dashboard() {
                         </div>
                         </div>
                     </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="row mt-4">
 
