@@ -45,5 +45,10 @@ class Obra extends Model
         return $this->belongsTo(TipoObra::class, 'idTipoObra');
     }
 
+    public function prestadoresObras()
+    {
+        return $this->hasMany(PrestadorObra::class , 'idObra')->with('prestador');
+    }
+
 
 }

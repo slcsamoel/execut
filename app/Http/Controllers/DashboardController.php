@@ -21,11 +21,13 @@ class DashboardController extends Controller
         $clientes = Cliente::all()->count();
         $prestadores = Prestador::all()->count();
         $obras = Obra::all()->count();
+        $qntObrasRealizadas = Obra::where('status' , 4)->count();
 
         return inertia('Dashboard' , [
             'clientes' => $clientes,
             'prestadores' => $prestadores,
-            'obras' => $obras
+            'obras' => $obras,
+            'qntObrasRealizadas' => $qntObrasRealizadas
         ]);
     }
 }

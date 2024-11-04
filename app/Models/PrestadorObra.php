@@ -9,4 +9,14 @@ class PrestadorObra extends Model
 {
     use HasFactory;
     protected $table = 'prestador_obra';
+
+    public function prestador()
+    {
+        return $this->belongsTo(Prestador::class, 'idPrestador')->with('funcao');
+    }
+
+    public function obra()
+    {
+        return $this->belongsTo(Obra::class, 'idObra');
+    }
 }

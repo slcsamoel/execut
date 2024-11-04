@@ -1,4 +1,4 @@
-import { useForm, usePage } from '@inertiajs/inertia-react';
+import { Link, useForm, usePage } from '@inertiajs/inertia-react';
 import React, { useState , useEffect } from 'react';
 import Base from '../../Layouts/Base'
 import axios from 'axios';
@@ -110,7 +110,9 @@ export default function Edit(props) {
                                 <div className="card-header pb-0">
                                     <div className="d-flex align-items-center">
                                         <button type='submit' className="btn btn-primary btn-sm ms-auto">Materiais</button>
-                                        <button type='submit' className="btn btn-primary btn-sm ms-auto">Prestadores</button>
+                                        <Link type="button" href={route('funcionarios.index', obra.id)} className="btn btn-primary btn-sm ms-auto">Prestadores</Link>
+                                        <button type='submit' className="btn btn-primary btn-sm ms-auto">Relatorios</button>
+                                        <button type='submit' className="btn btn-primary btn-sm ms-auto">Mudar status</button>
                                     </div>
                                 </div>
                                 <div className="card-body">

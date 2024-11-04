@@ -2,6 +2,7 @@ import React from 'react'
 import Base from '../Layouts/Base'
 
 export default function Dashboard(props) {
+        const qntObrasRealizadas = props.qntObrasRealizadas;
         const qntObras = props.obras;
         const qntClientes = props.clientes;
         const qntPrestador = props.prestadores;
@@ -11,13 +12,39 @@ export default function Dashboard(props) {
         <>
             <div className="container-fluid py-4">
                 <div className="row">
+
+                    <div className="col-xl-3 col-sm-6">
+                    <div className="card">
+                        <div className="card-body p-3">
+                        <div className="row">
+                            <div className="col-8">
+                            <div className="numbers">
+                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Obras Finalizadas</p>
+                                <h5 className="font-weight-bolder">
+                                {qntObrasRealizadas}
+                                </h5>
+                                <p className="mb-0">
+                                <span className="text-success text-sm font-weight-bolder">+</span>
+                                </p>
+                            </div>
+                            </div>
+                            <div className="col-4 text-end">
+                            <div className="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                <i className="ni ni-cart text-lg opacity-10" aria-hidden="true" />
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
                     <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div className="card">
                         <div className="card-body p-3">
                         <div className="row">
                             <div className="col-8">
                             <div className="numbers">
-                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Obras Realizadas</p>
+                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Obras Cadastradas</p>
                                 <h5 className="font-weight-bolder">
                                   {qntObras}
                                 </h5>
@@ -83,30 +110,7 @@ export default function Dashboard(props) {
                         </div>
                     </div>
                     </div>
-                    {/* <div className="col-xl-3 col-sm-6">
-                    <div className="card">
-                        <div className="card-body p-3">
-                        <div className="row">
-                            <div className="col-8">
-                            <div className="numbers">
-                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
-                                <h5 className="font-weight-bolder">
-                                $103,430
-                                </h5>
-                                <p className="mb-0">
-                                <span className="text-success text-sm font-weight-bolder">+5%</span> than last month
-                                </p>
-                            </div>
-                            </div>
-                            <div className="col-4 text-end">
-                            <div className="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                <i className="ni ni-cart text-lg opacity-10" aria-hidden="true" />
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div> */}
+
                 </div>
                 <div className="row mt-4">
 
