@@ -89,7 +89,7 @@ CREATE TABLE `endereco` (
   `cidade` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `estado` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `endereco` (
 
 LOCK TABLES `endereco` WRITE;
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
-INSERT INTO `endereco` VALUES (1,'Rua dos Usuarios','Conjunto Usuario Apt A-101','Aparecida de Goiânia','GO'),(2,'Rua dos Clientes','Conjunto Cliente Apt B-101','Aparecida de Goiânia','GO'),(3,'Rua dos Fornecedores','Conjunto Fornecedor Apt C-101','Goiânia','GO'),(4,'Rua das Obras','Conjunto Construção Apt D-101','Goiânia','GO'),(5,'Avenida E, nº 1.470','sdfdfdfdafdsf','Aparecida de Goiânia','GO'),(6,'Rua dos Usuarios','Conjunto Usuario Apt A-101','Aparecida de Goiânia','GO'),(7,'Rua santa iris','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(8,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(9,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(10,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(11,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(12,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(13,'Avenida E, nº 1.470','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(14,'Rua santa iris','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(15,'Rua santa iris','Quadra 41 lote 10','APARECIDA DE GOIÂNIA','GO');
+INSERT INTO `endereco` VALUES (1,'Rua dos Usuarios','Conjunto Usuario Apt A-101','Aparecida de Goiânia','GO'),(2,'Rua dos Clientes','Conjunto Cliente Apt B-101','Aparecida de Goiânia','GO'),(3,'Rua dos Fornecedores','Conjunto Fornecedor Apt C-101','Goiânia','GO'),(4,'Rua das Obras','Conjunto Construção Apt D-101','Goiânia','GO'),(5,'Avenida E, nº 1.470','sdfdfdfdafdsf','Aparecida de Goiânia','GO'),(6,'Rua dos Usuarios','Conjunto Usuario Apt A-101','Aparecida de Goiânia','GO'),(7,'Rua santa iris','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(8,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(9,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(10,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(11,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(12,'Avenida E','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(13,'Avenida E, nº 1.470','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(14,'Rua santa iris','Quadra 41 lote 10','Aparecida de Goiânia','GO'),(15,'Rua santa iris','Quadra 41 lote 10','APARECIDA DE GOIÂNIA','GO'),(16,'Avenida E','Quadra 41 lote 10','APARECIDA DE GOIANIA','GO');
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,8 +291,8 @@ CREATE TABLE `obra` (
   `id` int NOT NULL AUTO_INCREMENT,
   `valorFinal` double DEFAULT NULL,
   `responsavelObra` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dataInicio` datetime NOT NULL,
-  `dataFim` datetime DEFAULT NULL,
+  `dataInicio` date NOT NULL,
+  `dataFim` date DEFAULT NULL,
   `idCliente` int NOT NULL,
   `idPagamento` int NOT NULL,
   `idEndereco` int NOT NULL,
@@ -308,7 +308,7 @@ CREATE TABLE `obra` (
   CONSTRAINT `obra_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`id`),
   CONSTRAINT `obra_ibfk_2` FOREIGN KEY (`idPagamento`) REFERENCES `pagamento` (`id`),
   CONSTRAINT `obra_ibfk_4` FOREIGN KEY (`idEndereco`) REFERENCES `endereco` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +317,7 @@ CREATE TABLE `obra` (
 
 LOCK TABLES `obra` WRITE;
 /*!40000 ALTER TABLE `obra` DISABLE KEYS */;
-INSERT INTO `obra` VALUES (1,50000,'João Silva','2024-01-01 00:00:00','2024-12-31 00:00:00',1,1,4,'',0,0,NULL,NULL);
+INSERT INTO `obra` VALUES (1,50000,'João Silva','2024-01-01','2024-12-31',1,1,4,'',0,0,NULL,NULL),(2,NULL,'Saul','2024-10-24',NULL,1,1,16,'Obra 01',1,5000,NULL,'2024-11-30');
 /*!40000 ALTER TABLE `obra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,13 +470,13 @@ CREATE TABLE `prestador_obra` (
   `idPrestador` int NOT NULL,
   `idObra` int NOT NULL,
   `dataInicio` date NOT NULL,
-  `dataFim` date NOT NULL,
+  `dataFim` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idPrestador` (`idPrestador`),
   KEY `idObra` (`idObra`),
   CONSTRAINT `prestador_obra_ibfk_1` FOREIGN KEY (`idPrestador`) REFERENCES `prestador` (`id`),
   CONSTRAINT `prestador_obra_ibfk_2` FOREIGN KEY (`idObra`) REFERENCES `obra` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -485,7 +485,7 @@ CREATE TABLE `prestador_obra` (
 
 LOCK TABLES `prestador_obra` WRITE;
 /*!40000 ALTER TABLE `prestador_obra` DISABLE KEYS */;
-INSERT INTO `prestador_obra` VALUES (1,1,1,'2024-04-01','2024-07-01');
+INSERT INTO `prestador_obra` VALUES (1,1,1,'2024-04-01','2024-07-01'),(2,2,1,'2024-11-05',NULL),(3,2,2,'2024-11-09',NULL);
 /*!40000 ALTER TABLE `prestador_obra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -610,4 +610,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-28 16:34:14
+-- Dump completed on 2024-11-05 17:08:01

@@ -9,6 +9,15 @@ class PrestadorObra extends Model
 {
     use HasFactory;
     protected $table = 'prestador_obra';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'idPrestador',
+        'idObra',
+        'dataInicio',
+        'dataFim',
+    ];
+
 
     public function prestador()
     {

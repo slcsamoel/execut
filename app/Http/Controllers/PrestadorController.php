@@ -28,7 +28,7 @@ class PrestadorController extends Controller
             'tipoPrestador' => 'required|max:255',
             'cpfCnpj'   => 'required|max:255',
             'telefone' => 'required|max:255',
-            'idFuncao' => 'required|max:1',
+            'idFuncao' => 'required|max:3',
             'valorDiaria' => 'required|max:10',
         ]);
 
@@ -64,7 +64,7 @@ class PrestadorController extends Controller
             'tipoPrestador' => 'required|max:255',
             'cpfCnpj'   => 'required|max:255',
             'telefone' => 'required|max:255',
-            'idFuncao' => 'required|max:1',
+            'idFuncao' => 'required|max:3',
             'valorDiaria' => 'required|max:10',
         ]);
 

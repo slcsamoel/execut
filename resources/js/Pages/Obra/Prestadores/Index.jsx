@@ -6,12 +6,14 @@ import useDialog from '../../../Hooks/useDialog';
 import { Inertia } from '@inertiajs/inertia';
 import CreatePrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/CreatePrestadorObra';
 import EditPrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/EditPrestadorObra';
-
+import {formatDate} from '../../../Utils/helpers';
 
 
 export default function Index(props) {
 
     const {data: prestadores, links, meta} = props.prestadoresObras;
+    const obra = props.obra;
+    const todosPrestadores = props.prestadores;
    // const funcoes =  props.funcoes;
     const [state, setState] = useState([])
     const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
@@ -39,14 +41,15 @@ export default function Index(props) {
     return (
         <>
             <div className="container-fluid py-4">
-                {/* <Dialog trigger={addTrigger} title="Criar novo prestador">
-                    <CreatePrestadorObra close={addCloseTrigger} funcoes={funcoes} />
+                <Dialog trigger={addTrigger} title="Vincular novo prestador">
+                    <CreatePrestadorObra close={addCloseTrigger} todosPrestadores={todosPrestadores} obra={obra}/>
                 </Dialog>
 
-                <Dialog trigger={UpdateTrigger} title={`Alterar prestador: ${state.nomePrestador}`}>
-                    <EditPrestadorObra model={state} close={UpdateCloseTrigger} funcoes={funcoes}/>
+                <Dialog trigger={UpdateTrigger} title={`Finalizar Participação`}>
+                    <EditPrestadorObra model={state} close={UpdateCloseTrigger} obra={obra}/>
                 </Dialog>
 
+                {/*
                 <Dialog trigger={destroyTrigger} title={`Deletar prestador: ${state.nomePrestador}`}>
                     <p>Deletar Função ?</p>
                     <div className="modal-footer">
@@ -84,7 +87,7 @@ export default function Index(props) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {prestadores.map((prestador, index) => (
+                                        {prestadores.length > 0 && prestadores.map((prestador, index) => (
                                             <tr key={prestador.id}>
                                                 <td className='text-center'>{meta.from + index}</td>
                                                 <td className='text-left'>
@@ -98,11 +101,11 @@ export default function Index(props) {
                                                     <p className="text-sm font-weight-bold mb-0">{prestador.prestador.funcao.descricaoFuncao}</p>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <p className="text-sm font-weight-bold mb-0">{prestador.dataInicio}</p>
+                                                    <p className="text-sm font-weight-bold mb-0">{formatDate(prestador.dataInicio)}</p>
                                                 </td>
                                                 { prestador.dataFim ?
                                                     <td className='text-left'>
-                                                        <p className="text-sm font-weight-bold mb-0">{prestador.dataFim}</p>
+                                                        <p className="text-sm font-weight-bold mb-0">{formatDate(prestador.dataInicio)}</p>
                                                     </td>
                                                     :
                                                     <td className='text-left'>
