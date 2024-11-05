@@ -3,11 +3,11 @@ import React from 'react'
 
 export default function Sidebar() {
     return (
-        <aside className="sidenav bg-default navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+        <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" style={{ backgroundColor: '#fff' }} id="sidenav-main">
             <div className="sidenav-header">
                 <i className="fas fa-times p-3 cursor-pointer opacity-5 position-absolute end-0 top-0 d-none d-xl-none opacity-8 text-white" aria-hidden="true" id="iconSidenav" />
                 <Link className="navbar-brand m-0" href={route('dashboard')} target="_blank">
-                    {/* <img src="/img/logo-ct.png" className="navbar-brand-img h-100" alt="main_logo" /> */}
+                    <img src="/img/logo-execut.png" className="navbar-brand-img h-100" alt="main_logo" />
                     <span className="ms-1 font-weight-bold"> Sistema Execut</span>
                 </Link>
             </div>
