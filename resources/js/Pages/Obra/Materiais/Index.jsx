@@ -6,15 +6,14 @@ import useDialog from '../../../Hooks/useDialog';
 import { Inertia } from '@inertiajs/inertia';
 import CreatePrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/CreatePrestadorObra';
 import EditPrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/EditPrestadorObra';
-import {formatDate} from '../../../Utils/helpers';
+import {formatDate , formatDateWithTime} from '../../../Utils/helpers';
 
 
 export default function Index(props) {
 
-    const {data: prestadores, links, meta} = props.prestadoresObras;
+    const {data: materiais, links, meta} = props.materiaisObra;
     const obra = props.obra;
-    const todosPrestadores = props.prestadores;
-   // const funcoes =  props.funcoes;
+    const fornecedores = props.fornecedores;
     const [state, setState] = useState([])
     const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
     const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
@@ -41,7 +40,7 @@ export default function Index(props) {
     return (
         <>
             <div className="container-fluid py-4">
-                <Dialog trigger={addTrigger} title="Vincular novo prestador">
+                {/* <Dialog trigger={addTrigger} title="Vincular novo prestador">
                     <CreatePrestadorObra close={addCloseTrigger} todosPrestadores={todosPrestadores} obra={obra}/>
                 </Dialog>
 
@@ -56,7 +55,7 @@ export default function Index(props) {
                         <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
                         <button type="submit" onClick={destroyFuncao} className="btn bg-gradient-danger">Deletar</button>
                     </div>
-                </Dialog>
+                </Dialog> */}
 
                 <div className="row pb-4">
                     <div className="col-12 w-100">
@@ -64,11 +63,11 @@ export default function Index(props) {
                             <div className="card-header pb-0">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <h6>Prestadores</h6>
+                                    <h6>Materias</h6>
                                 </div>
                                 <div className="col-md-6 d-flex justify-content-end">
                                     <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Vincular Novo  prestador
+                                        Cadastrar Novo  Material
                                     </button>
                                 </div>
                             </div>
@@ -80,53 +79,39 @@ export default function Index(props) {
                                         <tr>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-centter">#</th>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Nome</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Função</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Data Inicio</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Data Fim</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Fornecedor</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Data</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Valor</th>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {prestadores.length > 0 && prestadores.map((prestador, index) => (
-                                            <tr key={prestador.id}>
+                                        {materiais.length > 0 && materiais.map((material, index) => (
+                                            <tr key={material.id}>
                                                 <td className='text-center'>{meta.from + index}</td>
                                                 <td className='text-left'>
                                                     <div className="d-flex px-2">
                                                         <div className="my-auto">
-                                                            <h6 className="mb-0 text-sm">{prestador.prestador.nomePrestador}</h6>
+                                                            <h6 className="mb-0 text-sm">{material.nomeMaterial}</h6>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <p className="text-sm font-weight-bold mb-0">{prestador.prestador.funcao.descricaoFuncao}</p>
+                                                    <p className="text-sm font-weight-bold mb-0">{material.fornecedor.razaoSocial}</p>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <p className="text-sm font-weight-bold mb-0">{formatDate(prestador.dataInicio)}</p>
+                                                    <p className="text-sm font-weight-bold mb-0">{formatDateWithTime(material.dataCompra)}</p>
                                                 </td>
-                                                { prestador.dataFim ?
-                                                    <td className='text-left'>
-                                                        <p className="text-sm font-weight-bold mb-0">{formatDate(prestador.dataFim)}</p>
-                                                    </td>
-                                                    :
-                                                    <td className='text-left'>
-                                                        <p className="text-sm font-weight-bold mb-0">Atuando</p>
-                                                    </td>
-                                                }
-
-
+                                                <td className='text-left'>
+                                                    <p className="text-sm font-weight-bold mb-0">{material.valor}</p>
+                                                </td>
                                                 <td className="align-middle text-center" width="15%">
                                                 <div>
-                                                { prestador.dataFim ?
 
-                                                       ''
-                                                :
-
-                                                    <button type="button" onClick={() => openUpdateDialog(prestador)} className="btn btn-vimeo btn-icon-only mx-2">
+                                                    <button type="button" onClick={() => openUpdateDialog(material)} className="btn btn-vimeo btn-icon-only mx-2">
                                                         <span className="btn-inner--icon"><i className="fas fa-pencil-alt"></i></span>
                                                     </button>
-
-                                                }
-                                                    <button type="button" onClick={() => openDestroyDialog(prestador)} className="btn btn-youtube btn-icon-only">
+                                                    <button type="button" onClick={() => openDestroyDialog(material)} className="btn btn-youtube btn-icon-only">
                                                         <span className="btn-inner--icon"><i className="fas fa-trash"></i></span>
                                                     </button>
                                                 </div>
@@ -154,4 +139,4 @@ export default function Index(props) {
     )
 }
 
-Index.layout = (page) => <Base key={page} children={page} title={"Prestadores da Obra "}/>
+Index.layout = (page) => <Base key={page} children={page} title={"Materiais da Obra "}/>

@@ -50,5 +50,10 @@ class Obra extends Model
         return $this->hasMany(PrestadorObra::class , 'idObra')->with('prestador');
     }
 
+    public function materiaisObras()
+    {
+        return $this->hasMany(MaterialDeObra::class , 'idObra')->with('fornecedor');
+    }
+
 
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\FuncaoPrestadorController;
 use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\ObraController;
 use App\Http\Controllers\PrestadorObraController;
+use App\Http\Controllers\MateriasObraController;
 
 // Route::get('/', HomeController::class)->name('home');
 
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     //Obras
     Route::resource('obras', ObraController::class);
     Route::apiResource('obras/{obra}/funcionarios', PrestadorObraController::class);
+    Route::apiResource('obras/{obra}/materiais', MateriasObraController::class);
     //Obras
 
     Route::get('profile', ProfileController::class)->name('profile');

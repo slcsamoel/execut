@@ -19,6 +19,7 @@ class Cliente extends Model
         'razaoSocial',
         'cpfCnpj',
         'telefone',
+        'idEndereco'
     ];
 
     public function endereco(){

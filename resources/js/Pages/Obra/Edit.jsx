@@ -2,6 +2,7 @@ import { Link, useForm, usePage } from '@inertiajs/inertia-react';
 import React, { useState , useEffect } from 'react';
 import Base from '../../Layouts/Base'
 import axios from 'axios';
+import { formatCurrency, convertCurrencyToNumber , formatarCampoTextParaNumerico} from '../../Utils/helpers';
 
 export default function Edit(props) {
     const { auth } = usePage().props;
@@ -15,7 +16,7 @@ export default function Edit(props) {
     const [estados, setEstados] = useState([]);
     const [cidades , setCidades] = useState([]);
 
-    const {data, setData, post, reset, errors} = useForm({
+    const {data, setData, put, reset, errors} = useForm({
             responsavelObra: obra.responsavelObra ,
             idCliente: obra.idCliente ,
             idPagamento: obra.idPagamento,
@@ -68,7 +69,7 @@ export default function Edit(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route('obras.store'), {
+        put(route('obras.update', obra.id), {
             data,
             onSuccess: () => {
             },
@@ -109,10 +110,10 @@ export default function Edit(props) {
                             <form onSubmit={onSubmit}>
                                 <div className="card-header pb-0">
                                     <div className="d-flex align-items-center">
-                                        <button type='submit' className="btn btn-primary btn-sm ms-auto">Materiais</button>
-                                        <Link type="button" href={route('funcionarios.index', obra.id)} className="btn btn-primary btn-sm ms-auto">Prestadores</Link>
-                                        <button type='submit' className="btn btn-primary btn-sm ms-auto">Relatorios</button>
-                                        <button type='submit' className="btn btn-primary btn-sm ms-auto">Mudar status</button>
+                                        <Link type='button'  href={route('materiais.index', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Materiais</Link>
+                                        <Link type="button" href={route('funcionarios.index', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Prestadores</Link>
+                                        <button type='button' className="btn bg-gradient-secondary btn-sm ms-auto">Relatorios</button>
+                                        <button type='button' className="btn bg-gradient-secondary btn-sm ms-auto">Mudar status</button>
                                     </div>
                                 </div>
                                 <div className="card-body">
@@ -132,7 +133,7 @@ export default function Edit(props) {
                                         <div className="col-md-12">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor do orçamento</label>
-                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento} onChange={onChange} id="valorOrcamento" />
+                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento}  onInput={e => formatarCampoTextParaNumerico(e)} onChange={onChange}  id="valorOrcamento" />
                                             </div>
                                         </div>
 

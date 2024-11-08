@@ -54,6 +54,14 @@ class ObraController extends Controller
             'estado'=> 'required|max:2',
         ]);
 
+        if(!verificarDataIncioDataFim($request->dataInicio, $request->previsaoEntrega)){
+            return back()->with([
+                'type' => 'error',
+                'message' => 'A  data de inicio não pode ser maior que previsão de entrega',
+            ]);
+        }
+
+
         $endereco = new Endereco();
         $endereco->logradouro = $request->logradouro;
         $endereco->complemento = $request->complemento;
@@ -109,6 +117,72 @@ class ObraController extends Controller
             'pagamentos' => $pagamentos,
             'obra' => $obraEdit,
         ]);
+
+    }
+
+    public function update(Request $request , Obra $obra)
+    {
+        $this->validate($request, [
+            'responsavelObra' => 'required|max:255',
+            'dataInicio' => 'required|max:15',
+            'dataFim' => 'nullable|max:12',
+            'idCliente'=> 'required|max:255',
+            'idPagamento'=> 'required|max:255',
+            'idTipoObra'=> 'required|max:255',
+            'nomeObra'=> 'nullable|max:255',
+            'valorOrcamento'=> 'nullable|max:255',
+            'previsaoEntrega'=> 'required|max:255',
+            'logradouro'=> 'required|max:255',
+            'complemento'=> 'required|max:255',
+            'cidade'=> 'required|max:100',
+            'estado'=> 'required|max:2',
+        ]);
+
+        if(!verificarDataIncioDataFim($request->dataInicio, $request->previsaoEntrega)){
+            return back()->with([
+                'type' => 'error',
+                'message' => 'A  data de inicio não pode ser maior que previsão de entrega',
+            ]);
+        }
+
+        if($obra->idEndereco){
+            $endereco = Endereco::find($obra->idEndereco);
+        }else{
+            $endereco = new Endereco();
+        }
+
+        $endereco->logradouro = $request->logradouro;
+        $endereco->complemento = $request->complemento;
+        $endereco->cidade = $request->cidade;
+        $endereco->estado = $request->estado;
+
+        try {
+            $endereco->save();
+            $obra->idEndereco = $endereco->id;
+            $obra->responsavelObra = $request->responsavelObra;
+            $obra->dataInicio = $request->dataInicio;
+            $obra->dataFim = $request->dataFim;
+            $obra->idCliente = $request->idCliente;
+            $obra->idPagamento = $request->idPagamento;
+            $obra->idTipoObra = $request->idTipoObra;
+            $obra->nomeObra = $request->nomeObra;
+            $obra->valorOrcamento = $request->valorOrcamento;
+            $obra->previsaoEntrega = $request->previsaoEntrega;
+            $obra->save();
+
+            return back()->with([
+                'type' => 'success',
+                'message' => 'Obra Atualizada com sucesso',
+            ]);
+
+        } catch (\Throwable $th) {
+
+            return back()->with([
+                'type' => 'error',
+                'message' => $th->getMessage(),
+            ]);
+        }
+
 
     }
 

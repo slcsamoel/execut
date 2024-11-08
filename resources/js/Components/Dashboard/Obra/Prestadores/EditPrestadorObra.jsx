@@ -13,7 +13,7 @@ export default function EditPrestadorObra({close , model ,obra}) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        put(route('funcionarios.update',obra.id ,model.id), {
+        put(route('funcionarios.update',[obra.id ,model.id]), {
             data,
             onSuccess: () => {
                 reset(),
