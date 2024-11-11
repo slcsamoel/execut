@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('obras', ObraController::class);
     Route::apiResource('obras/{obra}/funcionarios', PrestadorObraController::class);
     Route::apiResource('obras/{obra}/materiais', MateriasObraController::class);
+    Route::get('obras/{obra}/relatorio',[ObraController::class , 'relatorioDaObra'])->name('obras.relatorio');
     //Obras
 
     Route::get('profile', ProfileController::class)->name('profile');
@@ -46,9 +47,5 @@ Route::middleware('auth')->group(function () {
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('login');
     Route::post('login', [LoginController::class, 'store']);
-    // Route::get('register', [RegisterController::class, 'create'])->name('register');
-    // Route::post('register', [RegisterController::class, 'store']);
-    // Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
-    // Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 });
 

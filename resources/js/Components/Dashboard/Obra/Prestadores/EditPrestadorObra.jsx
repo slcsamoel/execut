@@ -35,7 +35,7 @@ export default function EditPrestadorObra({close , model ,obra}) {
 
                         <div className="form-group">
                             <label htmlFor="nomePrestador" className="col-form-label">Nome:</label>
-                            <input type="text" className="form-control" name='nomePrestador' value={data.nomePrestador} onChange={onChange} id="nomePrestador"/>
+                            <input type="text" className="form-control" name='nomePrestador' value={data.nomePrestador} onChange={onChange} id="nomePrestador" readOnly/>
                             {errors && <div className='text-danger mt-1'>{errors.nomePrestador}</div>}
                         </div>
 

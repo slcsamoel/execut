@@ -31,7 +31,6 @@ class MateriasObraController extends Controller
             'descricaoMaterial'   => 'required|max:255',
             'valor'   => 'required|max:255',
             'idFornecedor'   => 'required|max:255',
-            'dataCompra' =>  'required|max:255',
         ]);
 
         $material = new MaterialDeObra();
@@ -39,7 +38,7 @@ class MateriasObraController extends Controller
         $material->descricaoMaterial = $request->descricaoMaterial;
         $material->valor = $request->valor;
         $material->idFornecedor = $request->idFornecedor;
-        $material->dataCompra = $request->dataCompra;
+        $material->dataCompra = now();
         $material->idObra = $obra->id;
 
         try {
@@ -58,6 +57,55 @@ class MateriasObraController extends Controller
             ]);
         }
 
+    }
+
+    public function update(Request $request , Obra $obra , MaterialDeObra $materiai)
+    {
+        $this->validate($request, [
+            'nomeMaterial' =>  'required|max:255',
+            'descricaoMaterial'   => 'required|max:255',
+            'valor'   => 'required|max:255',
+            'idFornecedor'   => 'required|max:255',
+        ]);
+
+        $materiai->nomeMaterial = $request->nomeMaterial;
+        $materiai->descricaoMaterial = $request->descricaoMaterial;
+        $materiai->valor = $request->valor;
+        $materiai->idFornecedor = $request->idFornecedor;
+        $materiai->idObra = $obra->id;
+
+        try {
+            $materiai->update();
+
+            return back()->with([
+                'type' => 'success',
+                'message' => 'Registrado com sucesso',
+            ]);
+        } catch (\Throwable $th) {
+            return back()->with([
+                'type' => 'error',
+                'message' => $th->getMessage(),
+            ]);
+        }
+
+    }
+
+    public function destroy(Request $request , Obra $obra , MaterialDeObra $materiai)
+    {
+        try {
+            $materiai->delete();
+
+            return back()->with([
+                'type' => 'success',
+                'message' => 'Deletado com sucesso',
+            ]);
+
+        } catch (\Throwable $th) {
+            return back()->with([
+                'type' => 'error',
+                'message' => $th->getMessage(),
+            ]);
+        }
     }
 
 }

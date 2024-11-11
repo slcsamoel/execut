@@ -63,10 +63,13 @@ export default function Index(props) {
                         <div className="card h-100 w-100">
                             <div className="card-header pb-0">
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <h6>Prestadores</h6>
                                 </div>
-                                <div className="col-md-6 d-flex justify-content-end">
+                                <div className="col-md-8 d-flex justify-content-end">
+                                    <Link type="button" href={route('obras.edit', obra.id)} className="btn bg-primary-success btn-block mb-3" style={{ margin: '5px' }}>
+                                        Obra
+                                    </Link>
                                     <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
                                         Vincular Novo  prestador
                                     </button>

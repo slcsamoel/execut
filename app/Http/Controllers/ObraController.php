@@ -9,6 +9,8 @@ use App\Models\Pagamento;
 use App\Models\TipoObra;
 use Illuminate\Http\Request;
 use App\Models\Endereco;
+use App\Models\MaterialDeObra;
+use App\Models\PrestadorObra;
 
 class ObraController extends Controller
 {
@@ -102,7 +104,6 @@ class ObraController extends Controller
 
     }
 
-
     public function edit (Request $request , Obra $obra)
     {
         $tipoObras = TipoObra::all();
@@ -111,11 +112,16 @@ class ObraController extends Controller
 
         $obraEdit = Obra::with('endereco', 'cliente' , 'tipoObra')->where('id', $obra->id )->first();
 
+        $arrayValorObra = $this->calcularValorObra($obra);
+
         return inertia('Obra/Edit', [
             'tipoObras' => $tipoObras,
             'clientes' => $clientes,
             'pagamentos' => $pagamentos,
             'obra' => $obraEdit,
+            'valorObra' => $arrayValorObra['valorObra'],
+            'valorMateria' => $arrayValorObra['valorMateria'],
+            'valorPrestador' => $arrayValorObra['valorPrestador'],
         ]);
 
     }
@@ -183,6 +189,74 @@ class ObraController extends Controller
             ]);
         }
 
+
+    }
+
+    public function relatorioDaObra (Request $request , Obra $obra)
+    {
+        $obra = Obra::with('endereco', 'cliente' , 'tipoObra', 'pagamento')->where('id', $obra->id )->first();
+        $materias = MaterialDeObra::with('fornecedor')->where('idObra' , $obra->id)->get();
+        $prestadores = PrestadorObra::with('prestador')->where('idObra' , $obra->id)->get();
+
+        $valorObra = 0;
+        $valorMateria = 0;
+        $valorPrestador = 0;
+
+        foreach ($materias as $materia) {
+            $valorMateria += $materia->valor;
+        }
+
+        foreach ($prestadores as $prestadorObra) {
+                $diasTrabalhados = calcularDiferencaDias($prestadorObra->dataInicio , $prestadorObra->dataFim ? $prestadorObra->dataFim : null);
+                $prestadorObra->diasTrabalhados = $diasTrabalhados;
+                $prestadorObra->valorTotalTrabalhado = (intval($diasTrabalhados) * intval($prestadorObra->prestador->valorDiaria));
+                $valorPrestador += $prestadorObra->valorTotalTrabalhado;
+        }
+
+        $valorObra = ($valorMateria + $valorPrestador);
+
+
+        return inertia('Obra/Relatorio', [
+            'valorObra' => $valorObra,
+            'valorMateria' => $valorMateria,
+            'valorPrestador' => $valorPrestador,
+            'obra' => $obra,
+            'materias' => $materias,
+            'prestadores' => $prestadores,
+        ]);
+    }
+
+    public function finalizarObra (Request $request , Obra $obra)
+    {
+
+    }
+
+    protected function calcularValorObra($obra)
+    {
+        $materias = MaterialDeObra::with('fornecedor')->where('idObra' , $obra->id)->get();
+        $prestadores = PrestadorObra::with('prestador')->where('idObra' , $obra->id)->get();
+        $valorObra = 0;
+        $valorMateria = 0;
+        $valorPrestador = 0;
+
+        foreach ($materias as $materia) {
+            $valorMateria += $materia->valor;
+        }
+
+        foreach ($prestadores as $prestadorObra) {
+            $diasTrabalhados = calcularDiferencaDias($prestadorObra->dataInicio , $prestadorObra->dataFim ? $prestadorObra->dataFim : null);
+            $prestadorObra->diasTrabalhados = $diasTrabalhados;
+            $prestadorObra->valorTotalTrabalhado = (intval($diasTrabalhados) * intval($prestadorObra->prestador->valorDiaria));
+            $valorPrestador += $prestadorObra->valorTotalTrabalhado;
+        }
+
+        $valorObra = ($valorMateria + $valorPrestador);
+
+        return  array(
+            'valorObra' => $valorObra,
+            'valorMateria' => $valorMateria,
+            'valorPrestador' => $valorPrestador,
+        );
 
     }
 

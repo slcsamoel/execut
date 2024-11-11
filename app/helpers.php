@@ -15,3 +15,16 @@ use Carbon\Carbon;
        return false;
     }
  }
+
+
+function calcularDiferencaDias($dataInicial, $dataFinal = null)
+{
+    // Converte a data inicial em um objeto Carbon
+    $dataInicial = Carbon::parse($dataInicial);
+
+    // Se a data final não for informada, usa a data atual
+    $dataFinal = $dataFinal ? Carbon::parse($dataFinal) : Carbon::now();
+
+    // Calcula a diferença em dias entre as duas datas
+    return $dataInicial->diffInDays($dataFinal);
+}

@@ -21,6 +21,7 @@ class MateriasObraResource extends JsonResource
             'valor' => $this->valor,
             'idObra' => $this->idObra,
             'idFornecedor' => $this->idFornecedor,
+            'dataCompra' => $this->dataCompra,
             'fornecedor' => $this->fornecedor,
         ];
     }

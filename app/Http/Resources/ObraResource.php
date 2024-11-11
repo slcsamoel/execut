@@ -25,6 +25,7 @@ class ObraResource extends JsonResource
             'endereco' => $this->endereco,
             'tipoObra'  => $this->tipoObra,
             'nomeObra' => $this->nomeObra,
+            'status' => $this->status,
             'valorOrcamento' => $this->valorOrcamento,
         ];
     }

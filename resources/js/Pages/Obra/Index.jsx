@@ -26,12 +26,14 @@ export default function Index(props) {
     };
 
     const checkStatus = (status) =>{
-        if(status == '1' || status == 1){
-            return 'Em Andamento'
-        }else if(status == '2' || status == 2){
-            return 'Concluído'
-        }else{
-            return 'Não Concluído'
+        if (status === 1) {
+            return "Em andamento";
+        } else if (status === 2) {
+            return "Pausada";
+        }else if (status === 3){
+            return "Cancelada";
+        }else if (status === 4){
+            return "Concluída";
         }
     }
 
@@ -108,7 +110,7 @@ export default function Index(props) {
                                                 </td>
                                                 <td className="align-middle text-left">
                                                     <div className="d-flex align-items-center text-left">
-                                                        <span className="text-xs font-weight-bold mb-0">{checkStatus(obra.status)}</span>
+                                                        <span className="text-xs font-weight-bold mb-0">{ checkStatus(obra.status) }</span>
                                                     </div>
                                                 </td>
                                                 <td className="align-middle text-center" width="10%">

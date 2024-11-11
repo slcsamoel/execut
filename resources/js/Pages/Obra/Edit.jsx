@@ -2,7 +2,7 @@ import { Link, useForm, usePage } from '@inertiajs/inertia-react';
 import React, { useState , useEffect } from 'react';
 import Base from '../../Layouts/Base'
 import axios from 'axios';
-import { formatCurrency, convertCurrencyToNumber , formatarCampoTextParaNumerico} from '../../Utils/helpers';
+import { formatarCampoTextParaNumerico} from '../../Utils/helpers';
 
 export default function Edit(props) {
     const { auth } = usePage().props;
@@ -10,6 +10,9 @@ export default function Edit(props) {
     const clientes = props.clientes;
     const pagamentos = props.pagamentos;
     const obra = props.obra;
+    const valorObra = props.valorObra;
+    const valorMateria = props.valorMateria;
+    const valorPrestador = props.valorPrestador;
 
     console.log(obra);
 
@@ -112,8 +115,9 @@ export default function Edit(props) {
                                     <div className="d-flex align-items-center">
                                         <Link type='button'  href={route('materiais.index', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Materiais</Link>
                                         <Link type="button" href={route('funcionarios.index', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Prestadores</Link>
-                                        <button type='button' className="btn bg-gradient-secondary btn-sm ms-auto">Relatorios</button>
-                                        <button type='button' className="btn bg-gradient-secondary btn-sm ms-auto">Mudar status</button>
+                                        <Link type='button' href={route('obras.relatorio', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Relatorios</Link>
+                                        <button type='button' className="btn btn-primary btn-sm ms-auto">Finalizar</button>
+                                        <button type='button' className="btn btn-danger btn-sm ms-auto">Cancelar</button>
                                     </div>
                                 </div>
                                 <div className="card-body">
@@ -130,12 +134,44 @@ export default function Edit(props) {
                                                 <input className="form-control" type="text" name='responsavelObra' value={data.responsavelObra} onChange={onChange} id="responsavelObra" />
                                             </div>
                                         </div>
+
                                         <div className="col-md-12">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor do orçamento</label>
                                             <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento}  onInput={e => formatarCampoTextParaNumerico(e)} onChange={onChange}  id="valorOrcamento" />
                                             </div>
                                         </div>
+
+                                        <div className="col-md-4">
+                                            <div className="form-group">
+                                            <label htmlFor="name" className="form-control-label">Total de Materias</label>
+                                                <input className="form-control" type="text" name='valorMateria' value={valorMateria} id="valorMateria"  readOnly/>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-4">
+                                            <div className="form-group">
+                                            <label htmlFor="name" className="form-control-label">Total de Mão de Obra</label>
+                                                <input className="form-control" type="text" name='valorPrestador' value={valorPrestador} id="valorPrestador"  readOnly/>
+                                            </div>
+                                        </div>
+
+                                        {obra.status === 4 ?
+
+                                         <div className="col-md-4">
+                                            <div className="form-group">
+                                            <label htmlFor="name" className="form-control-label">Valor Final da Obra</label>
+                                                <input className="form-control" type="text" name='valorFinal' value={obra.valorFinal} id="valorFinal"  readOnly/>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="col-md-4">
+                                            <div className="form-group">
+                                            <label htmlFor="name" className="form-control-label">Valor Atual da Obra</label>
+                                                <input className="form-control" type="text" name='valorObra' value={valorObra} id="valorObra"  readOnly/>
+                                            </div>
+                                        </div>
+                                        }
 
                                         <div className="col-md-12">
                                             <div className="form-group">
@@ -266,7 +302,7 @@ export default function Edit(props) {
 
                                         <div className="row">
                                             <div className="form-group">
-                                                <button type='submit' className="btn btn-primary btn-sm ms-auto">Save</button>
+                                                <button type='submit' className="btn btn-primary btn-sm ms-auto">Atualizar</button>
                                             </div>
                                         </div>
 

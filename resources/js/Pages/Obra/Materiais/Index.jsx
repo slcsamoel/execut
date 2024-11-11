@@ -4,10 +4,9 @@ import Dialog from '../../../Components/Dashboard/Dialog';
 import Base from '../../../Layouts/Base';
 import useDialog from '../../../Hooks/useDialog';
 import { Inertia } from '@inertiajs/inertia';
-import CreatePrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/CreatePrestadorObra';
-import EditPrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/EditPrestadorObra';
 import {formatDate , formatDateWithTime} from '../../../Utils/helpers';
-
+import CreateMateriasObra from '../../../Components/Dashboard/Obra/Materias/CreateMateriasObra';
+import EditMateriasObra from '../../../Components/Dashboard/Obra/Materias/EditMateriasObra';
 
 export default function Index(props) {
 
@@ -19,13 +18,13 @@ export default function Index(props) {
     const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
     const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog()
 
-    const openUpdateDialog = (prestador) => {
-        setState(prestador);
+    const openUpdateDialog = (materias) => {
+        setState(materias);
         UpdateDialogHandler()
     }
 
-    const openDestroyDialog = (prestador) => {
-        setState(prestador);
+    const openDestroyDialog = (materias) => {
+        setState(materias);
         destroyDialogHandler()
     };
 
@@ -33,39 +32,43 @@ export default function Index(props) {
 
     const destroyFuncao = () => {
         Inertia.delete(
-            route('funcionarios.destroy',[obra.id ,state.id]),
+            route('materiais.destroy',[obra.id ,state.id]),
             { onSuccess: () => destroyCloseTrigger() });
     }
 
     return (
         <>
             <div className="container-fluid py-4">
-                {/* <Dialog trigger={addTrigger} title="Vincular novo prestador">
-                    <CreatePrestadorObra close={addCloseTrigger} todosPrestadores={todosPrestadores} obra={obra}/>
+                <Dialog trigger={addTrigger} title="Cadastrar Novo Material!">
+                    <CreateMateriasObra close={addCloseTrigger} Fornecedores={fornecedores} obra={obra}/>
                 </Dialog>
 
-                <Dialog trigger={UpdateTrigger} title={`Finalizar Participação`}>
-                    <EditPrestadorObra model={state} close={UpdateCloseTrigger} obra={obra}/>
+                <Dialog trigger={UpdateTrigger} title={`Editar Material!`}>
+                    <EditMateriasObra model={state} close={UpdateCloseTrigger} Fornecedores={fornecedores} obra={obra}/>
                 </Dialog>
 
-                <Dialog trigger={destroyTrigger} title={`Excluir prestador da obra`}>
-                    <p>Deseja Exluir o Prestador da obra ?</p>
-                    <p>Ao excluir não será contabilizado no valor da obra</p>
+
+                <Dialog trigger={destroyTrigger} title={`Excluir Material da obra`}>
+                    <p>Deseja Exluir o Material da obra ?</p>
+                    <p>Ao excluir não será contabilizado no valor Total da obra</p>
                     <div className="modal-footer">
                         <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
                         <button type="submit" onClick={destroyFuncao} className="btn bg-gradient-danger">Deletar</button>
                     </div>
-                </Dialog> */}
+                </Dialog>
 
                 <div className="row pb-4">
                     <div className="col-12 w-100">
                         <div className="card h-100 w-100">
                             <div className="card-header pb-0">
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <h6>Materias</h6>
                                 </div>
-                                <div className="col-md-6 d-flex justify-content-end">
+                                <div className="col-md-8 d-flex justify-content-end">
+                                    <Link type="button" href={route('obras.edit', obra.id)} className="btn bg-primary-success btn-block mb-3" style={{ margin: '5px' }}>
+                                        Obra
+                                    </Link>
                                     <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
                                         Cadastrar Novo  Material
                                     </button>
