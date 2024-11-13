@@ -18,11 +18,17 @@ class Fornecedor extends Model
         'telefone',
         'idTipo',
         'idEndereco',
+        'cnpj'
     ];
 
     public function endereco()
     {
         return $this->belongsTo(Endereco::class, 'idEndereco');
+    }
+
+    public function tipo()
+    {
+        return $this->belongsTo(TipoFornecedor::class, 'idTipo');
     }
 
 }

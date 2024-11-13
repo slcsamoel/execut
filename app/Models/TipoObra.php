@@ -9,4 +9,5 @@ class TipoObra extends Model
 {
     use HasFactory;
     protected $table = 'tipo_de_obra';
+    public $timestamps = false;
 }

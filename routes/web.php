@@ -15,6 +15,7 @@ use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\ObraController;
 use App\Http\Controllers\PrestadorObraController;
 use App\Http\Controllers\MateriasObraController;
+use App\Http\Controllers\FornecedorController;
 
 // Route::get('/', HomeController::class)->name('home');
 
@@ -30,17 +31,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 
+    //Usuarios
     Route::apiResource('users', UserController::class);
+    //clientes
     Route::apiResource('clientes', ClienteController::class);
+    //Funções de prestadores
     Route::apiResource('funcoes', FuncaoPrestadorController::class);
+    //Prestadores
     Route::apiResource('prestadores', PrestadorController::class);
     //Obras
     Route::resource('obras', ObraController::class);
     Route::apiResource('obras/{obra}/funcionarios', PrestadorObraController::class);
     Route::apiResource('obras/{obra}/materiais', MateriasObraController::class);
     Route::get('obras/{obra}/relatorio',[ObraController::class , 'relatorioDaObra'])->name('obras.relatorio');
-    //Obras
+    //Fornecedores
+    Route::apiResource('fornecedores', FornecedorController::class);
 
+
+    //Perfil
     Route::get('profile', ProfileController::class)->name('profile');
 });
 
