@@ -4,7 +4,7 @@ import Dialog from '../../../Components/Dashboard/Dialog';
 import Base from '../../../Layouts/Base';
 import useDialog from '../../../Hooks/useDialog';
 import { Inertia } from '@inertiajs/inertia';
-import {formatDate , formatDateWithTime} from '../../../Utils/helpers';
+import {formatDate , formatDateWithTime , validarStatusObra} from '../../../Utils/helpers';
 import CreateMateriasObra from '../../../Components/Dashboard/Obra/Materias/CreateMateriasObra';
 import EditMateriasObra from '../../../Components/Dashboard/Obra/Materias/EditMateriasObra';
 
@@ -28,7 +28,7 @@ export default function Index(props) {
         destroyDialogHandler()
     };
 
-    console.log(props);
+    console.log(obra);
 
     const destroyFuncao = () => {
         Inertia.delete(
@@ -69,9 +69,13 @@ export default function Index(props) {
                                     <Link type="button" href={route('obras.edit', obra.id)} className="btn bg-primary-success btn-block mb-3" style={{ margin: '5px' }}>
                                         Obra
                                     </Link>
-                                    <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Cadastrar Novo  Material
-                                    </button>
+                                    {validarStatusObra(obra.status) ?
+                                        <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
+                                            Cadastrar Novo  Material
+                                        </button>
+                                    :
+                                    ''
+                                    }
                                 </div>
                             </div>
                             </div>
@@ -109,15 +113,18 @@ export default function Index(props) {
                                                     <p className="text-sm font-weight-bold mb-0">{material.valor}</p>
                                                 </td>
                                                 <td className="align-middle text-center" width="15%">
-                                                <div>
-
-                                                    <button type="button" onClick={() => openUpdateDialog(material)} className="btn btn-vimeo btn-icon-only mx-2">
-                                                        <span className="btn-inner--icon"><i className="fas fa-pencil-alt"></i></span>
-                                                    </button>
-                                                    <button type="button" onClick={() => openDestroyDialog(material)} className="btn btn-youtube btn-icon-only">
-                                                        <span className="btn-inner--icon"><i className="fas fa-trash"></i></span>
-                                                    </button>
-                                                </div>
+                                                {validarStatusObra(obra.status) ?
+                                                    <div>
+                                                            <button type="button" onClick={() => openUpdateDialog(material)} className="btn btn-vimeo btn-icon-only mx-2">
+                                                                <span className="btn-inner--icon"><i className="fas fa-pencil-alt"></i></span>
+                                                            </button>
+                                                            <button type="button" onClick={() => openDestroyDialog(material)} className="btn btn-youtube btn-icon-only">
+                                                                <span className="btn-inner--icon"><i className="fas fa-trash"></i></span>
+                                                            </button>
+                                                    </div>
+                                                :
+                                                    <p className="text-sm font-weight-bold mb-0">Obra Finalizada</p>
+                                                }
                                                 </td>
                                             </tr>
                                         ))}

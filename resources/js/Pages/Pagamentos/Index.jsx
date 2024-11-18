@@ -4,51 +4,52 @@ import Dialog from '../../Components/Dashboard/Dialog';
 import Base from '../../Layouts/Base'
 import useDialog from '../../Hooks/useDialog';
 import { Inertia } from '@inertiajs/inertia';
-import CreateFuncao from '../../Components/Dashboard/Funcao/CreateFuncao';
-import EditFuncao from '../../Components/Dashboard/Funcao/EditFuncao';
+import CreatePagamento from '../../Components/Dashboard/Pagamentos/CreatePagamento';
+import EditPagamento from '../../Components/Dashboard/Pagamentos/EditPagamento';
+
 
 export default function Index(props) {
 
-    const {data: funcoes, links, meta} = props.funcoes;
+    const {data: pagamentos, links, meta} = props.pagamentos;
     const [state, setState] = useState([])
     const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
     const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
     const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog()
 
-    const openUpdateDialog = (funcao) => {
-        setState(funcao);
+    const openUpdateDialog = (pagamento) => {
+        setState(pagamento);
         UpdateDialogHandler()
     }
 
-    const openDestroyDialog = (funcao) => {
-        setState(funcao);
+    const openDestroyDialog = (pagamento) => {
+        setState(pagamento);
         destroyDialogHandler()
     };
 
     console.log(props);
 
-    const destroyFuncao = () => {
+    const destroyTipo = () => {
         Inertia.delete(
-            route('funcoes.destroy', state.id),
+            route('pagamentos.destroy', state.id),
             { onSuccess: () => destroyCloseTrigger() });
     }
 
     return (
         <>
             <div className="container-fluid py-4">
-                <Dialog trigger={addTrigger} title="Criar nova função">
-                    <CreateFuncao close={addCloseTrigger}/>
+                <Dialog trigger={addTrigger} title="Criar novo pagamento">
+                    <CreatePagamento close={addCloseTrigger}/>
                 </Dialog>
 
-                <Dialog trigger={UpdateTrigger} title={`Alterar função: ${state.name}`}>
-                    <EditFuncao model={state} close={UpdateCloseTrigger}/>
+                <Dialog trigger={UpdateTrigger} title={`Alterar pagamento: ${state.tipoPagamento}`}>
+                    <EditPagamento model={state} close={UpdateCloseTrigger}/>
                 </Dialog>
 
-                <Dialog trigger={destroyTrigger} title={`Deletar função: ${state.name}`}>
-                    <p>Deletar Função ?</p>
+                <Dialog trigger={destroyTrigger} title={`Deletar pagamento: ${state.tipoPagamento}`}>
+                    <p>Deletar pagamentos ?</p>
                     <div className="modal-footer">
                         <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" onClick={destroyFuncao} className="btn bg-gradient-danger">Deletar</button>
+                        <button type="submit" onClick={destroyTipo} className="btn bg-gradient-danger">Deletar</button>
                     </div>
                 </Dialog>
 
@@ -58,11 +59,11 @@ export default function Index(props) {
                             <div className="card-header pb-0">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <h6>Funções</h6>
+                                    <h6>Pagamentos</h6>
                                 </div>
                                 <div className="col-md-6 d-flex justify-content-end">
                                     <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Criar Nova  Função
+                                        Criar Novo pagamento
                                     </button>
                                 </div>
                             </div>
@@ -73,31 +74,31 @@ export default function Index(props) {
                                     <thead>
                                         <tr>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-centter">#</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Nome</th>
-                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Descrição</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Tipo Pagamento</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left">Moeda</th>
                                             <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {funcoes.map((funcao, index) => (
-                                            <tr key={funcao.id}>
+                                        {pagamentos.map((pagamento, index) => (
+                                            <tr key={pagamento.id}>
                                                 <td className='text-center'>{meta.from + index}</td>
                                                 <td className='text-left'>
                                                     <div className="d-flex px-2">
                                                         <div className="my-auto">
-                                                            <h6 className="mb-0 text-sm">{funcao.nomeFuncao}</h6>
+                                                            <h6 className="mb-0 text-sm">{pagamento.tipoPagamento}</h6>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <p className="text-sm font-weight-bold mb-0">{funcao.descricaoFuncao}</p>
+                                                    <p className="text-sm font-weight-bold mb-0">{pagamento.moeda}</p>
                                                 </td>
                                                 <td className="align-middle text-center" width="10%">
                                                 <div>
-                                                    <button type="button" onClick={() => openUpdateDialog(funcao)} className="btn btn-vimeo btn-icon-only mx-2">
+                                                    <button type="button" onClick={() => openUpdateDialog(pagamento)} className="btn btn-vimeo btn-icon-only mx-2">
                                                         <span className="btn-inner--icon"><i className="fas fa-pencil-alt"></i></span>
                                                     </button>
-                                                    <button type="button" onClick={() => openDestroyDialog(funcao)} className="btn btn-youtube btn-icon-only">
+                                                    <button type="button" onClick={() => openDestroyDialog(pagamento)} className="btn btn-youtube btn-icon-only">
                                                         <span className="btn-inner--icon"><i className="fas fa-trash"></i></span>
                                                     </button>
                                                 </div>
@@ -125,4 +126,4 @@ export default function Index(props) {
     )
 }
 
-Index.layout = (page) => <Base key={page} children={page} title={"Funções de Prestador"}/>
+Index.layout = (page) => <Base key={page} children={page} title={"Pagamentos"}/>

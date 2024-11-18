@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TipoFornecedor;
-use App\Http\Resources\TipoFornecedorResource;
+use App\Models\TipoObra;
+use App\Http\Resources\TipoObraResource;
 
 
-class TipoFornecedorController extends Controller
+class TipoObraController extends Controller
 {
 
     public function index()
     {
-        $tipos = TipoFornecedorResource::collection(TipoFornecedor::paginate(10));
+        $tipos = TipoObraResource::collection(TipoObra::paginate(10));
 
-        return inertia('TipoFornecedor/Index', [
+        return inertia('TipoObra/Index', [
             'tipos' => $tipos,
         ]);
 
@@ -24,15 +24,16 @@ class TipoFornecedorController extends Controller
     {
         $this->validate($request, [
             'nomeTipo' => 'required|max:255',
-            'descricao' => 'nullable|max:255',
+            'descricaoTipo' => 'nullable|max:255',
         ]);
 
-        $tipos_fornecedore = new TipoFornecedor();
-        $tipos_fornecedore->nomeTipo = $request->nomeTipo;
-        $tipos_fornecedore->descricao = $request->descricao;
+        $tipos_obra = new TipoObra();
+        $tipos_obra->nomeTipo = $request->nomeTipo;
+        $tipos_obra->descricaoTipo = $request->descricaoTipo;
+        $tipos_obra->save();
 
         try {
-            $tipos_fornecedore->save();
+            $tipos_obra->save();
 
             return back()->with([
                 'type' => 'success',
@@ -48,19 +49,19 @@ class TipoFornecedorController extends Controller
 
     }
 
-    public function update(Request $request , TipoFornecedor $tipos_fornecedore)
+    public function update(Request $request , TipoObra $tipos_obra)
     {
         $this->validate($request, [
             'nomeTipo' => 'required|max:255',
-            'descricao' => 'nullable|max:255',
+            'descricaoTipo' => 'nullable|max:255',
         ]);
 
-        $tipos_fornecedore->nomeTipo = $request->nomeTipo;
-        $tipos_fornecedore->descricao = $request->descricao;
+        $tipos_obra->nomeTipo = $request->nomeTipo;
+        $tipos_obra->descricaoTipo = $request->descricaoTipo;
 
 
         try {
-            $tipos_fornecedore->save();
+            $tipos_obra->save();
 
             return back()->with([
                 'type' => 'success',
@@ -76,10 +77,10 @@ class TipoFornecedorController extends Controller
 
     }
 
-    public function destroy (Request $request , TipoFornecedor $tipos_fornecedore)
+    public function destroy (Request $request , TipoObra $tipos_obra)
     {
         try {
-            $tipos_fornecedore->delete();
+            $tipos_obra->delete();
 
             return back()->with([
                 'type' => 'success',
@@ -93,5 +94,6 @@ class TipoFornecedorController extends Controller
             }
 
     }
+
 
 }

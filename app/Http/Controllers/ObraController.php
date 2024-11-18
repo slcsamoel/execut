@@ -85,12 +85,12 @@ class ObraController extends Controller
             $obra->nomeObra = $request->nomeObra;
             $obra->valorOrcamento = $request->valorOrcamento;
             $obra->previsaoEntrega = $request->previsaoEntrega;
-
+            $obra->status= 1;
             $obra->save();
 
-            return back()->with([
+            return redirect(route('obras.edit',['obra' => $obra->id]))->with([
                 'type' => 'success',
-                'message' => 'Obra criado com sucesso',
+                'message' => 'Obra criado com sucesso'
             ]);
 
 
@@ -229,6 +229,51 @@ class ObraController extends Controller
     public function finalizarObra (Request $request , Obra $obra)
     {
 
+        try {
+
+            $valorFinal = $this->calcularValorFinalObra($obra);
+            $obra->dataFim = date('Y-m-d');
+            $obra->valorFinal = $valorFinal;
+            $obra->status = 4;
+            $obra->save();
+
+            return back()->with([
+                'type' => 'success',
+                'message' => 'Obra Finalizada com sucesso',
+            ]);
+
+        } catch (\Throwable $th) {
+            return back()->with([
+                'type' => 'error',
+                'message' => $th->getMessage(),
+            ]);
+        }
+
+    }
+
+    public function cancelarObra(Request $request , Obra $obra)
+    {
+
+        try {
+
+            $valorFinal = $this->calcularValorFinalObra($obra);
+            $obra->dataFim = date('Y-m-d');
+            $obra->valorFinal = $valorFinal;
+            $obra->status = 3;
+            $obra->save();
+
+            return back()->with([
+                'type' => 'success',
+                'message' => 'Obra Cancelada com sucesso',
+            ]);
+
+        } catch (\Throwable $th) {
+            return back()->with([
+                'type' => 'error',
+                'message' => $th->getMessage(),
+            ]);
+        }
+
     }
 
     protected function calcularValorObra($obra)
@@ -257,6 +302,32 @@ class ObraController extends Controller
             'valorMateria' => $valorMateria,
             'valorPrestador' => $valorPrestador,
         );
+
+    }
+
+
+    protected function calcularValorFinalObra($obra)
+    {
+        $materias = MaterialDeObra::with('fornecedor')->where('idObra' , $obra->id)->get();
+        $prestadores = PrestadorObra::with('prestador')->where('idObra' , $obra->id)->get();
+        $valorObra = 0;
+        $valorMateria = 0;
+        $valorPrestador = 0;
+
+        foreach ($materias as $materia) {
+            $valorMateria += $materia->valor;
+        }
+
+        foreach ($prestadores as $prestadorObra) {
+            $diasTrabalhados = calcularDiferencaDias($prestadorObra->dataInicio , $prestadorObra->dataFim ? $prestadorObra->dataFim : null);
+            $valorPrestador += (intval($diasTrabalhados) * intval($prestadorObra->prestador->valorDiaria));
+            if(is_null($prestadorObra->dataFim)){
+                $prestadorObra->dataFim = now();
+                $prestadorObra->save();
+            }
+        }
+        $valorObra = ($valorMateria + $valorPrestador);
+        return $valorObra;
 
     }
 

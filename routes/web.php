@@ -16,6 +16,9 @@ use App\Http\Controllers\ObraController;
 use App\Http\Controllers\PrestadorObraController;
 use App\Http\Controllers\MateriasObraController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\TipoFornecedorController;
+use App\Http\Controllers\TipoObraController;
 
 // Route::get('/', HomeController::class)->name('home');
 
@@ -44,9 +47,15 @@ Route::middleware('auth')->group(function () {
     Route::apiResource('obras/{obra}/funcionarios', PrestadorObraController::class);
     Route::apiResource('obras/{obra}/materiais', MateriasObraController::class);
     Route::get('obras/{obra}/relatorio',[ObraController::class , 'relatorioDaObra'])->name('obras.relatorio');
+    Route::post('obras/{obra}/finalizar',[ObraController::class , 'finalizarObra'])->name('obras.finalizar');
+    Route::post('obras/{obra}/cancelar',[ObraController::class , 'cancelarObra'])->name('obras.cancelar');
+    Route::apiResource('tipos-obras', TipoObraController::class);
     //Fornecedores
     Route::apiResource('fornecedores', FornecedorController::class);
+    Route::apiResource('tipos-fornecedores', TipoFornecedorController::class);
 
+    //Pagamentos
+    Route::apiResource('pagamentos', PagamentoController::class);
 
     //Perfil
     Route::get('profile', ProfileController::class)->name('profile');

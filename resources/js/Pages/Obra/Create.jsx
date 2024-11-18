@@ -108,7 +108,7 @@ export default function Create(props) {
                                 <div className="card-header pb-0">
                                     <div className="d-flex align-items-center">
                                     <p className="mb-0">Criar Nova Obra</p>
-                                    <button type='submit' className="btn btn-primary btn-sm ms-auto">Save</button>
+                                    <button type='submit' className="btn btn-primary btn-sm ms-auto">Salvar</button>
                                     </div>
                                 </div>
                                 <div className="card-body">

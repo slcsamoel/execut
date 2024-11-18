@@ -6,7 +6,7 @@ import useDialog from '../../../Hooks/useDialog';
 import { Inertia } from '@inertiajs/inertia';
 import CreatePrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/CreatePrestadorObra';
 import EditPrestadorObra from '../../../Components/Dashboard/Obra/Prestadores/EditPrestadorObra';
-import {formatDate} from '../../../Utils/helpers';
+import {formatDate , validarStatusObra} from '../../../Utils/helpers';
 
 
 export default function Index(props) {
@@ -14,7 +14,6 @@ export default function Index(props) {
     const {data: prestadores, links, meta} = props.prestadoresObras;
     const obra = props.obra;
     const todosPrestadores = props.prestadores;
-   // const funcoes =  props.funcoes;
     const [state, setState] = useState([])
     const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
     const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
@@ -30,7 +29,7 @@ export default function Index(props) {
         destroyDialogHandler()
     };
 
-    console.log(props);
+    console.log(obra);
 
     const destroyFuncao = () => {
         Inertia.delete(
@@ -70,9 +69,15 @@ export default function Index(props) {
                                     <Link type="button" href={route('obras.edit', obra.id)} className="btn bg-primary-success btn-block mb-3" style={{ margin: '5px' }}>
                                         Obra
                                     </Link>
-                                    <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Vincular Novo  prestador
-                                    </button>
+
+                                    {validarStatusObra(obra.status) ?
+                                        <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
+                                            Vincular Novo  prestador
+                                        </button>
+                                    :
+                                    ''
+                                    }
+
                                 </div>
                             </div>
                             </div>
@@ -129,9 +134,14 @@ export default function Index(props) {
                                                     </button>
 
                                                 }
+
+                                                {validarStatusObra(obra.status) ?
                                                     <button type="button" onClick={() => openDestroyDialog(prestador)} className="btn btn-youtube btn-icon-only">
                                                         <span className="btn-inner--icon"><i className="fas fa-trash"></i></span>
                                                     </button>
+                                                 :
+                                                    <p className="text-sm font-weight-bold mb-0">Obra Finalizada</p>
+                                                }
                                                 </div>
                                                 </td>
                                             </tr>

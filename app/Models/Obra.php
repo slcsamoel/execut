@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Obra extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'obra';
 
@@ -25,7 +26,8 @@ class Obra extends Model
         'idEndereco',
         'idTipoObra',
         'nomeObra',
-        'valorOrcamento'
+        'valorOrcamento',
+        'status'
     ];
 
 

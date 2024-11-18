@@ -69,3 +69,33 @@ export function formatISODateWithTime(date) {
     if (!year || !month || !day || !hour || !minute) return '';
     return `${day}/${month}/${year} ${hour}:${minute}`;
 };
+
+/**
+ * Status Obra
+*/
+export function checkStatusObra(status){
+    if (status === 1) {
+        return "Em andamento";
+    } else if (status === 2) {
+        return "Pausada";
+    }else if (status === 3){
+        return "Cancelada";
+    }else if (status === 4){
+        return "Concluída";
+    }
+}
+
+/**
+ * Validar Status Obra
+*/
+export function validarStatusObra(status){
+    if (status === 1) {
+        return true;
+    } else if (status === 2) {
+        return true;
+    }else if (status === 3){
+        return false;
+    }else if (status === 4){
+        return false;
+    }
+}
