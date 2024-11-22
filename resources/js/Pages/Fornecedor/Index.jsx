@@ -6,6 +6,7 @@ import useDialog from '../../Hooks/useDialog';
 import { Inertia } from '@inertiajs/inertia';
 import CreateFornecedor from '../../Components/Dashboard/Fornecedor/CreateFornecedor';
 import EditFornecedor from '../../Components/Dashboard/Fornecedor/EditFornecedor';
+import { maskCnpj, maskPhone } from '../../Utils/helpers';
 
 export default function Index(props) {
 
@@ -93,14 +94,14 @@ export default function Index(props) {
                                                     </div>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <p className="text-sm font-weight-bold mb-0">{fornecedor.cnpj}</p>
+                                                    <p className="text-sm font-weight-bold mb-0">{maskCnpj(fornecedor.cnpj)}</p>
                                                 </td>
                                                 <td className='text-left'>
                                                     <span className="text-xs font-weight-bold">{fornecedor.tipo.nomeTipo}</span>
                                                 </td>
                                                 <td className="align-middle text-left">
                                                     <div className="d-flex align-items-center text-left">
-                                                        <span className="text-xs font-weight-bold mb-0">{fornecedor.telefone}</span>
+                                                        <span className="text-xs font-weight-bold mb-0">{maskPhone(fornecedor.telefone)}</span>
                                                     </div>
                                                 </td>
                                                 <td className="align-middle text-center" width="10%">

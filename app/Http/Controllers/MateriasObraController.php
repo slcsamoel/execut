@@ -36,7 +36,7 @@ class MateriasObraController extends Controller
         $material = new MaterialDeObra();
         $material->nomeMaterial = $request->nomeMaterial;
         $material->descricaoMaterial = $request->descricaoMaterial;
-        $material->valor = $request->valor;
+        $material->valor = formatToDouble($request->valor);
         $material->idFornecedor = $request->idFornecedor;
         $material->dataCompra = now();
         $material->idObra = $obra->id;
@@ -70,7 +70,7 @@ class MateriasObraController extends Controller
 
         $materiai->nomeMaterial = $request->nomeMaterial;
         $materiai->descricaoMaterial = $request->descricaoMaterial;
-        $materiai->valor = $request->valor;
+        $materiai->valor = formatToDouble($request->valor);
         $materiai->idFornecedor = $request->idFornecedor;
         $materiai->idObra = $obra->id;
 

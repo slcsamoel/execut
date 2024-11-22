@@ -6,6 +6,7 @@ import useDialog from '../../Hooks/useDialog';
 import CreateCliente from '../../Components/Dashboard/Clientes/CreateCliente';
 import EditCliente from '../../Components/Dashboard/Clientes/EditCliente';
 import { Inertia } from '@inertiajs/inertia';
+import { maskCpfCnpj,maskPhone,maskMoney } from '../../Utils/helpers';
 
 export default function Index(props) {
 
@@ -95,11 +96,11 @@ export default function Index(props) {
                                                     <p className="text-sm font-weight-bold mb-0">{cliente.razaoSocial}</p>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <span className="text-xs font-weight-bold">{cliente.cpfCnpj}</span>
+                                                    <span className="text-xs font-weight-bold">{maskCpfCnpj(cliente.cpfCnpj)}</span>
                                                 </td>
                                                 <td className="align-middle text-left">
                                                     <div className="d-flex align-items-center text-left">
-                                                        <span className="text-xs font-weight-bold mb-0">{cliente.telefone}</span>
+                                                        <span className="text-xs font-weight-bold mb-0">{maskPhone(cliente.telefone)}</span>
                                                     </div>
                                                 </td>
                                                 <td className="align-middle text-center" width="10%">

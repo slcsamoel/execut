@@ -25,9 +25,9 @@ class FornecedorController extends Controller
     {
             $this->validate($request, [
                 'razaoSocial' => 'nullable|max:255',
-                'cnpj' => 'required|max:15',
+                'cnpj' => 'required|max:255',
                 'idTipo' => 'required|max:15',
-                'telefone' => 'nullable|max:12',
+                'telefone' => 'nullable|max:255',
                 'logradouro'=> 'required|max:255',
                 'complemento'=> 'required|max:255',
                 'cidade'=> 'required|max:100',
@@ -45,9 +45,9 @@ class FornecedorController extends Controller
 
             $fornecedor = new Fornecedor();
             $fornecedor->razaoSocial = $request->razaoSocial;
-            $fornecedor->cnpj = $request->cnpj;
+            $fornecedor->cnpj = preg_replace('/\D/', '', $request->cnpj);
             $fornecedor->idTipo = $request->idTipo;
-            $fornecedor->telefone = $request->telefone;
+            $fornecedor->telefone = preg_replace('/\D/', '', $request->telefone);
             $fornecedor->idEndereco = $endereco->id;
             $fornecedor->save();
 
@@ -67,9 +67,9 @@ class FornecedorController extends Controller
     {
         $this->validate($request, [
             'razaoSocial' => 'nullable|max:255',
-            'cnpj' => 'required|max:15',
+            'cnpj' => 'required|max:255',
             'idTipo' => 'required|max:15',
-            'telefone' => 'nullable|max:12',
+            'telefone' => 'nullable|max:255',
             'logradouro'=> 'required|max:255',
             'complemento'=> 'required|max:255',
             'cidade'=> 'required|max:100',
@@ -91,9 +91,9 @@ class FornecedorController extends Controller
             $endereco->save();
 
             $fornecedore->razaoSocial = $request->razaoSocial;
-            $fornecedore->cnpj = $request->cnpj;
+            $fornecedore->cnpj = preg_replace('/\D/', '', $request->cnpj);
             $fornecedore->idTipo = $request->idTipo;
-            $fornecedore->telefone = $request->telefone;
+            $fornecedore->telefone = preg_replace('/\D/', '', $request->telefone);
             $fornecedore->idEndereco = $endereco->id;
             $fornecedore->save();
 

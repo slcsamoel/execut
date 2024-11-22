@@ -35,9 +35,9 @@ class PrestadorController extends Controller
         $prestador = new Prestador();
         $prestador->nomePrestador = $request->nomePrestador;
         $prestador->tipoPrestador = $request->tipoPrestador;
-        $prestador->cpfCnpj = $request->cpfCnpj;
-        $prestador->telefone = $request->telefone;
-        $prestador->valorDiaria = $request->valorDiaria;
+        $prestador->cpfCnpj = preg_replace('/\D/', '', $request->cpfCnpj);
+        $prestador->telefone = preg_replace('/\D/', '', $request->telefone);
+        $prestador->valorDiaria = formatToDouble($request->valorDiaria);
         $prestador->idFuncao = $request->idFuncao;
 
 
@@ -70,9 +70,9 @@ class PrestadorController extends Controller
 
         $prestadore->nomePrestador = $request->nomePrestador;
         $prestadore->tipoPrestador = $request->tipoPrestador;
-        $prestadore->cpfCnpj = $request->cpfCnpj;
-        $prestadore->telefone = $request->telefone;
-        $prestadore->valorDiaria = $request->valorDiaria;
+        $prestadore->cpfCnpj = preg_replace('/\D/', '', $request->cpfCnpj);
+        $prestadore->telefone = preg_replace('/\D/', '', $request->telefone);
+        $prestadore->valorDiaria = formatToDouble($request->valorDiaria);
         $prestadore->idFuncao = $request->idFuncao;
 
         try {

@@ -28,3 +28,13 @@ function calcularDiferencaDias($dataInicial, $dataFinal = null)
     // Calcula a diferença em dias entre as duas datas
     return $dataInicial->diffInDays($dataFinal);
 }
+
+function formatToDouble($value)
+{
+    if (!$value) return 0.0;
+
+    // Remove separadores de milhares e substitui a vírgula decimal por ponto
+    $formatted = str_replace(['.', ','], ['', '.'], $value);
+
+    return (float) $formatted; // Converte para float/double
+}

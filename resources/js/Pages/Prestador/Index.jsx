@@ -130,4 +130,4 @@ export default function Index(props) {
     )
 }
 
-Index.layout = (page) => <Base key={page} children={page} title={"Funções de Prestador"}/>
+Index.layout = (page) => <Base key={page} children={page} title={"Prestador"}/>

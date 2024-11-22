@@ -1,6 +1,7 @@
 import { useForm } from '@inertiajs/inertia-react'
 import React, { useState , useEffect } from 'react';
 import { formatarCampoTextParaNumerico } from '../../../../Utils/helpers';
+import { maskMoney } from '../../../../Utils/helpers';
 
 
 export default function CreateMateriasObra({close , Fornecedores, obra}) {
@@ -64,7 +65,7 @@ export default function CreateMateriasObra({close , Fornecedores, obra}) {
 
                         <div className="form-group">
                             <label htmlFor="valor" className="col-form-label">Valor:</label>
-                            <input type="text" className="form-control" name='valor' value={data.valor} onInput={e => formatarCampoTextParaNumerico(e)} onChange={onChange} id="valor" />
+                            <input type="text" className="form-control" name='valor' value={data.valor} onChange={(e)=> setData('valor',maskMoney(e.target.value))} id="valor" />
                             {errors && <div className='text-danger mt-1'>{errors.valor}</div>}
                         </div>
 

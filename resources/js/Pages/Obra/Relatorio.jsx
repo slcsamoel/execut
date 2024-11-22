@@ -2,7 +2,7 @@ import { Link, useForm, usePage } from "@inertiajs/inertia-react";
 import React, { useState, useEffect } from "react";
 import Base from "../../Layouts/Base";
 import axios from "axios";
-import { formatarCampoTextParaNumerico } from "../../Utils/helpers";
+import { maskMoney , maskPhone } from "../../Utils/helpers";
 
 export default function Relatorio(props) {
     const { auth } = usePage().props;
@@ -12,7 +12,6 @@ export default function Relatorio(props) {
     const valorPrestador = props.valorPrestador;
     const materias = props.materias;
     const prestadores = props.prestadores;
-    console.log(props);
 
     useEffect(() => {}, []);
 
@@ -98,7 +97,7 @@ export default function Relatorio(props) {
                                                 </h5>
                                                 <p>
                                                     {obra.cliente.razaoSocial} -{" "}
-                                                    {obra.cliente.telefone}{" "}
+                                                    {maskPhone(obra.cliente.telefone)}{" "}
                                                 </p>
                                             </div>
                                         </div>
@@ -123,7 +122,7 @@ export default function Relatorio(props) {
                                                 >
                                                     Total de Materias:
                                                 </label>
-                                                <h5>{valorMateria}</h5>
+                                                <h5>{maskMoney(valorMateria)}</h5>
                                             </div>
                                         </div>
 
@@ -135,7 +134,7 @@ export default function Relatorio(props) {
                                                 >
                                                     Total de Mão de obra:
                                                 </label>
-                                                <h5>{valorPrestador}</h5>
+                                                <h5>{maskMoney(valorPrestador)}</h5>
                                             </div>
                                         </div>
 
@@ -148,7 +147,7 @@ export default function Relatorio(props) {
                                                 >
                                                     Valor do orçamento:
                                                 </label>
-                                                <h5>{obra.valorOrcamento}</h5>
+                                                <h5>{maskMoney(obra.valorOrcamento)}</h5>
                                             </div>
                                         </div>
 
@@ -161,7 +160,7 @@ export default function Relatorio(props) {
                                                     >
                                                         Valor da Obra:
                                                     </label>
-                                                    <h5>{obra.valorFinal}</h5>
+                                                    <h5>{maskMoney(obra.valorFinal)}</h5>
                                                 </div>
                                             </div>
                                         ) : (
@@ -173,7 +172,7 @@ export default function Relatorio(props) {
                                                     >
                                                         Valor Parcial da obra:
                                                     </label>
-                                                    <h5>{valorObra}</h5>
+                                                    <h5>{maskMoney(valorObra)}</h5>
                                                 </div>
                                             </div>
                                         )}
@@ -212,7 +211,7 @@ export default function Relatorio(props) {
                                                                 <p className="text-sm font-weight-bold mb-0">{prestadorObra.diasTrabalhados}</p>
                                                         </td>
                                                         <td className='text-left'>
-                                                                <p className="text-sm font-weight-bold mb-0">{prestadorObra.valorTotalTrabalhado}</p>
+                                                                <p className="text-sm font-weight-bold mb-0">{maskMoney(prestadorObra.valorTotalTrabalhado)}</p>
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -253,7 +252,7 @@ export default function Relatorio(props) {
                                                                 <p className="text-sm font-weight-bold mb-0">{material.dataCompra}</p>
                                                         </td>
                                                         <td className='text-left'>
-                                                                <p className="text-sm font-weight-bold mb-0">{material.valor}</p>
+                                                                <p className="text-sm font-weight-bold mb-0">{maskMoney(material.valor)}</p>
                                                         </td>
                                                     </tr>
                                                 ))}

@@ -1,5 +1,6 @@
 import { useForm } from '@inertiajs/inertia-react'
 import React, { useState , useEffect } from 'react';
+import { maskCpfCnpj,maskPhone,maskMoney } from '../../../Utils/helpers';
 
 
 export default function EditPrestador({close , model ,funcoes}) {
@@ -7,10 +8,10 @@ export default function EditPrestador({close , model ,funcoes}) {
     const {data, setData, put, reset, errors} = useForm({
         nomePrestador: model.nomePrestador,
         tipoPrestador: model.tipoPrestador,
-        cpfCnpj: model.cpfCnpj,
-        telefone: model.telefone,
+        cpfCnpj: maskCpfCnpj(model.cpfCnpj),
+        telefone: maskPhone(model.telefone),
         idFuncao: model.idFuncao,
-        valorDiaria: model.valorDiaria
+        valorDiaria: maskMoney(model.valorDiaria)
     });
 
     const onChange = (e) => setData({ ...data, [e.target.id]: e.target.value });
@@ -30,10 +31,10 @@ export default function EditPrestador({close , model ,funcoes}) {
         setData({...data,
             nomePrestador: model.nomePrestador,
             tipoPrestador: model.tipoPrestador,
-            cpfCnpj: model.cpfCnpj,
-            telefone: model.telefone,
+            cpfCnpj: maskCpfCnpj(model.cpfCnpj),
+            telefone: maskPhone(model.telefone),
             idFuncao: model.idFuncao,
-            valorDiaria: model.valorDiaria
+            valorDiaria: maskMoney(model.valorDiaria)
         });
     }, [model]);
 
@@ -54,13 +55,13 @@ export default function EditPrestador({close , model ,funcoes}) {
 
                         <div className="form-group">
                             <label htmlFor="cpfCnpj" className="col-form-label">CPF/CNPJ</label>
-                            <input type="text" className="form-control" name='cpfCnpj' value={data.cpfCnpj} onChange={onChange} id="cpfCnpj"/>
+                            <input type="text" className="form-control" name='cpfCnpj' value={data.cpfCnpj} onChange={(e)=> setData('cpfCnpj', maskCpfCnpj(e.target.value))} id="cpfCnpj"/>
                             {errors && <div className='text-danger mt-1'>{errors.cpfCnpj}</div>}
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="telefone" className="col-form-label">Telefone</label>
-                            <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={onChange} id="telefone"/>
+                            <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={(e)=> setData('telefone', maskPhone(e.target.value))} id="telefone"/>
                             {errors && <div className='text-danger mt-1'>{errors.telefone}</div>}
                         </div>
 
@@ -85,7 +86,7 @@ export default function EditPrestador({close , model ,funcoes}) {
 
                         <div className="form-group">
                             <label htmlFor="valorDiaria" className="col-form-label">Valor Diaria</label>
-                            <input type="text" className="form-control" name='valorDiaria' value={data.valorDiaria} onChange={onChange} id="valorDiaria"/>
+                            <input type="text" className="form-control" name='valorDiaria' value={data.valorDiaria} onChange={(e)=> setData('valorDiaria', maskMoney(e.target.value))}  id="valorDiaria"/>
                             {errors && <div className='text-danger mt-1'>{errors.valorDiaria}</div>}
                         </div>
 

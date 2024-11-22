@@ -2,7 +2,7 @@ import { useForm, usePage } from '@inertiajs/inertia-react';
 import React, { useState , useEffect } from 'react';
 import Base from '../../Layouts/Base'
 import axios from 'axios';
-import { formatarCampoTextParaNumerico} from '../../Utils/helpers';
+import {maskMoney} from '../../Utils/helpers';
 
 export default function Create(props) {
     const { auth } = usePage().props;
@@ -128,7 +128,7 @@ export default function Create(props) {
                                         <div className="col-md-12">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor do orçamento</label>
-                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento} onInput={e => formatarCampoTextParaNumerico(e)} onChange={onChange} id="valorOrcamento" />
+                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento} onChange={(e)=> setData('valorOrcamento',maskMoney(e.target.value))} id="valorOrcamento" />
                                             </div>
                                         </div>
 

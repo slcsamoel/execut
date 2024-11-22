@@ -1,6 +1,7 @@
 import { useForm } from '@inertiajs/inertia-react'
 import React, { useState , useEffect } from 'react';
 import axios from 'axios';
+import { maskCpfCnpj,maskPhone,maskMoney } from '../../../Utils/helpers';
 
 export default function CreateCliente({close}) {
     const [estados, setEstados] = useState([]);
@@ -78,12 +79,12 @@ export default function CreateCliente({close}) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="cpfCnpj" className="col-form-label">Cpf/Cnpj:</label>
-                            <input type="text" className="form-control" name='cpfCnpj' value={data.cpfCnpj} onChange={onChange} id="cpfCnpj"/>
+                            <input type="text" className="form-control" name='cpfCnpj' value={data.cpfCnpj} onChange={(e)=> setData('cpfCnpj',maskCpfCnpj(e.target.value))} id="cpfCnpj"/>
                             {errors && <div className='text-danger mt-1'>{errors.cpfCnpj}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="telefone" className="col-form-label">Telefone:</label>
-                            <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={onChange} id="telefone"/>
+                            <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={(e)=> setData('telefone',maskPhone(e.target.value))} id="telefone"/>
                             {errors && <div className='text-danger mt-1'>{errors.telefone}</div>}
                         </div>
                         <hr className="horizontal dark" />

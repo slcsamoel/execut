@@ -83,7 +83,7 @@ class ObraController extends Controller
             $obra->idPagamento = $request->idPagamento;
             $obra->idTipoObra = $request->idTipoObra;
             $obra->nomeObra = $request->nomeObra;
-            $obra->valorOrcamento = $request->valorOrcamento;
+            $obra->valorOrcamento = formatToDouble($request->valorOrcamento);
             $obra->previsaoEntrega = $request->previsaoEntrega;
             $obra->status= 1;
             $obra->save();
@@ -172,7 +172,7 @@ class ObraController extends Controller
             $obra->idPagamento = $request->idPagamento;
             $obra->idTipoObra = $request->idTipoObra;
             $obra->nomeObra = $request->nomeObra;
-            $obra->valorOrcamento = $request->valorOrcamento;
+            $obra->valorOrcamento = formatToDouble($request->valorOrcamento);
             $obra->previsaoEntrega = $request->previsaoEntrega;
             $obra->save();
 

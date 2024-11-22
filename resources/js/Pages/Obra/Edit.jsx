@@ -2,10 +2,10 @@ import { Link, useForm, usePage } from '@inertiajs/inertia-react';
 import React, { useState , useEffect } from 'react';
 import Base from '../../Layouts/Base'
 import axios from 'axios';
-import { formatarCampoTextParaNumerico , validarStatusObra} from '../../Utils/helpers';
 import { Inertia } from '@inertiajs/inertia';
 import useDialog from '../../Hooks/useDialog';
 import Dialog from '../../Components/Dashboard/Dialog';
+import { validarStatusObra , maskMoney} from '../../Utils/helpers';
 
 export default function Edit(props) {
     const { auth } = usePage().props;
@@ -31,7 +31,7 @@ export default function Edit(props) {
             idPagamento: obra.idPagamento,
             nomeObra: obra.nomeObra,
             idTipoObra: obra.idTipoObra,
-            valorOrcamento: obra.valorOrcamento,
+            valorOrcamento: maskMoney(obra.valorOrcamento),
             dataInicio: obra.dataInicio,
             previsaoEntrega: obra.previsaoEntrega,
             logradouro: obra.endereco.logradouro,
@@ -189,21 +189,21 @@ export default function Edit(props) {
                                         <div className="col-md-12">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor do orçamento</label>
-                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento}  onInput={e => formatarCampoTextParaNumerico(e)} onChange={onChange}  id="valorOrcamento" readOnly={!validarStatusObra(obra.status)} />
+                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento}  onChange={(e)=> setData('valorOrcamento',maskMoney(e.target.value))}  id="valorOrcamento" readOnly={!validarStatusObra(obra.status)} />
                                             </div>
                                         </div>
 
                                         <div className="col-md-4">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Total de Materias</label>
-                                                <input className="form-control" type="text" name='valorMateria' value={valorMateria} id="valorMateria"  readOnly/>
+                                                <input className="form-control" type="text" name='valorMateria' value={maskMoney(valorMateria)} id="valorMateria"  readOnly/>
                                             </div>
                                         </div>
 
                                         <div className="col-md-4">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Total de Mão de Obra</label>
-                                                <input className="form-control" type="text" name='valorPrestador' value={valorPrestador} id="valorPrestador"  readOnly/>
+                                                <input className="form-control" type="text" name='valorPrestador' value={maskMoney(valorPrestador)} id="valorPrestador"  readOnly/>
                                             </div>
                                         </div>
 
@@ -212,14 +212,14 @@ export default function Edit(props) {
                                          <div className="col-md-4">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor Final da Obra</label>
-                                                <input className="form-control" type="text" name='valorFinal' value={obra.valorFinal} id="valorFinal"  readOnly/>
+                                                <input className="form-control" type="text" name='valorFinal' value={maskMoney(obra.valorFinal)} id="valorFinal"  readOnly/>
                                             </div>
                                         </div>
                                         :
                                         <div className="col-md-4">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor Atual da Obra</label>
-                                                <input className="form-control" type="text" name='valorObra' value={valorObra} id="valorObra"  readOnly/>
+                                                <input className="form-control" type="text" name='valorObra' value={maskMoney(valorObra)} id="valorObra"  readOnly/>
                                             </div>
                                         </div>
                                         }

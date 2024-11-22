@@ -7,6 +7,7 @@ import { Inertia } from '@inertiajs/inertia';
 import {formatDate , formatDateWithTime , validarStatusObra} from '../../../Utils/helpers';
 import CreateMateriasObra from '../../../Components/Dashboard/Obra/Materias/CreateMateriasObra';
 import EditMateriasObra from '../../../Components/Dashboard/Obra/Materias/EditMateriasObra';
+import { maskMoney } from '../../../Utils/helpers';
 
 export default function Index(props) {
 
@@ -110,7 +111,7 @@ export default function Index(props) {
                                                     <p className="text-sm font-weight-bold mb-0">{formatDateWithTime(material.dataCompra)}</p>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <p className="text-sm font-weight-bold mb-0">{material.valor}</p>
+                                                    <p className="text-sm font-weight-bold mb-0">{maskMoney(material.valor)}</p>
                                                 </td>
                                                 <td className="align-middle text-center" width="15%">
                                                 {validarStatusObra(obra.status) ?

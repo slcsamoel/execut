@@ -19,7 +19,7 @@ export default function Dashboard(props) {
                         <div className="row">
                             <div className="col-8">
                             <div className="numbers">
-                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Obras Finalizadas</p>
+                                <p className="text-sm mb-0 text-uppercase font-weight-bold">Obras Concluídas</p>
                                 <h5 className="font-weight-bolder">
                                 {qntObrasRealizadas}
                                 </h5>

@@ -24,8 +24,8 @@ class ClienteController extends Controller
         $this->validate($request, [
             'nomeCliente' => 'required|max:255',
             'razaoSocial' => 'nullable|max:255',
-            'cpfCnpj' => 'required|max:15',
-            'telefone' => 'nullable|max:12',
+            'cpfCnpj' => 'required|max:255',
+            'telefone' => 'nullable|max:255',
             'logradouro'=> 'required|max:255',
             'complemento'=> 'required|max:255',
             'cidade'=> 'required|max:100',
@@ -45,8 +45,8 @@ class ClienteController extends Controller
             $cliente = new Cliente();
             $cliente->nomeCliente = $request->nomeCliente;
             $cliente->razaoSocial = $request->razaoSocial;
-            $cliente->cpfCnpj = $request->cpfCnpj;
-            $cliente->telefone = $request->telefone;
+            $cliente->cpfCnpj = preg_replace('/\D/', '', $request->cpfCnpj);
+            $cliente->telefone = preg_replace('/\D/', '', $request->telefone);
             $cliente->idEndereco = $endereco->id;
             $cliente->save();
 
@@ -70,8 +70,8 @@ class ClienteController extends Controller
         $this->validate($request, [
             'nomeCliente' => 'required|max:255',
             'razaoSocial' => 'nullable|max:255',
-            'cpfCnpj' => 'required|max:15',
-            'telefone' => 'nullable|max:12',
+            'cpfCnpj' => 'required|max:255',
+            'telefone' => 'nullable|max:255',
             'logradouro'=> 'required|max:255',
             'complemento'=> 'required|max:255',
             'cidade'=> 'required|max:100',
@@ -95,8 +95,8 @@ class ClienteController extends Controller
             $endereco->save();
             $cliente->nomeCliente = $request->nomeCliente;
             $cliente->razaoSocial = $request->razaoSocial;
-            $cliente->cpfCnpj = $request->cpfCnpj;
-            $cliente->telefone = $request->telefone;
+            $cliente->cpfCnpj = preg_replace('/\D/', '', $request->cpfCnpj);
+            $cliente->telefone = preg_replace('/\D/', '', $request->telefone);
             $cliente->idEndereco = $endereco->id;
             $cliente->update();
 

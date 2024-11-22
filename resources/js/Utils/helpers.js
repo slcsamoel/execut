@@ -99,3 +99,118 @@ export function validarStatusObra(status){
         return false;
     }
 }
+
+/**
+ * Formatar campos
+ */
+
+export function formatCpfCnpj(value) {
+    // Remove tudo que não for número
+    value = value.replace(/\D/g, "");
+
+    if (value.length <= 11) {
+        // Formata como CPF: 000.000.000-00
+        return value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/, (_, p1, p2, p3, p4) =>
+            [p1, p2, p3, p4].filter(Boolean).join(".").replace(/\.(\d{3})\.(\d{3})$/, "-$1")
+        );
+    } else {
+        // Formata como CNPJ: 00.000.000/0000-00
+        return value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, (_, p1, p2, p3, p4, p5) =>
+            [p1, p2, p3, p4, p5].filter(Boolean).join(".").replace(/\.(\d{3})\.(\d{4})\./, "/").replace(/\.(\d{4})\/$/, "-$1")
+        );
+    }
+}
+
+/**
+ * mask cpfCNPJ
+ */
+
+export function maskCpfCnpj(value) {
+     // Verifica se o valor é undefined ou null e se não, converte para string
+     if (!value) return ""; // Retorna uma string vazia caso o valor seja inválido (null, undefined)
+
+     value = String(value).replace(/\D/g, ""); // Remove tudo que não for número
+
+     if (value.length > 14) value = value.slice(0, 14); // Limita a 14 dígitos (máximo para CNPJ)
+
+     if (value.length <= 11) {
+         return value
+             .replace(/^(\d{3})(\d)/, "$1.$2")
+             .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+             .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+     } else {
+         return value
+             .replace(/^(\d{2})(\d)/, "$1.$2")
+             .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+             .replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3/$4")
+             .replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})(\d)/, "$1.$2.$3/$4-$5");
+     }
+}
+
+/**
+ * mask phone
+ */
+
+export function maskPhone(value) {
+    if (!value) return ""; // Retorna vazio se não houver valor
+
+    value = String(value).replace(/\D/g, ""); // Remove tudo que não é número
+    if (value.length > 11) value = value.slice(0, 11);
+
+    if (value.length === 0) return ""; // Se o valor for apagado, retorna vazio
+    if (value.length <= 2) return `(${value}`; // Adiciona apenas o parêntese inicial
+
+    if (value.length <= 10) {
+        // Telefone fixo: (99) 9999-9999
+        return value.replace(/(\d{2})(\d{0,4})(\d{0,4})/, (_, p1, p2, p3) =>
+            `(${p1}) ${p2}${p3 ? `-${p3}` : ""}`
+        );
+    } else {
+        // Celular: (99) 9 9999-9999
+        return value.replace(/(\d{2})(\d{1})(\d{0,4})(\d{0,4})/, (_, p1, p2, p3, p4) =>
+            `(${p1}) ${p2} ${p3}${p4 ? `-${p4}` : ""}`
+        );
+    }
+}
+
+/**
+ * mask money
+ */
+
+export function maskMoney(value) {
+    if (value == null || value === "") return ""; // Trata valores nulos ou vazios
+
+    // Remove tudo que não for número
+    const numericValue = String(value).replace(/\D/g, "");
+
+    // Caso o valor seja um número inteiro vindo do banco
+    if (!String(value).includes(".") && !String(value).includes(",")) {
+        return Number(numericValue)
+            .toFixed(2) // Adiciona as casas decimais
+            .replace(".", ",") // Substitui o ponto pela vírgula
+            .replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Formata com separadores BR
+    }
+
+    // Caso seja um número digitado no input (como centavos)
+    const formattedValue = (Number(numericValue) / 100).toFixed(2);
+    return formattedValue
+        .replace(".", ",") // Substitui o ponto pela vírgula
+        .replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Formata com separadores BR
+}
+
+
+
+export function maskCnpj(value) {
+    if (!value) return ""; // Retorna vazio se o valor for inválido
+
+    value = String(value).replace(/\D/g, ""); // Remove tudo que não for número
+
+    if (value.length > 14) value = value.slice(0, 14); // Limita a 14 dígitos (máximo para CNPJ)
+
+    // Aplica a máscara do CNPJ: 00.000.000/0000-00
+    return value
+        .replace(/^(\d{2})(\d)/, "$1.$2")
+        .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3/$4")
+        .replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})(\d)/, "$1.$2.$3/$4-$5");
+}

@@ -39,7 +39,7 @@ export default function EditTipoObra({close , model}) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="descricaoTipo" className="col-form-label">Descrição</label>
-                            <input type="text" className="form-control" name='descricaoTipo' value={data.descricaoTipo} onChange={onChange} id="ddescricaoTipoescricao"/>
+                            <input type="text" className="form-control" name='descricaoTipo' value={data.descricaoTipo} onChange={onChange} id="descricaoTipo"/>
                             {errors && <div className='text-danger mt-1'>{errors.descricaoTipo}</div>}
                         </div>
                 </div>

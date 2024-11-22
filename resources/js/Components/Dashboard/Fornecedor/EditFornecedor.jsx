@@ -1,6 +1,7 @@
 import { useForm } from '@inertiajs/inertia-react'
 import React, { useState , useEffect } from 'react';
 import axios from 'axios';
+import { maskPhone,maskCnpj } from '../../../Utils/helpers';
 
 export default function EditFornecedor({close , tipos , model}) {
     const [estados, setEstados] = useState([]);
@@ -8,9 +9,9 @@ export default function EditFornecedor({close , tipos , model}) {
 
     const {data, setData, put, reset, errors} = useForm({
         razaoSocial: model.razaoSocial,
-        cnpj: model.cnpj,
+        cnpj: maskCnpj(model.cnpj),
         idTipo: model.idTipo,
-        telefone: model.telefone,
+        telefone: maskPhone(model.telefone),
         logradouro: model.endereco ? model.endereco.logradouro : '',
         complemento: model.endereco ? model.endereco.complemento : '' ,
         cidade: model.endereco ? model.endereco.cidade : '',
@@ -55,9 +56,9 @@ export default function EditFornecedor({close , tipos , model}) {
     useEffect(() => {
         setData({...data,
             razaoSocial: model.razaoSocial,
-            cnpj: model.cnpj,
+            cnpj: maskCnpj(model.cnpj),
             idTipo: model.idTipo,
-            telefone: model.telefone,
+            telefone: maskPhone(model.telefone),
             logradouro: model.endereco ? model.endereco.logradouro : '',
             complemento: model.endereco ? model.endereco.complemento : '' ,
             cidade: model.endereco ? model.endereco.cidade : '',
@@ -86,12 +87,12 @@ export default function EditFornecedor({close , tipos , model}) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="cnpj" className="col-form-label">Cnpj:</label>
-                            <input type="text" className="form-control" name='cnpj' value={data.cnpj} onChange={onChange} id="cnpj"/>
+                            <input type="text" className="form-control" name='cnpj' value={data.cnpj} onChange={(e)=> setData('cnpj',maskCnpj(e.target.value))} id="cnpj"/>
                             {errors && <div className='text-danger mt-1'>{errors.cnpj}</div>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="telefone" className="col-form-label">Telefone:</label>
-                            <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={onChange} id="telefone"/>
+                            <input type="text" className="form-control" name='telefone' value={data.telefone} onChange={(e)=> setData('telefone',maskPhone(e.target.value))} id="telefone"/>
                             {errors && <div className='text-danger mt-1'>{errors.telefone}</div>}
                         </div>
 
@@ -104,7 +105,7 @@ export default function EditFornecedor({close , tipos , model}) {
                                 onChange={onChange}
                                 id="idTipo"
                             >
-                                <option value="">Selecione uma função</option>
+                                <option value="">Selecione o Tipo</option>
                                 {tipos.map((tipo) => (
                                     <option key={tipo.id} value={tipo.id}>
                                         {tipo.nomeTipo}
