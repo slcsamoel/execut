@@ -17,7 +17,7 @@ export default function Edit(props) {
     const valorMateria = props.valorMateria;
     const valorPrestador = props.valorPrestador;
 
-    console.log(obra);
+    console.log(props);
 
     const [estados, setEstados] = useState([]);
     const [cidades , setCidades] = useState([]);

@@ -12710,7 +12710,7 @@ function Dashboard(props) {
                     className: "numbers",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
                       className: "text-sm mb-0 text-uppercase font-weight-bold",
-                      children: "Obras Conclu\xEDdas"
+                      children: "Obras Finalizadas"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
                       className: "font-weight-bolder",
                       children: qntObrasRealizadas
@@ -13982,7 +13982,7 @@ function Edit(props) {
   var valorObra = props.valorObra;
   var valorMateria = props.valorMateria;
   var valorPrestador = props.valorPrestador;
-  console.log(obra);
+  console.log(props);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -17716,20 +17716,19 @@ function maskPhone(value) {
 
 function maskMoney(value) {
   if (value == null || value === "") return ""; // Trata valores nulos ou vazios
-  // Remove tudo que não for número
+  // Remove tudo que não for número ou ponto/vírgula
 
-  var numericValue = String(value).replace(/\D/g, ""); // Caso o valor seja um número inteiro vindo do banco
+  var numericValue = String(value).replace(/[^\d.,]/g, ""); // Substitui vírgula por ponto (para tratar corretamente como número)
 
-  if (!String(value).includes(".") && !String(value).includes(",")) {
-    return Number(numericValue).toFixed(2) // Adiciona as casas decimais
-    .replace(".", ",") // Substitui o ponto pela vírgula
-    .replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Formata com separadores BR
-  } // Caso seja um número digitado no input (como centavos)
+  numericValue = numericValue.replace(",", "."); // Verifica se é um número válido
 
+  if (isNaN(Number(numericValue))) return ""; // Formata o número como moeda BR
 
-  var formattedValue = (Number(numericValue) / 100).toFixed(2);
-  return formattedValue.replace(".", ",") // Substitui o ponto pela vírgula
-  .replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Formata com separadores BR
+  var formattedValue = Number(numericValue).toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+  return formattedValue;
 }
 function maskCnpj(value) {
   if (!value) return ""; // Retorna vazio se o valor for inválido

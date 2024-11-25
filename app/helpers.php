@@ -9,11 +9,9 @@ use Carbon\Carbon;
  {
     $data_inicio = Carbon::parse($dataInicio);
     $data_fim = Carbon::parse($dataFim);
-    if ($data_inicio->lt($data_fim)) {
-        return true;
-    } else {
-       return false;
-    }
+
+    // Retorna true se data_inicio for menor ou igual a data_fim
+    return $data_inicio->lte($data_fim);
  }
 
 

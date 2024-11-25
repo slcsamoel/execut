@@ -180,22 +180,22 @@ export function maskPhone(value) {
 export function maskMoney(value) {
     if (value == null || value === "") return ""; // Trata valores nulos ou vazios
 
-    // Remove tudo que não for número
-    const numericValue = String(value).replace(/\D/g, "");
+    // Remove tudo que não for número ou ponto/vírgula
+    let numericValue = String(value).replace(/[^\d.,]/g, "");
 
-    // Caso o valor seja um número inteiro vindo do banco
-    if (!String(value).includes(".") && !String(value).includes(",")) {
-        return Number(numericValue)
-            .toFixed(2) // Adiciona as casas decimais
-            .replace(".", ",") // Substitui o ponto pela vírgula
-            .replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Formata com separadores BR
-    }
+    // Substitui vírgula por ponto (para tratar corretamente como número)
+    numericValue = numericValue.replace(",", ".");
 
-    // Caso seja um número digitado no input (como centavos)
-    const formattedValue = (Number(numericValue) / 100).toFixed(2);
-    return formattedValue
-        .replace(".", ",") // Substitui o ponto pela vírgula
-        .replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Formata com separadores BR
+    // Verifica se é um número válido
+    if (isNaN(Number(numericValue))) return "";
+
+    // Formata o número como moeda BR
+    const formattedValue = Number(numericValue).toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+
+    return formattedValue;
 }
 
 

@@ -209,7 +209,7 @@ class ObraController extends Controller
         foreach ($prestadores as $prestadorObra) {
                 $diasTrabalhados = calcularDiferencaDias($prestadorObra->dataInicio , $prestadorObra->dataFim ? $prestadorObra->dataFim : null);
                 $prestadorObra->diasTrabalhados = $diasTrabalhados;
-                $prestadorObra->valorTotalTrabalhado = (intval($diasTrabalhados) * intval($prestadorObra->prestador->valorDiaria));
+                $prestadorObra->valorTotalTrabalhado = (intval($diasTrabalhados) * intval($prestadorObra->valorDiaria));
                 $valorPrestador += $prestadorObra->valorTotalTrabalhado;
         }
 
@@ -291,7 +291,7 @@ class ObraController extends Controller
         foreach ($prestadores as $prestadorObra) {
             $diasTrabalhados = calcularDiferencaDias($prestadorObra->dataInicio , $prestadorObra->dataFim ? $prestadorObra->dataFim : null);
             $prestadorObra->diasTrabalhados = $diasTrabalhados;
-            $prestadorObra->valorTotalTrabalhado = (intval($diasTrabalhados) * intval($prestadorObra->prestador->valorDiaria));
+            $prestadorObra->valorTotalTrabalhado = (intval($diasTrabalhados) * intval($prestadorObra->valorDiaria));
             $valorPrestador += $prestadorObra->valorTotalTrabalhado;
         }
 
@@ -320,7 +320,7 @@ class ObraController extends Controller
 
         foreach ($prestadores as $prestadorObra) {
             $diasTrabalhados = calcularDiferencaDias($prestadorObra->dataInicio , $prestadorObra->dataFim ? $prestadorObra->dataFim : null);
-            $valorPrestador += (intval($diasTrabalhados) * intval($prestadorObra->prestador->valorDiaria));
+            $valorPrestador += (intval($diasTrabalhados) * intval($prestadorObra->valorDiaria));
             if(is_null($prestadorObra->dataFim)){
                 $prestadorObra->dataFim = now();
                 $prestadorObra->save();

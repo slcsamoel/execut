@@ -16,6 +16,7 @@ class PrestadorObra extends Model
         'idObra',
         'dataInicio',
         'dataFim',
+        'valorDiaria'
     ];
 
 

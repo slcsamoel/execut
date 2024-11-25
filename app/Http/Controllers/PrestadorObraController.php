@@ -33,10 +33,13 @@ class PrestadorObraController extends Controller
             'dataInicio'   => 'required|max:255',
         ]);
 
+        $prestador = Prestador::find($request->idPrestador);
+
         $funcionario = new PrestadorObra();
         $funcionario->idObra = $obra->id;
         $funcionario->idPrestador = $request->idPrestador;
         $funcionario->dataInicio = $request->dataInicio;
+        $funcionario->valorDiaria = $prestador->valorDiaria;
 
 
         if(!verificarDataIncioDataFim($obra->dataInicio, $funcionario->dataInicio)){
