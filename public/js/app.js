@@ -8034,11 +8034,11 @@ function EditCliente(_ref) {
           type: "button",
           className: "btn bg-gradient-secondary",
           "data-bs-dismiss": "modal",
-          children: "Close"
+          children: "Fecha"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           type: "submit",
           className: "btn bg-gradient-primary",
-          children: "Update"
+          children: "Salvar"
         })]
       })]
     })
@@ -11646,11 +11646,11 @@ function EditUser(_ref) {
           type: "button",
           className: "btn bg-gradient-secondary",
           "data-bs-dismiss": "modal",
-          children: "Close"
+          children: "Fechar"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           type: "submit",
           className: "btn bg-gradient-primary",
-          children: "Update"
+          children: "Salvar"
         })]
       })]
     })
@@ -12863,7 +12863,7 @@ function Dashboard(props) {
 Dashboard.layout = function (page) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Layouts_Base__WEBPACK_IMPORTED_MODULE_1__["default"], {
     children: page,
-    title: "Dashboard"
+    title: "Home"
   });
 };
 

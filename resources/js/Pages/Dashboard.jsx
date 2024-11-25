@@ -165,4 +165,4 @@ export default function Dashboard(props) {
     )
 }
 
-Dashboard.layout = (page) => <Base children={page} title={"Dashboard"}/>
+Dashboard.layout = (page) => <Base children={page} title={"Home"}/>
