@@ -6,15 +6,24 @@ use App\Http\Resources\ClienteResource;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Models\Endereco;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ClienteController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = ClienteResource::collection(Cliente::with('endereco')->paginate(10));
+        $search = $request->query('search', '');
+        $query = Cliente::with('endereco');
+        if (!empty($search)) {
+            $query->where('nomeCliente', 'like', "%{$search}%");
+                // ->orWhere('email', 'like', "%{$search}%")
+                // ->orWhere('cpf', 'like', "%{$search}%");
+        }
+         $clientes = ClienteResource::collection($query->paginate(10));
         return inertia('Clientes/Index', [
             'clientes' => $clientes,
+            'search' => $search,
         ]);
     }
 
@@ -120,6 +129,20 @@ class ClienteController extends Controller
             'type' => 'success',
             'message' => 'User has been deleted',
         ]);
+    }
+
+    public function gerarRelatorioGeral(Request $request)
+    {
+         // Obtenha os dados dos clientes
+        $clientes = Cliente::with('endereco')->get();
+
+        // Gere a view para o PDF
+        $pdf = Pdf::loadView('relatorios.clientes', compact('clientes'));
+
+        // Configurar para forçar o download
+        return response($pdf->output(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="relatorio_clientes.pdf"');
     }
 
 }

@@ -86,3 +86,6 @@
    setup in UserFactory
    default '123456'
    ```
+## LIB DE PDF 
+composer require barryvdh/laravel-dompdf
+php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"

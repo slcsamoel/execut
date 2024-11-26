@@ -11,10 +11,11 @@ export default function Index(props) {
 
     const {data: prestadores, links, meta} = props.prestadores;
     const funcoes =  props.funcoes;
-    const [state, setState] = useState([])
-    const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
-    const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
-    const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog()
+    const [state, setState] = useState([]);
+    const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog();
+    const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog();
+    const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog();
+    const [search, setSearch] = useState(props.search);
 
     const openUpdateDialog = (prestador) => {
         setState(prestador);
@@ -26,7 +27,10 @@ export default function Index(props) {
         destroyDialogHandler()
     };
 
-    console.log(props);
+     // registra o termo digitado no campo
+     const handleSearch = (e) => {
+        setSearch(e.target.value);
+    };
 
     const destroyFuncao = () => {
         Inertia.delete(
@@ -58,12 +62,25 @@ export default function Index(props) {
                         <div className="card h-100 w-100">
                             <div className="card-header pb-0">
                             <div className="row">
-                                <div className="col-md-6">
-                                    <h6>Prestadores</h6>
-                                </div>
-                                <div className="col-md-6 d-flex justify-content-end">
+                                    <div className="col-md-3">
+                                        <input className="form-control" type="text" name='search'  onChange={handleSearch} value={search} placeholder='buscar'/>
+                                        {search &&
+                                            <Link  type="button" href={`/prestadores`} className="btn bg-primary-success btn-block mb-3">
+                                                Limpar
+                                            </Link>
+                                        }
+                                    </div>
+                                    <div className="col-md-2">
+                                        <Link  type="button" href={`/prestadores?search=${search}`} className="btn btn-primary btn-block mb-3">
+                                            Buscar
+                                        </Link>
+                                    </div>
+                                <div className="col-md-7 d-flex justify-content-end">
+                                    <a href={`/prestadores/relatorio`} target='blank' type="button" className="btn bg-primary-success btn-block mb-3" style={{ margin: '5px' }}>
+                                        Relatorio Geral
+                                    </a>
                                     <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Criar Novo  prestador
+                                        Novo Prestador
                                     </button>
                                 </div>
                             </div>
@@ -92,7 +109,7 @@ export default function Index(props) {
                                                     </div>
                                                 </td>
                                                 <td className='text-left'>
-                                                    <p className="text-sm font-weight-bold mb-0">{prestador.funcao.descricaoFuncao}</p>
+                                                    <p className="text-sm font-weight-bold mb-0">{prestador.funcao.nomeFuncao}</p>
                                                 </td>
                                                 <td className='text-left'>
                                                     <p className="text-sm font-weight-bold mb-0">{prestador.tipoPrestador}</p>
@@ -117,13 +134,28 @@ export default function Index(props) {
                     </div>
                 </div>
                 <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
-                        { meta.links.map((link, k) => (
-                            <li key={k} className="page-item">
-                                <Link disabled={link.url == null ? true : false} as="button" className={`${link.active && 'bg-info'} ${link.url == null && 'btn bg-gradient-secondary text-white'} page-link`} href={link.url || ''} dangerouslySetInnerHTML={{ __html: link.label }}/>
-                            </li>
-                        ))}
-                    </ul>
+                        <ul className="pagination justify-content-center">
+                            {meta.links.map((link, k) => {
+                                // Adiciona o parâmetro `search` à URL da paginação
+                                const urlWithSearch = link.url
+                                    ? `${link.url}${link.url.includes('?') ? '&' : '?'}search=${search}`
+                                    : null;
+
+                                return (
+                                    <li key={k} className="page-item">
+                                        <Link
+                                            disabled={link.url == null}
+                                            as="button"
+                                            className={`${link.active && 'bg-info'} ${
+                                                link.url == null && 'btn bg-gradient-secondary text-white'
+                                            } page-link`}
+                                            href={urlWithSearch || ''}
+                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                        />
+                                    </li>
+                                );
+                            })}
+                        </ul>
                 </nav>
             </div>
         </>

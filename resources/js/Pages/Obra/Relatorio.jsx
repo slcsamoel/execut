@@ -54,7 +54,10 @@ export default function Relatorio(props) {
                             <div className="card">
                                 <div className="card-header pb-0">
                                     <div className="d-flex align-items-center">
-                                        <Link type='button' href={route('obras.edit', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Obra</Link>
+                                        <Link type='button' href={route('obras.index')} className="btn bg-gradient-secondary ms-auto" style={{ marginRight: '5px' }}>Obras</Link>
+                                        <a type="button" href={`/obras/${obra.id}/pdf`} target='blank'  className="btn btn-vimeo ">
+                                            <span className="btn-inner--icon"><i className="fas fa-print"></i></span>
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="card-body">

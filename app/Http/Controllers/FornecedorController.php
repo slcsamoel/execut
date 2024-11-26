@@ -7,17 +7,27 @@ use App\Models\Fornecedor;
 use Illuminate\Http\Request;
 use App\Models\Endereco;
 use App\Models\TipoFornecedor;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class FornecedorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $fornecedores = FornecedorResource::collection(Fornecedor::with('endereco','tipo')->paginate(10));
+        $search = $request->query('search', '');
+        $query = Fornecedor::with('endereco','tipo');
+        if (!empty($search)) {
+            $query->where('razaoSocial', 'like', "%{$search}%");
+                // ->orWhere('email', 'like', "%{$search}%")
+                // ->orWhere('cpf', 'like', "%{$search}%");
+        }
+
+        $fornecedores = FornecedorResource::collection($query->paginate(10));
         $tipos = TipoFornecedor::all();
 
         return inertia('Fornecedor/Index', [
             'fornecedores' => $fornecedores,
             'tipos' => $tipos,
+            'search' => $search,
         ]);
     }
 
@@ -111,6 +121,19 @@ class FornecedorController extends Controller
     }
 
 
+    public function gerarRelatorioGeral(Request $request)
+    {
+         // Obtenha os dados dos clientes
+        $fornecedores = Fornecedor::with('endereco','tipo')->get();
+
+        // Gere a view para o PDF
+        $pdf = Pdf::loadView('relatorios.fornecedores', compact('fornecedores'));
+
+        // Configurar para forçar o download
+        return response($pdf->output(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="relatorio_fornecedores.pdf"');
+    }
 
 
 }

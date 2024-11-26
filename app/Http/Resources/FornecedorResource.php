@@ -20,6 +20,7 @@ class FornecedorResource extends JsonResource
             'cnpj' => $this->cnpj,
             'telefone' => $this->telefone,
             'endereco' => $this->endereco,
+            'idTipo' => $this->idTipo,
             'tipo' => $this->tipo,
         ];
     }

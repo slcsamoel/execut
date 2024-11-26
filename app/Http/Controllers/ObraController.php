@@ -11,16 +11,24 @@ use Illuminate\Http\Request;
 use App\Models\Endereco;
 use App\Models\MaterialDeObra;
 use App\Models\PrestadorObra;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ObraController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->query('search', '');
+        $query = Obra::with('endereco', 'cliente' , 'tipoObra');
+        if (!empty($search)) {
+            $query->where('nomeObra', 'like', "%{$search}%")
+                ->orWhere('responsavelObra', 'like', "%{$search}%");
+        }
 
-        $obras = ObraResource::collection(Obra::with('endereco', 'cliente' , 'tipoObra')->paginate(10));
+        $obras = ObraResource::collection($query->paginate(10));
 
         return inertia('Obra/Index', [
             'obras' => $obras,
+            'search' => $search,
         ]);
 
     }
@@ -329,6 +337,50 @@ class ObraController extends Controller
         $valorObra = ($valorMateria + $valorPrestador);
         return $valorObra;
 
+    }
+
+    public function geraRelatorioDeObra(Request $request , Obra $obra){
+        $obra = Obra::with('endereco', 'cliente' , 'tipoObra', 'pagamento')->where('id', $obra->id )->first();
+        $materias = MaterialDeObra::with('fornecedor')->where('idObra' , $obra->id)->get();
+        $prestadores = PrestadorObra::with('prestador')->where('idObra' , $obra->id)->get();
+
+        $valorObra = 0;
+        $valorMateria = 0;
+        $valorPrestador = 0;
+
+        foreach ($materias as $materia) {
+            $valorMateria += $materia->valor;
+        }
+
+        foreach ($prestadores as $prestadorObra) {
+                $diasTrabalhados = calcularDiferencaDias($prestadorObra->dataInicio , $prestadorObra->dataFim ? $prestadorObra->dataFim : null);
+                $prestadorObra->diasTrabalhados = $diasTrabalhados;
+                $prestadorObra->valorTotalTrabalhado = (intval($diasTrabalhados) * intval($prestadorObra->valorDiaria));
+                $valorPrestador += $prestadorObra->valorTotalTrabalhado;
+        }
+
+        $valorObra = ($valorMateria + $valorPrestador);
+
+         // Gere a view para o PDF
+         $pdf = Pdf::loadView('relatorios.Obras.obra', compact('valorObra' , 'valorMateria' , 'valorPrestador', 'obra' , 'materias' , 'prestadores'));
+
+         // Configurar para forçar o download
+         return response($pdf->output(), 200)
+             ->header('Content-Type', 'application/pdf')
+             ->header('Content-Disposition', 'attachment; filename="relatorio_obra.pdf"');
+
+    }
+
+    public function geraRelatorioDeObras(Request $request)
+    {
+        $obras = Obra::with('endereco', 'cliente' , 'tipoObra')->get();
+         // Gere a view para o PDF
+         $pdf = Pdf::loadView('relatorios.Obras.obras', compact('obras'));
+
+         // Configurar para forçar o download
+         return response($pdf->output(), 200)
+             ->header('Content-Type', 'application/pdf')
+             ->header('Content-Disposition', 'attachment; filename="relatorio_obras.pdf"');
     }
 
 }

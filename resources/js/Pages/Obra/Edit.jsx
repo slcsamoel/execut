@@ -22,8 +22,8 @@ export default function Edit(props) {
     const [estados, setEstados] = useState([]);
     const [cidades , setCidades] = useState([]);
 
-    const [finalizarDialogHandler, finalizarCloseTrigger,finalizarTrigger] = useDialog();
-    const [CancelarDialogHandler, CancelarCloseTrigger,CancelarTrigger] = useDialog();
+    const [finalizarDialogHandler, finalizarCloseTrigger, finalizarTrigger] = useDialog();
+    const [CancelarDialogHandler, CancelarCloseTrigger, CancelarTrigger] = useDialog();
 
     const {data, setData, put, reset, errors} = useForm({
             responsavelObra: obra.responsavelObra ,
@@ -158,7 +158,6 @@ export default function Edit(props) {
                                     <div className="d-flex align-items-center">
                                         <Link type='button'  href={route('materiais.index', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Materiais</Link>
                                         <Link type="button" href={route('funcionarios.index', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Prestadores</Link>
-                                        <Link type='button' href={route('obras.relatorio', obra.id)} className="btn bg-gradient-secondary btn-sm ms-auto">Relatorios</Link>
                                         {validarStatusObra(obra.status) ?
                                             <>
                                                 <button type='button' className="btn btn-primary btn-sm ms-auto" onClick={openFinalizarDialog}>Finalizar</button>

@@ -37,20 +37,26 @@ Route::middleware('auth')->group(function () {
     //Usuarios
     Route::apiResource('users', UserController::class);
     //clientes
+    Route::get('clientes/relatorio', [ClienteController::class, 'gerarRelatorioGeral'])->name('clientes.relatorioGeral');
     Route::apiResource('clientes', ClienteController::class);
+
     //Funções de prestadores
     Route::apiResource('funcoes', FuncaoPrestadorController::class);
     //Prestadores
+    Route::get('prestadores/relatorio', [PrestadorController::class, 'gerarRelatorioGeral'])->name('prestadores.relatorioGeral');
     Route::apiResource('prestadores', PrestadorController::class);
     //Obras
+    Route::get('obras/relatorio-geral',[ObraController::class , 'geraRelatorioDeObras'])->name('obras.relatorioGeral');
     Route::resource('obras', ObraController::class);
     Route::apiResource('obras/{obra}/funcionarios', PrestadorObraController::class);
     Route::apiResource('obras/{obra}/materiais', MateriasObraController::class);
     Route::get('obras/{obra}/relatorio',[ObraController::class , 'relatorioDaObra'])->name('obras.relatorio');
+    Route::get('obras/{obra}/pdf',[ObraController::class , 'geraRelatorioDeObra'])->name('obras.pdf');
     Route::post('obras/{obra}/finalizar',[ObraController::class , 'finalizarObra'])->name('obras.finalizar');
     Route::post('obras/{obra}/cancelar',[ObraController::class , 'cancelarObra'])->name('obras.cancelar');
     Route::apiResource('tipos-obras', TipoObraController::class);
     //Fornecedores
+    Route::get('fornecedores/relatorio', [FornecedorController::class, 'gerarRelatorioGeral'])->name('fornecedores.relatorioGeral');
     Route::apiResource('fornecedores', FornecedorController::class);
     Route::apiResource('tipos-fornecedores', TipoFornecedorController::class);
 

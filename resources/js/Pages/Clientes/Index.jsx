@@ -11,10 +11,11 @@ import { maskCpfCnpj,maskPhone,maskMoney } from '../../Utils/helpers';
 export default function Index(props) {
 
     const {data: clientes, links, meta} = props.clientes;
-    const [state, setState] = useState([])
-    const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
-    const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
-    const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog()
+    const [state, setState] = useState([]);
+    const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog();
+    const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog();
+    const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog();
+    const [search, setSearch] = useState(props.search);
 
     const openUpdateDialog = (cliente) => {
         setState(cliente);
@@ -24,6 +25,11 @@ export default function Index(props) {
     const openDestroyDialog = (cliente) => {
         setState(cliente);
         destroyDialogHandler()
+    };
+
+    // registra o termo digitado no campo
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
     };
 
     console.log(props);
@@ -57,16 +63,29 @@ export default function Index(props) {
                     <div className="col-12 w-100">
                         <div className="card h-100 w-100">
                             <div className="card-header pb-0">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <h6>Clientes</h6>
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <input className="form-control" type="text" name='search'  onChange={handleSearch} value={search} placeholder='buscar'/>
+                                        {search &&
+                                            <Link  type="button" href={`/clientes`} className="btn bg-primary-success btn-block mb-3">
+                                                Limpar
+                                            </Link>
+                                        }
+                                    </div>
+                                    <div className="col-md-2">
+                                        <Link  type="button" href={`/clientes?search=${search}`} className="btn btn-primary btn-block mb-3">
+                                            Buscar
+                                        </Link>
+                                    </div>
+                                    <div className="col-md-7 d-flex justify-content-end">
+                                        <a href={`/clientes/relatorio`} target='blank' type="button" className="btn bg-primary-success btn-block mb-3" style={{ margin: '5px' }}>
+                                            Relatorio Geral
+                                        </a>
+                                        <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
+                                            Novo Cliente
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="col-md-6 d-flex justify-content-end">
-                                    <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Criar novo Cliente
-                                    </button>
-                                </div>
-                            </div>
                             </div>
                             <div className="card-body px-0 pt-0 pb-2">
                             <div className="table-responsive-xxl p-0" width="100%">
@@ -123,14 +142,30 @@ export default function Index(props) {
                     </div>
                 </div>
                 <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
-                        { meta.links.map((link, k) => (
-                            <li key={k} className="page-item">
-                                <Link disabled={link.url == null ? true : false} as="button" className={`${link.active && 'bg-info'} ${link.url == null && 'btn bg-gradient-secondary text-white'} page-link`} href={link.url || ''} dangerouslySetInnerHTML={{ __html: link.label }}/>
-                            </li>
-                        ))}
-                    </ul>
+                        <ul className="pagination justify-content-center">
+                            {meta.links.map((link, k) => {
+                                // Adiciona o parâmetro `search` à URL da paginação
+                                const urlWithSearch = link.url
+                                    ? `${link.url}${link.url.includes('?') ? '&' : '?'}search=${search}`
+                                    : null;
+
+                                return (
+                                    <li key={k} className="page-item">
+                                        <Link
+                                            disabled={link.url == null}
+                                            as="button"
+                                            className={`${link.active && 'bg-info'} ${
+                                                link.url == null && 'btn bg-gradient-secondary text-white'
+                                            } page-link`}
+                                            href={urlWithSearch || ''}
+                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                        />
+                                    </li>
+                                );
+                            })}
+                        </ul>
                 </nav>
+
             </div>
         </>
     )

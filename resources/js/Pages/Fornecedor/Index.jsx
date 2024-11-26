@@ -16,6 +16,7 @@ export default function Index(props) {
     const [addDialogHandler, addCloseTrigger,addTrigger] = useDialog()
     const [UpdateDialogHandler, UpdateCloseTrigger,UpdateTrigger] = useDialog()
     const [destroyDialogHandler, destroyCloseTrigger,destroyTrigger] = useDialog()
+    const [search, setSearch] = useState(props.search);
 
     const openUpdateDialog = (fornecedor) => {
         setState(fornecedor);
@@ -24,10 +25,14 @@ export default function Index(props) {
 
     const openDestroyDialog = (fornecedor) => {
         setState(fornecedor);
+        console.log(fornecedor);
         destroyDialogHandler()
     };
 
-    console.log(props);
+     // registra o termo digitado no campo
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+    };
 
     const destroycliente = () => {
         Inertia.delete(
@@ -58,16 +63,29 @@ export default function Index(props) {
                     <div className="col-12 w-100">
                         <div className="card h-100 w-100">
                             <div className="card-header pb-0">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <h6>Fornecedores</h6>
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <input className="form-control" type="text" name='search'  onChange={handleSearch} value={search} placeholder='buscar'/>
+                                        {search &&
+                                            <Link  type="button" href={`/fornecedores`} className="btn bg-primary-success btn-block mb-3">
+                                                Limpar
+                                            </Link>
+                                        }
+                                    </div>
+                                    <div className="col-md-2">
+                                        <Link  type="button" href={`/fornecedores?search=${search}`} className="btn btn-primary btn-block mb-3">
+                                            Buscar
+                                        </Link>
+                                    </div>
+                                    <div className="col-md-7 d-flex justify-content-end">
+                                        <a href={`/fornecedores/relatorio`} target='blank' type="button" className="btn bg-primary-success btn-block mb-3" style={{ margin: '5px' }}>
+                                            Relatorio Geral
+                                        </a>
+                                        <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
+                                            Novo Fornecedor
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="col-md-6 d-flex justify-content-end">
-                                    <button onClick={addDialogHandler} type="button" className="btn bg-gradient-success btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
-                                        Criar novo Fornecedores
-                                    </button>
-                                </div>
-                            </div>
                             </div>
                             <div className="card-body px-0 pt-0 pb-2">
                             <div className="table-responsive-xxl p-0" width="100%">
@@ -124,13 +142,28 @@ export default function Index(props) {
                     </div>
                 </div>
                 <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
-                        { meta.links.map((link, k) => (
-                            <li key={k} className="page-item">
-                                <Link disabled={link.url == null ? true : false} as="button" className={`${link.active && 'bg-info'} ${link.url == null && 'btn bg-gradient-secondary text-white'} page-link`} href={link.url || ''} dangerouslySetInnerHTML={{ __html: link.label }}/>
-                            </li>
-                        ))}
-                    </ul>
+                        <ul className="pagination justify-content-center">
+                            {meta.links.map((link, k) => {
+                                // Adiciona o parâmetro `search` à URL da paginação
+                                const urlWithSearch = link.url
+                                    ? `${link.url}${link.url.includes('?') ? '&' : '?'}search=${search}`
+                                    : null;
+
+                                return (
+                                    <li key={k} className="page-item">
+                                        <Link
+                                            disabled={link.url == null}
+                                            as="button"
+                                            className={`${link.active && 'bg-info'} ${
+                                                link.url == null && 'btn bg-gradient-secondary text-white'
+                                            } page-link`}
+                                            href={urlWithSearch || ''}
+                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                        />
+                                    </li>
+                                );
+                            })}
+                        </ul>
                 </nav>
             </div>
         </>

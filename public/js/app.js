@@ -12444,6 +12444,11 @@ function Index(props) {
       destroyCloseTrigger = _useDialog6[1],
       destroyTrigger = _useDialog6[2];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.search),
+      _useState4 = _slicedToArray(_useState3, 2),
+      search = _useState4[0],
+      setSearch = _useState4[1];
+
   var openUpdateDialog = function openUpdateDialog(cliente) {
     setState(cliente);
     UpdateDialogHandler();
@@ -12452,6 +12457,11 @@ function Index(props) {
   var openDestroyDialog = function openDestroyDialog(cliente) {
     setState(cliente);
     destroyDialogHandler();
+  }; // registra o termo digitado no campo
+
+
+  var handleSearch = function handleSearch(e) {
+    setSearch(e.target.value);
   };
 
   console.log(props);
@@ -12509,21 +12519,48 @@ function Index(props) {
               className: "card-header pb-0",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
                 className: "row",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-                  className: "col-md-6",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h6", {
-                    children: "Clientes"
-                  })
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+                  className: "col-md-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("input", {
+                    className: "form-control",
+                    type: "text",
+                    name: "search",
+                    onChange: handleSearch,
+                    value: search,
+                    placeholder: "buscar"
+                  }), search && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/clientes",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    children: "Limpar"
+                  })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-                  className: "col-md-6 d-flex justify-content-end",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+                  className: "col-md-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/clientes?search=".concat(search),
+                    className: "btn btn-primary btn-block mb-3",
+                    children: "Buscar"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+                  className: "col-md-7 d-flex justify-content-end",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
+                    href: "/clientes/relatorio",
+                    target: "blank",
+                    type: "button",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    style: {
+                      margin: '5px'
+                    },
+                    children: "Relatorio Geral"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
                     onClick: addDialogHandler,
                     type: "button",
                     className: "btn bg-gradient-success btn-block mb-3",
                     "data-bs-toggle": "modal",
                     "data-bs-target": "#exampleModalMessage",
-                    children: "Criar novo Cliente"
-                  })
+                    children: "Novo Cliente"
+                  })]
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
@@ -12639,13 +12676,15 @@ function Index(props) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("ul", {
           className: "pagination justify-content-center",
           children: meta.links.map(function (link, k) {
+            // Adiciona o parâmetro `search` à URL da paginação
+            var urlWithSearch = link.url ? "".concat(link.url).concat(link.url.includes('?') ? '&' : '?', "search=").concat(search) : null;
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("li", {
               className: "page-item",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
-                disabled: link.url == null ? true : false,
+                disabled: link.url == null,
                 as: "button",
                 className: "".concat(link.active && 'bg-info', " ").concat(link.url == null && 'btn bg-gradient-secondary text-white', " page-link"),
-                href: link.url || '',
+                href: urlWithSearch || '',
                 dangerouslySetInnerHTML: {
                   __html: link.label
                 }
@@ -12944,6 +12983,11 @@ function Index(props) {
       destroyCloseTrigger = _useDialog6[1],
       destroyTrigger = _useDialog6[2];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.search),
+      _useState4 = _slicedToArray(_useState3, 2),
+      search = _useState4[0],
+      setSearch = _useState4[1];
+
   var openUpdateDialog = function openUpdateDialog(fornecedor) {
     setState(fornecedor);
     UpdateDialogHandler();
@@ -12951,10 +12995,14 @@ function Index(props) {
 
   var openDestroyDialog = function openDestroyDialog(fornecedor) {
     setState(fornecedor);
+    console.log(fornecedor);
     destroyDialogHandler();
-  };
+  }; // registra o termo digitado no campo
 
-  console.log(props);
+
+  var handleSearch = function handleSearch(e) {
+    setSearch(e.target.value);
+  };
 
   var destroycliente = function destroycliente() {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia["delete"](route('clientes.destroy', state.id), {
@@ -13011,21 +13059,48 @@ function Index(props) {
               className: "card-header pb-0",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
                 className: "row",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-                  className: "col-md-6",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h6", {
-                    children: "Fornecedores"
-                  })
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+                  className: "col-md-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("input", {
+                    className: "form-control",
+                    type: "text",
+                    name: "search",
+                    onChange: handleSearch,
+                    value: search,
+                    placeholder: "buscar"
+                  }), search && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/fornecedores",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    children: "Limpar"
+                  })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-                  className: "col-md-6 d-flex justify-content-end",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+                  className: "col-md-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/fornecedores?search=".concat(search),
+                    className: "btn btn-primary btn-block mb-3",
+                    children: "Buscar"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+                  className: "col-md-7 d-flex justify-content-end",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
+                    href: "/fornecedores/relatorio",
+                    target: "blank",
+                    type: "button",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    style: {
+                      margin: '5px'
+                    },
+                    children: "Relatorio Geral"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
                     onClick: addDialogHandler,
                     type: "button",
                     className: "btn bg-gradient-success btn-block mb-3",
                     "data-bs-toggle": "modal",
                     "data-bs-target": "#exampleModalMessage",
-                    children: "Criar novo Fornecedores"
-                  })
+                    children: "Novo Fornecedor"
+                  })]
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
@@ -13129,13 +13204,15 @@ function Index(props) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("ul", {
           className: "pagination justify-content-center",
           children: meta.links.map(function (link, k) {
+            // Adiciona o parâmetro `search` à URL da paginação
+            var urlWithSearch = link.url ? "".concat(link.url).concat(link.url.includes('?') ? '&' : '?', "search=").concat(search) : null;
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("li", {
               className: "page-item",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
-                disabled: link.url == null ? true : false,
+                disabled: link.url == null,
                 as: "button",
                 className: "".concat(link.active && 'bg-info', " ").concat(link.url == null && 'btn bg-gradient-secondary text-white', " page-link"),
-                href: link.url || '',
+                href: urlWithSearch || '',
                 dangerouslySetInnerHTML: {
                   __html: link.label
                 }
@@ -14181,11 +14258,6 @@ function Edit(props) {
                       href: route('funcionarios.index', obra.id),
                       className: "btn bg-gradient-secondary btn-sm ms-auto",
                       children: "Prestadores"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
-                      type: "button",
-                      href: route('obras.relatorio', obra.id),
-                      className: "btn bg-gradient-secondary btn-sm ms-auto",
-                      children: "Relatorios"
                     }), (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_7__.validarStatusObra)(obra.status) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
                         type: "button",
@@ -14642,6 +14714,11 @@ function Index(props) {
       destroyCloseTrigger = _useDialog6[1],
       destroyTrigger = _useDialog6[2];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.search),
+      _useState4 = _slicedToArray(_useState3, 2),
+      search = _useState4[0],
+      setSearch = _useState4[1];
+
   var openUpdateDialog = function openUpdateDialog(cliente) {
     setState(cliente);
     UpdateDialogHandler();
@@ -14650,6 +14727,11 @@ function Index(props) {
   var openDestroyDialog = function openDestroyDialog(cliente) {
     setState(cliente);
     destroyDialogHandler();
+  }; // registra o termo digitado no campo
+
+
+  var handleSearch = function handleSearch(e) {
+    setSearch(e.target.value);
   };
 
   var checkStatus = function checkStatus(status) {
@@ -14717,19 +14799,46 @@ function Index(props) {
               className: "card-header pb-0",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
                 className: "row",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                  className: "col-md-6",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h6", {
-                    children: "Obras"
-                  })
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+                  className: "col-md-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
+                    className: "form-control",
+                    type: "text",
+                    name: "search",
+                    onChange: handleSearch,
+                    value: search,
+                    placeholder: "buscar"
+                  }), search && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/obras",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    children: "Limpar"
+                  })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                  className: "col-md-6 d-flex justify-content-end",
+                  className: "col-md-2",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/obras?search=".concat(search),
+                    className: "btn btn-primary btn-block mb-3",
+                    children: "Buscar"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+                  className: "col-md-7 d-flex justify-content-end",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("a", {
+                    href: "/obras/relatorio-geral",
+                    target: "blank",
+                    type: "button",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    style: {
+                      margin: '5px'
+                    },
+                    children: "Relatorio Geral"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
                     href: route('obras.create'),
                     type: "button",
                     className: "btn bg-gradient-success btn-block mb-3",
                     children: "Nova Obra"
-                  })
+                  })]
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
@@ -14745,6 +14854,9 @@ function Index(props) {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
                         className: "text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-centter",
                         children: "#"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
+                        className: "text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left",
+                        children: "Nome"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
                         className: "text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-left",
                         children: "Responsavel"
@@ -14776,6 +14888,18 @@ function Index(props) {
                               className: "my-auto",
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h6", {
                                 className: "mb-0 text-sm",
+                                children: obra.nomeObra
+                              })
+                            })
+                          })
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+                          className: "text-left",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+                            className: "d-flex px-2",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+                              className: "my-auto",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h6", {
+                                className: "mb-0 text-sm",
                                 children: obra.responsavelObra
                               })
                             })
@@ -14784,7 +14908,7 @@ function Index(props) {
                           className: "text-left",
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
                             className: "text-sm font-weight-bold mb-0",
-                            children: obra.cliente.razaoSocial
+                            children: obra.cliente.nomeCliente
                           })
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                           className: "text-left",
@@ -14804,8 +14928,18 @@ function Index(props) {
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                           className: "align-middle text-center",
                           width: "10%",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                              type: "button",
+                              href: route('obras.relatorio', obra.id),
+                              className: "btn btn-vimeo btn-icon-only",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+                                className: "btn-inner--icon",
+                                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("i", {
+                                  className: "fas fa-print"
+                                })
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
                               type: "button",
                               href: route('obras.edit', obra.id),
                               className: "btn btn-vimeo btn-icon-only mx-2",
@@ -14815,7 +14949,7 @@ function Index(props) {
                                   className: "fas fa-pencil-alt"
                                 })
                               })
-                            })
+                            })]
                           })
                         })]
                       }, obra.id);
@@ -14831,13 +14965,15 @@ function Index(props) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("ul", {
           className: "pagination justify-content-center",
           children: meta.links.map(function (link, k) {
+            // Adiciona o parâmetro `search` à URL da paginação
+            var urlWithSearch = link.url ? "".concat(link.url).concat(link.url.includes('?') ? '&' : '?', "search=").concat(search) : null;
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("li", {
               className: "page-item",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
-                disabled: link.url == null ? true : false,
+                disabled: link.url == null,
                 as: "button",
                 className: "".concat(link.active && 'bg-info', " ").concat(link.url == null && 'btn bg-gradient-secondary text-white', " page-link"),
-                href: link.url || '',
+                href: urlWithSearch || '',
                 dangerouslySetInnerHTML: {
                   __html: link.label
                 }
@@ -15579,14 +15715,28 @@ function Relatorio(props) {
               className: "card",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                 className: "card-header pb-0",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                   className: "d-flex align-items-center",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
                     type: "button",
-                    href: route('obras.edit', obra.id),
-                    className: "btn bg-gradient-secondary btn-sm ms-auto",
-                    children: "Obra"
-                  })
+                    href: route('obras.index'),
+                    className: "btn bg-gradient-secondary ms-auto",
+                    style: {
+                      marginRight: '5px'
+                    },
+                    children: "Obras"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+                    type: "button",
+                    href: "/obras/".concat(obra.id, "/pdf"),
+                    target: "blank",
+                    className: "btn btn-vimeo ",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                      className: "btn-inner--icon",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                        className: "fas fa-print"
+                      })
+                    })
+                  })]
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 className: "card-body",
@@ -16193,6 +16343,11 @@ function Index(props) {
       destroyCloseTrigger = _useDialog6[1],
       destroyTrigger = _useDialog6[2];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(props.search),
+      _useState4 = _slicedToArray(_useState3, 2),
+      search = _useState4[0],
+      setSearch = _useState4[1];
+
   var openUpdateDialog = function openUpdateDialog(prestador) {
     setState(prestador);
     UpdateDialogHandler();
@@ -16201,9 +16356,12 @@ function Index(props) {
   var openDestroyDialog = function openDestroyDialog(prestador) {
     setState(prestador);
     destroyDialogHandler();
-  };
+  }; // registra o termo digitado no campo
 
-  console.log(props);
+
+  var handleSearch = function handleSearch(e) {
+    setSearch(e.target.value);
+  };
 
   var destroyFuncao = function destroyFuncao() {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia["delete"](route('prestadores.destroy', state.id), {
@@ -16260,21 +16418,48 @@ function Index(props) {
               className: "card-header pb-0",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
                 className: "row",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                  className: "col-md-6",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h6", {
-                    children: "Prestadores"
-                  })
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+                  className: "col-md-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
+                    className: "form-control",
+                    type: "text",
+                    name: "search",
+                    onChange: handleSearch,
+                    value: search,
+                    placeholder: "buscar"
+                  }), search && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/prestadores",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    children: "Limpar"
+                  })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-                  className: "col-md-6 d-flex justify-content-end",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+                  className: "col-md-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
+                    type: "button",
+                    href: "/prestadores?search=".concat(search),
+                    className: "btn btn-primary btn-block mb-3",
+                    children: "Buscar"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+                  className: "col-md-7 d-flex justify-content-end",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("a", {
+                    href: "/prestadores/relatorio",
+                    target: "blank",
+                    type: "button",
+                    className: "btn bg-primary-success btn-block mb-3",
+                    style: {
+                      margin: '5px'
+                    },
+                    children: "Relatorio Geral"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
                     onClick: addDialogHandler,
                     type: "button",
                     className: "btn bg-gradient-success btn-block mb-3",
                     "data-bs-toggle": "modal",
                     "data-bs-target": "#exampleModalMessage",
-                    children: "Criar Novo  prestador"
-                  })
+                    children: "Novo Prestador"
+                  })]
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
@@ -16326,7 +16511,7 @@ function Index(props) {
                           className: "text-left",
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
                             className: "text-sm font-weight-bold mb-0",
-                            children: prestador.funcao.descricaoFuncao
+                            children: prestador.funcao.nomeFuncao
                           })
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
                           className: "text-left",
@@ -16378,13 +16563,15 @@ function Index(props) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("ul", {
           className: "pagination justify-content-center",
           children: meta.links.map(function (link, k) {
+            // Adiciona o parâmetro `search` à URL da paginação
+            var urlWithSearch = link.url ? "".concat(link.url).concat(link.url.includes('?') ? '&' : '?', "search=").concat(search) : null;
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("li", {
               className: "page-item",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_0__.Link, {
-                disabled: link.url == null ? true : false,
+                disabled: link.url == null,
                 as: "button",
                 className: "".concat(link.active && 'bg-info', " ").concat(link.url == null && 'btn bg-gradient-secondary text-white', " page-link"),
-                href: link.url || '',
+                href: urlWithSearch || '',
                 dangerouslySetInnerHTML: {
                   __html: link.label
                 }

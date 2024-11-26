@@ -6,17 +6,27 @@ use App\Http\Resources\PrestadorResource;
 use App\Models\FuncaoPrestador;
 use Illuminate\Http\Request;
 use App\Models\Prestador;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PrestadorController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $prestadores =  PrestadorResource::collection(Prestador::with('funcao')->paginate(10));
+        $search = $request->query('search', '');
+        $query = Prestador::with('funcao');
+        if (!empty($search)) {
+            $query->where('nomePrestador', 'like', "%{$search}%");
+                // ->orWhere('email', 'like', "%{$search}%")
+                // ->orWhere('cpf', 'like', "%{$search}%");
+        }
+
+        $prestadores =  PrestadorResource::collection($query->paginate(10));
         $funcoes = FuncaoPrestador::all();
         return inertia('Prestador/Index', [
             'prestadores' => $prestadores,
-            'funcoes' => $funcoes
+            'funcoes' => $funcoes,
+            'search' => $search,
         ]);
     }
 
@@ -108,6 +118,20 @@ class PrestadorController extends Controller
                 'message' => $th->getMessage(),
             ]);
         }
+    }
+
+    public function gerarRelatorioGeral(Request $request)
+    {
+         // Obtenha os dados dos clientes
+        $prestadores =  Prestador::with('funcao')->get();
+
+        // Gere a view para o PDF
+        $pdf = Pdf::loadView('relatorios.prestadores', compact('prestadores'));
+
+        // Configurar para forçar o download
+        return response($pdf->output(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="relatorio_prestadores.pdf"');
     }
 
 
