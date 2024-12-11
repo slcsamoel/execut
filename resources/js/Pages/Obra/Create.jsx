@@ -2,7 +2,7 @@ import { useForm, usePage } from '@inertiajs/inertia-react';
 import React, { useState , useEffect } from 'react';
 import Base from '../../Layouts/Base'
 import axios from 'axios';
-import {maskMoney} from '../../Utils/helpers';
+import {maskMoney , maskMoneyInput} from '../../Utils/helpers';
 
 export default function Create(props) {
     const { auth } = usePage().props;
@@ -128,7 +128,7 @@ export default function Create(props) {
                                         <div className="col-md-12">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor do orçamento</label>
-                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento} onChange={(e)=> setData('valorOrcamento',maskMoney(e.target.value))} id="valorOrcamento" />
+                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento} onChange={(e)=> setData('valorOrcamento', maskMoneyInput(e.target.value))} id="valorOrcamento" />
                                             </div>
                                         </div>
 

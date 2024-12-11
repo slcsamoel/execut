@@ -1,6 +1,6 @@
 import { useForm } from '@inertiajs/inertia-react'
 import React, { useState , useEffect } from 'react';
-import { formatCpfCnpj,maskCpfCnpj,maskPhone,maskMoney } from '../../../Utils/helpers';
+import { formatCpfCnpj,maskCpfCnpj,maskPhone,maskMoney , maskMoneyInput } from '../../../Utils/helpers';
 
 
 export default function CreatePrestador({close , funcoes}) {
@@ -81,7 +81,7 @@ export default function CreatePrestador({close , funcoes}) {
 
                         <div className="form-group">
                             <label htmlFor="valorDiaria" className="col-form-label">Valor Diaria</label>
-                            <input type="text" className="form-control" name='valorDiaria' value={data.valorDiaria} onChange={(e)=> setData('valorDiaria',maskMoney(e.target.value))} id="valorDiaria"/>
+                            <input type="text" className="form-control" name='valorDiaria' value={data.valorDiaria} onChange={(e)=> setData('valorDiaria',maskMoneyInput(e.target.value))} id="valorDiaria"/>
                             {errors && <div className='text-danger mt-1'>{errors.valorDiaria}</div>}
                         </div>
 

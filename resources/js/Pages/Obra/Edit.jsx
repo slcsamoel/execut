@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Inertia } from '@inertiajs/inertia';
 import useDialog from '../../Hooks/useDialog';
 import Dialog from '../../Components/Dashboard/Dialog';
-import { validarStatusObra , maskMoney} from '../../Utils/helpers';
+import { validarStatusObra , maskMoney , maskMoneyInput} from '../../Utils/helpers';
 
 export default function Edit(props) {
     const { auth } = usePage().props;
@@ -188,7 +188,7 @@ export default function Edit(props) {
                                         <div className="col-md-12">
                                             <div className="form-group">
                                             <label htmlFor="name" className="form-control-label">Valor do orçamento</label>
-                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento}  onChange={(e)=> setData('valorOrcamento',maskMoney(e.target.value))}  id="valorOrcamento" readOnly={!validarStatusObra(obra.status)} />
+                                            <input className="form-control" type="text" name='valorOrcamento' value={data.valorOrcamento}  onChange={(e)=> setData('valorOrcamento',maskMoneyInput(e.target.value))}  id="valorOrcamento" readOnly={!validarStatusObra(obra.status)} />
                                             </div>
                                         </div>
 

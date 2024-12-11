@@ -198,6 +198,30 @@ export function maskMoney(value) {
     return formattedValue;
 }
 
+export function maskMoneyInput(value) {
+    if (value == null || value === "") return ""; // Trata valores nulos ou vazios
+
+    // Remove todos os caracteres que não são dígitos
+    let numericValue = String(value).replace(/\D/g, "");
+
+    // Adiciona os centavos automaticamente
+    if (numericValue.length === 1) {
+        numericValue = "0" + numericValue; // Exemplo: "8" vira "08"
+    } else if (numericValue.length === 2) {
+        numericValue = "0" + numericValue; // Exemplo: "80" vira "080"
+    }
+
+    // Divide em reais e centavos
+    const reais = numericValue.slice(0, -2); // Parte inteira
+    const centavos = numericValue.slice(-2); // Últimos dois dígitos
+
+    // Formata o valor como moeda brasileira
+    const formattedValue = `${parseInt(reais, 10).toLocaleString("pt-BR")},${centavos}`;
+
+    return formattedValue;
+}
+
+
 
 
 export function maskCnpj(value) {

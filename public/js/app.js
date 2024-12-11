@@ -9216,7 +9216,7 @@ function CreateMateriasObra(_ref) {
             name: "valor",
             value: data.valor,
             onChange: function onChange(e) {
-              return setData('valor', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoney)(e.target.value));
+              return setData('valor', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoneyInput)(e.target.value));
             },
             id: "valor"
           }), errors && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -9388,7 +9388,7 @@ function EditMateriasObra(_ref) {
             name: "valor",
             value: data.valor,
             onChange: function onChange(e) {
-              return setData('valor', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoney)(e.target.value));
+              return setData('valor', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoneyInput)(e.target.value));
             },
             id: "valor"
           }), errors && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -10064,7 +10064,7 @@ function CreatePrestador(_ref) {
             name: "valorDiaria",
             value: data.valorDiaria,
             onChange: function onChange(e) {
-              return setData('valorDiaria', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoney)(e.target.value));
+              return setData('valorDiaria', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoneyInput)(e.target.value));
             },
             id: "valorDiaria"
           }), errors && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -10275,7 +10275,7 @@ function EditPrestador(_ref) {
             name: "valorDiaria",
             value: data.valorDiaria,
             onChange: function onChange(e) {
-              return setData('valorDiaria', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoney)(e.target.value));
+              return setData('valorDiaria', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_2__.maskMoneyInput)(e.target.value));
             },
             id: "valorDiaria"
           }), errors && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -13772,7 +13772,7 @@ function Create(props) {
                           name: "valorOrcamento",
                           value: data.valorOrcamento,
                           onChange: function onChange(e) {
-                            return setData('valorOrcamento', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_4__.maskMoney)(e.target.value));
+                            return setData('valorOrcamento', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_4__.maskMoneyInput)(e.target.value));
                           },
                           id: "valorOrcamento"
                         })]
@@ -14326,7 +14326,7 @@ function Edit(props) {
                           name: "valorOrcamento",
                           value: data.valorOrcamento,
                           onChange: function onChange(e) {
-                            return setData('valorOrcamento', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_7__.maskMoney)(e.target.value));
+                            return setData('valorOrcamento', (0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_7__.maskMoneyInput)(e.target.value));
                           },
                           id: "valorOrcamento",
                           readOnly: !(0,_Utils_helpers__WEBPACK_IMPORTED_MODULE_7__.validarStatusObra)(obra.status)
@@ -17680,6 +17680,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "maskCpfCnpj": () => (/* binding */ maskCpfCnpj),
 /* harmony export */   "maskPhone": () => (/* binding */ maskPhone),
 /* harmony export */   "maskMoney": () => (/* binding */ maskMoney),
+/* harmony export */   "maskMoneyInput": () => (/* binding */ maskMoneyInput),
 /* harmony export */   "maskCnpj": () => (/* binding */ maskCnpj)
 /* harmony export */ });
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -17915,6 +17916,27 @@ function maskMoney(value) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
+  return formattedValue;
+}
+function maskMoneyInput(value) {
+  if (value == null || value === "") return ""; // Trata valores nulos ou vazios
+  // Remove todos os caracteres que não são dígitos
+
+  var numericValue = String(value).replace(/\D/g, ""); // Adiciona os centavos automaticamente
+
+  if (numericValue.length === 1) {
+    numericValue = "0" + numericValue; // Exemplo: "8" vira "08"
+  } else if (numericValue.length === 2) {
+    numericValue = "0" + numericValue; // Exemplo: "80" vira "080"
+  } // Divide em reais e centavos
+
+
+  var reais = numericValue.slice(0, -2); // Parte inteira
+
+  var centavos = numericValue.slice(-2); // Últimos dois dígitos
+  // Formata o valor como moeda brasileira
+
+  var formattedValue = "".concat(parseInt(reais, 10).toLocaleString("pt-BR"), ",").concat(centavos);
   return formattedValue;
 }
 function maskCnpj(value) {

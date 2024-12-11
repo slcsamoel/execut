@@ -1,6 +1,6 @@
 import { useForm } from '@inertiajs/inertia-react'
 import React, { useState , useEffect } from 'react';
-import { maskMoney } from '../../../../Utils/helpers';
+import { maskMoney , maskMoneyInput} from '../../../../Utils/helpers';
 
 
 export default function EditMateriasObra({close , Fornecedores, obra , model}) {
@@ -74,7 +74,7 @@ export default function EditMateriasObra({close , Fornecedores, obra , model}) {
 
                         <div className="form-group">
                             <label htmlFor="valor" className="col-form-label">Valor:</label>
-                            <input type="text" className="form-control" name='valor' value={data.valor} onChange={(e)=> setData('valor',maskMoney(e.target.value))} id="valor" />
+                            <input type="text" className="form-control" name='valor' value={data.valor} onChange={(e)=> setData('valor',maskMoneyInput(e.target.value))} id="valor" />
                             {errors && <div className='text-danger mt-1'>{errors.valor}</div>}
                         </div>
 
