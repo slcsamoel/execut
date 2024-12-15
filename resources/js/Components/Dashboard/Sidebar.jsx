@@ -43,15 +43,6 @@ export default function Sidebar() {
                     </li>
 
                     <li className="nav-item">
-                        <Link className={`${route().current('prestadores.*') && 'active'} nav-link`} href={route('prestadores.index')}>
-                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i className="fas fa-user text-warning text-sm opacity-10" />
-                            </div>
-                            <span className="nav-link-text ms-1">Prestadores</span>
-                        </Link>
-                    </li>
-
-                    <li className="nav-item">
                         <Link className={`${route().current('funcoes.*') && 'active'} nav-link`} href={route('funcoes.index')}>
                             <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i className="fas fa-user text-warning text-sm opacity-10" />
@@ -61,11 +52,11 @@ export default function Sidebar() {
                     </li>
 
                     <li className="nav-item">
-                        <Link className={`${route().current('fornecedores.*') && 'active'} nav-link`} href={route('fornecedores.index')}>
+                        <Link className={`${route().current('prestadores.*') && 'active'} nav-link`} href={route('prestadores.index')}>
                             <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i className="fas fa-dolly text-warning text-sm opacity-10" />
+                                <i className="fas fa-user text-warning text-sm opacity-10" />
                             </div>
-                            <span className="nav-link-text ms-1">Fornecedores</span>
+                            <span className="nav-link-text ms-1">Prestadores</span>
                         </Link>
                     </li>
 
@@ -79,11 +70,29 @@ export default function Sidebar() {
                     </li>
 
                     <li className="nav-item">
+                        <Link className={`${route().current('fornecedores.*') && 'active'} nav-link`} href={route('fornecedores.index')}>
+                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i className="fas fa-dolly text-warning text-sm opacity-10" />
+                            </div>
+                            <span className="nav-link-text ms-1">Fornecedores</span>
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
                         <Link className={`${route().current('pagamentos.*') && 'active'} nav-link`} href={route('pagamentos.index')}>
                             <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i className="fas fa-coins text-warning text-sm opacity-10" />
                             </div>
                             <span className="nav-link-text ms-1">Pagamentos</span>
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link className={`${route().current('tipos-obras.*') && 'active'} nav-link`} href={route('tipos-obras.index')}>
+                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i className="fas fa-hammer text-warning text-sm opacity-10"/>
+                            </div>
+                            <span className="nav-link-text ms-1">Tipos de Obras</span>
                         </Link>
                     </li>
 
@@ -94,15 +103,6 @@ export default function Sidebar() {
                                 <i className="fas fa-hammer text-warning text-sm opacity-10"/>
                             </div>
                             <span className="nav-link-text ms-1">Obras</span>
-                        </Link>
-                    </li>
-
-                    <li className="nav-item">
-                        <Link className={`${route().current('tipos-obras.*') && 'active'} nav-link`} href={route('tipos-obras.index')}>
-                            <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i className="fas fa-hammer text-warning text-sm opacity-10"/>
-                            </div>
-                            <span className="nav-link-text ms-1">Tipos de Obras</span>
                         </Link>
                     </li>
 
